@@ -6,6 +6,8 @@
 
 Returns the number of tokens used when given text input
 
+Returns the number...
+
 #### Parameters
 
 In the body we should send the text to be tokenized
