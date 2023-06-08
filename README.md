@@ -24,3 +24,17 @@ Important Note: Tiktoken does not include special tokens such as [CLS] or [SEP] 
 - We need to add the Streamlit code (service)
 - Create account in Streamlit Cloud
 - Add the appropiate TOML file with Env Variables
+
+### Useful Commands
+
+To create a git branch:
+
+    ```bash
+    git checkout -b <branch-name>
+    ```
+
+To push a branch to GitHub:
+
+    ```bash
+    git push origin <branch-name>
+    ```
