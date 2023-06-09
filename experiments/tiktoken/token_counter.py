@@ -20,12 +20,12 @@ def how_many_tokens_remaining_as_int(tokens_used: int, model: str) -> int:
     return token_limits.get(model, -1) - tokens_used
 
 # chooses an encode based on the chosen chat model
-# there are different versoions of gpt 3.5 that use different encoders - from tiktoken in model.py
+# there are different versions of gpt 3.5 that use different encoders - from tiktoken in model.py
 # I set it to cl100k_base - it is most likely that current GPT 3.5 uses this one
 # "gpt-3.5-turbo/-0301": "cl100k_base"
 # "text-davinci-003": "p50k_base",
 # "text-davinci-002": "p50k_base",
- # "code-davinci-002": "p50k_base"
+# "code-davinci-002": "p50k_base"
 def set_encoder(model: str) -> str:
     model_options = {
         "gpt-4": "cl100k_base",
