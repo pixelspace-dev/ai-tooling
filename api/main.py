@@ -4,10 +4,11 @@ from authorization import (User,
                            create_access_token, 
                            verify_token,
                            users,
-                           get_number_tokens_from_openai,
+)
+from token_counter import  (get_number_tokens_from_openai,
                            how_many_tokens_remaining_as_int,
                            set_encoder
-                           )
+)
 
 app = FastAPI()
 
@@ -19,13 +20,13 @@ async def default_message():
 # Authenticate a user and return the appropriate access token
 @app.post("/token", tags=["Authentication"])
 async def login(user: User):
-    if user.username not in users or users[user.username]["password"] != user.password:
+    if user.title not in users or users[user.title]["password"] != user.password:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Username or password is incorrect")
    
-    has_permission = users[user.username].get("has_permission", False)
+    has_permission = users[user.title].get("has_permission", False)
 
     access_token_expires = timedelta(minutes=15)
-    access_token = create_access_token(data={"sub": user.username, "has_permission": has_permission}, expires_delta=access_token_expires)
+    access_token = create_access_token(data={"sub": user.title, "has_permission": has_permission}, expires_delta=access_token_expires)
 
     return {"access_token": access_token, "token_type": "bearer"}
 
