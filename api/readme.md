@@ -1,4 +1,4 @@
-Token counter API
+#Token counter API
 
 ## API Endpoints
 
@@ -30,8 +30,8 @@ Paste token under `Authorize` at top of the page
 Under `/protected_message/{model}`, enter model and message
 ```json 
   {
-    "model": "string",
-    "message": "string"
+    "model": "gpt-4",
+    "message": "this is a test"
   }
 ```
 
