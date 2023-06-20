@@ -2,54 +2,83 @@
 # Allows for greater levels of accuracy in responses
 import streamlit as st
 from langchain.memory import ConversationBufferMemory
-from functions import make_prompt, get_response_with_memory
+from chat import send_message, prompt_change, reset_conversation, display_percentage
+from token_counter import calculate_tokens_used
 
 st.set_page_config(layout="wide")
 
-    # adds the memory to the session state so AI can remember what has been said
+# add variables to the session state so AI can remember what has been said
 if 'memory' not in st.session_state:
     st.session_state.memory = ConversationBufferMemory(return_messages=True)
 if 'chat' not in st.session_state:
-    st.session_state.chat = ""
-if 'iteration' not in st.session_state:
-    st.session_state.iteration = 0
+    st.session_state.chat = []
+if 'set_new_prompt' not in st.session_state:
+    st.session_state.set_new_prompt = False
 
 response = None
 
 
-col1, col2 = st.columns([2,1], gap="large")
-
-with col2:
-    #this is where the user can input prompts for the ai to use in considering its answer
-    st.subheader("Customization")
-    st.text("Add parameters to guide the AI's thought proccess")
-    st.caption("EX: Output your inner monologue as described by the little angel on your shoulder advising for the wellbeing of the user.")
-    first_prompt = st.text_area("Prompt 1:")
-    second_prompt = st.text_area("Prompt 2:")
-    third_prompt = st.text_area("Prompt 3:")
-
+col1, col2 = st.columns([2,1.3], gap="large")
+            
 with col1:
     #header
     st.header(":blue[Multi-Prompt Chat]")
     st.subheader("Ask anything!")
 
-    #input text to be analyzed
-    user_inquiry = st.text_area("Text input:")
+    #chat and input box
+    chat_placeholder = st.container()
+    input_placeholder = st.form("chat-form")
 
-    #when button is pressed
-    if st.button(':blue[Send]'):
-        (memory, prompt) = make_prompt(st.session_state.memory, st.session_state.iteration, first_prompt, second_prompt, third_prompt)
-        (response, memory) = get_response_with_memory(prompt, user_inquiry, st.session_state.memory)
+with col2:
+    #this is where the user can input prompts for the ai to use in considering its answer
+    st.subheader("Customization")
+    st.text("Add parameters to guide the AI's thought proccess")
+    st.caption("EX: Output your inner monologue as described by a little angel on the user's shoulder.")
 
-        st.session_state.iteration = st.session_state.iteration + 1
+    #prompt section
+    prompt_placeholder = st.form("prompt-form")
 
-        #update visible chat    
-        st.session_state.chat = st.session_state.chat + "User - " + user_inquiry + '\n\n'
-        
-        if response:
-            st.session_state.chat = st.session_state.chat  + "AI - " + response + '\n\n'
+    st.caption("The AI will consider each input together in its final response.")
 
-        st.info(st.session_state.chat)
 
-        # hold on to chat memory for entire session
-        st.session_state.memory = memory
+with st.sidebar:
+    st.subheader("Select Model")
+    model = st.selectbox(label="Select Model", label_visibility="collapsed", options=["gpt-4", "gpt-3.5-turbo"])
+
+    tokens_used_placeholder = st.container()
+
+    st.caption("")
+    st.subheader("Reset Conversation:")
+    st.button(label="Clear", on_click=reset_conversation)
+
+
+with prompt_placeholder:
+    first_prompt = st.text_input("Prompt 1:")
+    second_prompt = st.text_input("Prompt 2:")
+    third_prompt = st.text_input("Prompt 3:")
+    prompt_placeholder.form_submit_button(":blue[Set]", on_click= prompt_change(first_prompt,second_prompt,third_prompt))
+
+
+# box with input and send button
+with input_placeholder:
+    input_col1, input_col2 = st.columns([5,1])
+
+    input_col1.text_input(label="message", label_visibility="collapsed", key= "user_inquiry")
+            
+    input_col2.form_submit_button(":blue[Send]", on_click=send_message(model, first_prompt, second_prompt, third_prompt))
+
+with tokens_used_placeholder:
+    st.caption("")
+    st.subheader("Tokens Used:")
+    (tokens_used, percentage) = calculate_tokens_used(model)
+    st.write("You have used " + str(tokens_used) + " tokens")
+
+    st.caption("")
+    st.subheader("Percentage of Tokens Remaining:")
+
+    display_percentage(percentage)
+
+#update visible chat  
+with chat_placeholder:
+        for chat_message in st.session_state.chat:
+            st.markdown(chat_message)
