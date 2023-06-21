@@ -7,7 +7,10 @@ def calculate_tokens_used(model) -> int:
     tokens_used = 0
 
     for message in st.session_state.chat:
-        tokens_used += get_number_tokens_from_openai(message, "cl100k_base") - 2
+        tokens_used += get_number_tokens_from_openai(message, "cl100k_base") - 1
+    if st.session_state.set_new_prompt:
+        tokens_used += get_number_tokens_from_openai(st.session_state.prompt, "cl100k_base") 
+        st.session_state.set_new_prompt = False
 
     remaining = how_many_tokens_remaining_as_int(tokens_used, model)
 

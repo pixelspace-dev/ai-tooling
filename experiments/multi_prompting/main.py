@@ -14,6 +14,8 @@ if 'chat' not in st.session_state:
     st.session_state.chat = []
 if 'set_new_prompt' not in st.session_state:
     st.session_state.set_new_prompt = False
+if 'prompt' not in st.session_state:
+    st.session_state.prompt = ""
 
 response = None
 
