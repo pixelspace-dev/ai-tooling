@@ -32,7 +32,7 @@ with col1:
 with col2:
     #this is where the user can input prompts for the ai to use in considering its answer
     st.subheader("Customization")
-    st.text("Add parameters to guide the AI's thought proccess")
+    st.write("Add parameters to guide the AI's thought proccess")
     st.caption("EX: Output your inner monologue as described by a little angel on the user's shoulder.")
 
     #prompt section

@@ -50,8 +50,12 @@ def make_prompt(first_perspective, second_perspective, third_perspective):
     memory = st.session_state.memory
 
     if st.session_state.set_new_prompt:
-        template = f"""{first_perspective} {second_perspective} {third_perspective} 
-                    Finally, combine your previous considerations to create your final response."""
+        template = f"""Human: Rationalize the following user inquiry from the following perspectives: {first_perspective}, {second_perspective} {third_perspective}.
+        Your output to the inquiry will be:
+        {first_perspective}: [Your thoughts about the user inquiry from this perspective]
+        {second_perspective}: [Your thoughts about the user inquiry from this perspective]
+        {third_perspective}: [Your thoughts about the user inquiry from this perspective]
+        Actual answer: [Your job is to take all perspectives and merge them into a single answer. Your answer must contain aspects of all perspectives, even if these perspectives seem to contradict or challenge each other. After your answer, you will provide an explaination of how each of the perspectives influence your response.]"""
     
         memory.chat_memory.add_user_message(template)
         memory.chat_memory.add_ai_message("Sure, what's the user's inquiry?")
@@ -68,7 +72,7 @@ def send_message(model, first_perspective, second_perspective, third_perspective
         response = get_response_with_memory(model, st.session_state.user_inquiry, st.session_state.memory)
 
         st.session_state.chat.append("User - " + st.session_state.user_inquiry)
-        st.session_state.chat.append("AI - " + response)
+        st.session_state.chat.append(response)
 
 
 # tell code whether to set a new prompt
