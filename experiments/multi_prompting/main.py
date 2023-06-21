@@ -53,10 +53,10 @@ with st.sidebar:
 
 
 with prompt_placeholder:
-    first_prompt = st.text_input("Prompt 1:")
-    second_prompt = st.text_input("Prompt 2:")
-    third_prompt = st.text_input("Prompt 3:")
-    prompt_placeholder.form_submit_button(":blue[Set]", on_click= prompt_change(first_prompt,second_prompt,third_prompt))
+    first_perspective = st.text_input("Prompt 1:")
+    second_perspective = st.text_input("Prompt 2:")
+    third_perspective = st.text_input("Prompt 3:")
+    prompt_placeholder.form_submit_button(":blue[Set]", on_click= prompt_change(first_perspective,second_perspective,third_perspective))
 
 
 # box with input and send button
@@ -65,7 +65,7 @@ with input_placeholder:
 
     input_col1.text_input(label="message", label_visibility="collapsed", key= "user_inquiry")
             
-    input_col2.form_submit_button(":blue[Send]", on_click=send_message(model, first_prompt, second_prompt, third_prompt))
+    input_col2.form_submit_button(":blue[Send]", on_click=send_message(model,first_perspective,second_perspective,third_perspective))
 
 with tokens_used_placeholder:
     st.caption("")

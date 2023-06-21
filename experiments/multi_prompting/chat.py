@@ -10,8 +10,7 @@ from langchain.prompts import (
     HumanMessagePromptTemplate
 )
 
-load_dotenv()
-os.environ["OPENAI_API_KEY"] = os.getenv('API_KEY')
+os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
 
 # chooses which color to display percentage as based on value and displays it
 def display_percentage(percentage):
@@ -47,11 +46,12 @@ def get_response_with_memory(model, user_inquiry, memory):
 
 
 # makes the prompt for the AI to follow
-def make_prompt(first_prompt, second_prompt, third_prompt):
+# Each prompt involves a new perspective for the AI to consider the User's inquiry through
+def make_prompt(first_perspective, second_perspective, third_perspective):
     memory = st.session_state.memory
 
     if st.session_state.set_new_prompt:
-        template = f"""{first_prompt} {second_prompt} {third_prompt} 
+        template = f"""{first_perspective} {second_perspective} {third_perspective} 
                     Finally, combine your previous considerations to create your final response."""
     
         memory.chat_memory.add_user_message(template)
@@ -61,9 +61,9 @@ def make_prompt(first_prompt, second_prompt, third_prompt):
     
 
 # make prompt, response, add to streamlit chat memory
-def send_message(model, first_prompt, second_prompt, third_prompt):    
+def send_message(model, first_perspective, second_perspective, third_perspective):    
     
-    make_prompt(first_prompt, second_prompt, third_prompt)
+    make_prompt(first_perspective, second_perspective, third_perspective)
 
     if st.session_state.user_inquiry:
         response = get_response_with_memory(model, st.session_state.user_inquiry, st.session_state.memory)
@@ -73,8 +73,8 @@ def send_message(model, first_prompt, second_prompt, third_prompt):
 
 
 # tell code whether to set a new prompt
-def prompt_change(first_prompt, second_prompt, third_prompt):
-    if first_prompt or second_prompt or third_prompt:
+def prompt_change(first_perspective, second_perspective, third_perspective):
+    if first_perspective or second_perspective or third_perspective:
         st.session_state.set_new_prompt = True
 
 
