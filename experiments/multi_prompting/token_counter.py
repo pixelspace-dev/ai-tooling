@@ -7,11 +7,14 @@ def calculate_tokens_used(model) -> int:
     tokens_used = 0
 
     for message in st.session_state.chat:
-        tokens_used += get_number_tokens_from_openai(message, "cl100k_base") - 2
+        tokens_used += get_number_tokens_from_openai(message, "cl100k_base") - 1
+    if st.session_state.set_new_prompt:
+        tokens_used += get_number_tokens_from_openai(st.session_state.prompt, "cl100k_base") 
+        st.session_state.set_new_prompt = False
 
-    remaining = how_many_tokens_remaining_as_int(tokens_used, model)
+    (remaining, max) = how_many_tokens_remaining_as_int(tokens_used, model)
 
-    percentage = round(100 - (tokens_used/remaining)*100, 2)
+    percentage = round(100 - (tokens_used/max)*100, 2)
 
     return tokens_used, percentage
 
@@ -30,7 +33,7 @@ def how_many_tokens_remaining_as_int(tokens_used: int, model: str) -> int:
         "gpt-3.5-turbo": 4096,
     }
 
-    return (token_limits.get(model, -1) - tokens_used)
+    return (token_limits.get(model, -1) - tokens_used), token_limits.get(model, -1)
 
 
 

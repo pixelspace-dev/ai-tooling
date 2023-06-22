@@ -20,7 +20,7 @@ with header_col2:
 #find number of tokens used
 message = st.text_area("Message to be tokenized:", height= 10)
 
-model = st.selectbox("Which model are you using?", ["gpt-4", "gpt-4-32k", "gpt-3.5", "gpt-3.5 (code-davinci-002)", "gpt-3"])
+model = st.selectbox("Which model are you using?", ["gpt-4", "gpt-4-32k", "gpt-3.5", "gpt-3.5 (turbo-16k)", "gpt-3.5 (code-davinci-002)", "gpt-3"])
 
 #choose encoder based on model
 encoder = set_encoder(model)
@@ -44,7 +44,7 @@ leftover_tokens = how_many_tokens_remaining_as_int(number_tokens, model)
 if leftover_tokens > 0:
     st.subheader(f'There are :violet[{leftover_tokens}] tokens available')
 elif leftover_tokens < 0:
-    st.subheader("This is an unknown model")
+    st.error("Your message uses too many tokens for this model")
 else:
-    st.subheader("Your message uses too many tokens for this model")
+    st.subheader("This is an unknown model")
 
