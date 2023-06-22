@@ -24,6 +24,8 @@ def display_percentage(percentage):
     elif percentage > 50:
         percentage = str(percentage)
         st.write( f":green[{percentage}%]")
+    else:
+        st.write(":red[0% Out of Tokens]")
 
 
 # creates a prompt for the ai to use and responds to the user's inquiry
@@ -50,14 +52,13 @@ def make_prompt(input):
     memory = st.session_state.memory
 
     if st.session_state.set_new_prompt:
-        st.session_state.prompt = f"""You will be given a block of text. You will respond to this text by creating an explanation of it using the following
-                    to guide your response: {input}. """
+        st.session_state.prompt = f"""You will be given a block of text. You will respond to this text 
+        by creating an explanation of it using the following to guide your response: 
+        {input}."""
     
         memory.chat_memory.add_user_message(st.session_state.prompt)
-        #memory.chat_memory.add_ai_message("Sure, what's the user's inquiry?")
+        memory.chat_memory.add_ai_message("Sure, input the text to be explained.")
 
-        
-    
 
 # make prompt, response, add to streamlit chat memory
 def send_message(model, input):    
@@ -68,7 +69,7 @@ def send_message(model, input):
         response = get_response_with_memory(model, st.session_state.user_inquiry, st.session_state.memory)
 
         st.session_state.chat.append("User - " + st.session_state.user_inquiry)
-        st.session_state.chat.append("AI - " + response)
+        st.session_state.chat.append("Explanation - " + response)
 
 
 # tell code whether to set a new prompt
