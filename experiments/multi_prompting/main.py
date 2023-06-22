@@ -35,7 +35,7 @@ with col2:
     #this is where the user can input prompts for the ai to use in considering its answer
     st.subheader("Customization")
     st.write("Add parameters to guide the AI's thought proccess")
-    st.caption("EX: Output your inner monologue as described by a little angel on the user's shoulder.")
+    st.caption("EX: little angel on the user's shoulder")
 
     #prompt section
     prompt_placeholder = st.form("prompt-form")
