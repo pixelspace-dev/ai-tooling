@@ -2,16 +2,18 @@
 # Allows for greater levels of accuracy in responses
 import streamlit as st
 from langchain.memory import ConversationBufferMemory
-from chat import send_message, prompt_change, reset_conversation, display_percentage
+from chat import summarize, prompt_change, reset_chat, display_percentage
 from token_counter import calculate_tokens_used
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide",)
 
 # add variables to the session state so AI can remember what has been said
 if 'memory' not in st.session_state:
     st.session_state.memory = ConversationBufferMemory(return_messages=True)
-if 'chat' not in st.session_state:
-    st.session_state.chat = []
+if 'user_message' not in st.session_state:
+    st.session_state.user_message = []
+if 'ai_message' not in st.session_state:
+    st.session_state.ai_message = []
 if 'set_new_prompt' not in st.session_state:
     st.session_state.set_new_prompt = False
 if 'prompt' not in st.session_state:
@@ -28,8 +30,8 @@ with col1:
     st.subheader("Helps you understand anything")
 
     #chat and input box
-    chat_placeholder = st.container()
-    input_placeholder = st.form("chat-form")
+    explain_placeholder = st.container()
+    file_input_placeholder = st.form("pdf-form")
 
 with col2:
     #this is where the user can input prompts for the ai to use in considering its answer
@@ -38,7 +40,7 @@ with col2:
     st.caption("EX: Output explanation in pizza terms")
 
     #prompt section
-    prompt_placeholder = st.form("prompt-form")
+    guide_placeholder = st.form("prompt-form")
 
 
 with st.sidebar:
@@ -48,22 +50,24 @@ with st.sidebar:
     tokens_used_placeholder = st.container()
 
     st.caption("")
-    st.subheader("Reset Conversation:")
-    st.button(label="Clear", on_click=reset_conversation)
+    st.button(label="Clear Chat", on_click=reset_chat)
 
 
-with prompt_placeholder:
-    input = st.text_area(label="Prompt 1:", label_visibility="collapsed")
-    prompt_placeholder.form_submit_button(":green[Set]", on_click= prompt_change(input))
+with guide_placeholder:
+    guide = st.text_area(label="Summary guidelines", label_visibility="collapsed")
+    guide_placeholder.form_submit_button(":green[Set]", on_click= prompt_change(guide))
 
 
 # box with input and send button
-with input_placeholder:
+with file_input_placeholder:
     input_col1, input_col2 = st.columns([5,1])
 
-    input_col1.text_area(label="message", label_visibility="collapsed", key= "user_inquiry", height=200)
+    with input_col1:
+        beginning_page = st.number_input("First Page:", step=1, value=1)
+        last_page = st.number_input("Last Page:", step=1, value=2)
+        st.file_uploader(label="file", label_visibility="collapsed", key="pdf_file")
             
-    input_col2.form_submit_button(":green[Send]", on_click= send_message(model, input))
+    input_col2.form_submit_button(":green[Submit]", on_click= summarize(model, guide, beginning_page, last_page))
 
 with tokens_used_placeholder:
     st.caption("")
@@ -77,6 +81,6 @@ with tokens_used_placeholder:
     display_percentage(percentage)
 
 #update visible chat  
-with chat_placeholder:
-        for chat_message in st.session_state.chat:
-            st.markdown(chat_message)
+with explain_placeholder:
+        for ai_message in st.session_state.ai_message:
+            st.markdown(ai_message)

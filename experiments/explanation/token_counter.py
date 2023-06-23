@@ -5,15 +5,18 @@ import streamlit as st
 # calculates the number of tokens used and the percent remaining
 def calculate_tokens_used(model) -> int:
     tokens_used = 0
-
-    for message in st.session_state.chat:
-        tokens_used += get_number_tokens_from_openai(message, "cl100k_base") - 2
+    base = "cl100k_base"
+    
+    for message in st.session_state.user_message:
+        tokens_used += get_number_tokens_from_openai(message, base)
+    for message in st.session_state.ai_message:
+        tokens_used += get_number_tokens_from_openai(message, base)
     if st.session_state.set_new_prompt:
-        tokens_used += get_number_tokens_from_openai(st.session_state.prompt, "cl100k_base") + 9 
+        tokens_used += get_number_tokens_from_openai(st.session_state.prompt, base) + 9 
         # 9 is added because a response is attached to the prompt that says "Sure, input the text to be explained."
         st.session_state.set_new_prompt = False
 
-    (remaining, max) = how_many_tokens_remaining_as_int(tokens_used, model)
+    max = max_tokens(model)
 
     percentage = round((100 - (tokens_used/max)*100), 2)
 
@@ -28,13 +31,13 @@ def get_number_tokens_from_openai(message: str, encoding: str) -> int:
 
 
 #takes number of tokens used and the model used, returns the number of tokens left to be used, which can be used in the response
-def how_many_tokens_remaining_as_int(tokens_used: int, model: str) -> int:
+def max_tokens(model: str) -> int:
     token_limits = {
         "gpt-4": 8192,
         "gpt-3.5-turbo": 4096,
     }
 
-    return (token_limits.get(model, -1) - tokens_used), token_limits.get(model, -1)
+    return token_limits.get(model, -1)
 
 
 
