@@ -37,7 +37,7 @@ with col2:
     #this is where the user can input prompts for the ai to use in considering its answer
     st.subheader("Parameters")
     st.write("Add guidelines that tell the AI how to provide feedback")
-    st.caption("EX: Output explanation in pizza terms")
+    st.caption("EX: Output explanation simple terms and in as few words as possible")
 
     #prompt section
     guide_placeholder = st.form("prompt-form")
@@ -46,6 +46,10 @@ with col2:
 with st.sidebar:
     st.subheader("Select Model")
     model = st.selectbox(label="Select Model", label_visibility="collapsed", options=["gpt-4", "gpt-3.5-turbo"])
+
+    st.caption("")
+    st.subheader("Document Size")
+    document_size = st.selectbox(label="Select Document Size", label_visibility="collapsed", options=["small ( < 13 pages )", "large ( > 13 pages )"])
 
     tokens_used_placeholder = st.container()
 
@@ -66,8 +70,8 @@ with file_input_placeholder:
         beginning_page = st.number_input("First Page:", step=1, value=1)
         last_page = st.number_input("Last Page:", step=1, value=2)
         st.file_uploader(label="file", label_visibility="collapsed", key="pdf_file")
-            
-    input_col2.form_submit_button(":green[Submit]", on_click= summarize(model, guide, beginning_page, last_page))
+    
+    input_col2.form_submit_button(":green[Submit]", on_click= summarize(model, guide, beginning_page, last_page, document_size))
 
 with tokens_used_placeholder:
     st.caption("")
