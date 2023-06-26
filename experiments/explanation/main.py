@@ -1,15 +1,10 @@
-# User inputs prompts that they want the AI to use to consider their inquiry before responding
-# Allows for greater levels of accuracy in responses
 import streamlit as st
-from langchain.memory import ConversationBufferMemory
 from chat import summarize, prompt_change, reset_chat, display_percentage
 from token_counter import calculate_tokens_used
 
 st.set_page_config(layout="wide",)
 
 # add variables to the session state so AI can remember what has been said
-if 'memory' not in st.session_state:
-    st.session_state.memory = ConversationBufferMemory(return_messages=True)
 if 'user_message' not in st.session_state:
     st.session_state.user_message = []
 if 'ai_message' not in st.session_state:
@@ -30,7 +25,7 @@ with col1:
     st.subheader("Helps you understand anything")
 
     #chat and input box
-    explain_placeholder = st.container()
+    explain_placeholder = st.empty()
     file_input_placeholder = st.form("pdf-form")
 
 with col2:
@@ -49,7 +44,7 @@ with st.sidebar:
 
     st.caption("")
     st.subheader("Document Size")
-    document_size = st.selectbox(label="Select Document Size", label_visibility="collapsed", options=["small ( < 13 pages )", "large ( > 13 pages )"])
+    document_size = st.selectbox(label="Select Document Size", label_visibility="collapsed", options=["small ( < 13 pages or 8,000 tokens )", "large ( > 13 pages or 8,000 tokens )"])
 
     tokens_used_placeholder = st.container()
 
@@ -59,19 +54,21 @@ with st.sidebar:
 
 with guide_placeholder:
     guide = st.text_area(label="Summary guidelines", label_visibility="collapsed")
-    guide_placeholder.form_submit_button(":green[Set]", on_click= prompt_change(guide))
+    guide_col1, guide_col2, guide_col3 = st.columns([3,1.4,3])
+    guide_col2.form_submit_button(":green[Set]", on_click= prompt_change(guide))
 
 
 # box with input and send button
 with file_input_placeholder:
-    input_col1, input_col2 = st.columns([5,1])
+    beginning_page = st.number_input("First Page:", step=1, value=1)
+    last_page = st.number_input("Last Page:", step=1, value=2)
+    st.file_uploader(label="file", label_visibility="collapsed", key="pdf_file")
 
-    with input_col1:
-        beginning_page = st.number_input("First Page:", step=1, value=1)
-        last_page = st.number_input("Last Page:", step=1, value=2)
-        st.file_uploader(label="file", label_visibility="collapsed", key="pdf_file")
-    
-    input_col2.form_submit_button(":green[Submit]", on_click= summarize(model, guide, beginning_page, last_page, document_size))
+    input_col1, input_col2, input_col3= st.columns([3,1.2,3])
+    if input_col2.form_submit_button(":green[Submit]"):
+        with explain_placeholder:
+            summarize(model, guide, beginning_page, last_page, document_size)
+
 
 with tokens_used_placeholder:
     st.caption("")
@@ -83,8 +80,3 @@ with tokens_used_placeholder:
     st.subheader("Percentage of Tokens Remaining:")
 
     display_percentage(percentage)
-
-#update visible chat  
-with explain_placeholder:
-        for ai_message in st.session_state.ai_message:
-            st.markdown(ai_message)
