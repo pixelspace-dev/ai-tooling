@@ -1,118 +1,172 @@
-import os
 import streamlit as st
 from PyPDF2 import PdfReader
+import openai
+
 from langchain.chains import ConversationChain
-from langchain.chains.summarize import load_summarize_chain
-from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chat_models import ChatOpenAI
+from langchain.memory import ConversationBufferMemory
 from langchain.prompts import (
     ChatPromptTemplate, 
     MessagesPlaceholder, 
     SystemMessagePromptTemplate, 
     HumanMessagePromptTemplate
 )
+from token_counter import get_tokens_from_openai, get_decoded_chunk_from_openai, max_tokens
 
-os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"]
+openai.api_key = st.secrets["API_KEY"]
 
-# chooses which color to display percentage as based on value and displays it
+
+def complete_summary(model, full_text):
+    """Creates a summary of the full pdf."""
+
+    chunk_size = (max_tokens(model) - 200)
+    overlap = 50
+    chunks = create_chunks(full_text, chunk_size, overlap)
+
+    # create a summary of each chunk, then put all summaries together
+    summaries = [get_partial_summary(model, get_decoded_chunk_from_openai(chunk, "cl100k_base")) for chunk in chunks]
+
+    return "".join(summaries)
+
+
+
+def create_chunks(full_text, chunk_size, overlap):
+    """Creates chunks of text instead of the full document."""   
+
+    # find number of tokens in the entire document
+    tokens_from_pdf = get_tokens_from_openai(full_text, "cl100k_base")
+
+    # create a list of chunks of a specified size
+    return [tokens_from_pdf[i:i+chunk_size] for i in range(0, len(tokens_from_pdf), chunk_size - overlap)]
+
+
+
 def display_percentage(percentage):
-    if percentage <= 20:
-        percentage = str(percentage)
-        st.write( f":red[{percentage}%]")
-
-    elif percentage > 20 and percentage <= 50:
-        percentage = str(percentage)
-        st.write( f":blue[{percentage}%]")
-
-    elif percentage > 50:
-        percentage = str(percentage)
-        st.write( f":green[{percentage}%]")
+    """Chooses which color to display the percentage as based on value and displays it."""
+    color = ("red" if 0 < percentage <= 20 
+             else "blue" if 20 < percentage <= 50
+             else "green" if percentage > 50
+             else None)
+    if color:
+        st.write(f":{color}[{percentage}%]")
     else:
         st.write(":red[0% Out of Tokens]")
 
 
-# creates a prompt for the ai to use and responds to the user's inquiry
-def get_explanation_with_memory(model, user_inquiry, memory):
+
+def extract_text(beginning_page, last_page):
+    """Extracts text from pdf documents."""
+
+    # PDF reader instance
+    reader = PdfReader(st.session_state.pdf_file)
+
+    # reads each page of pdf into text
+    pages = [reader.pages[i].extract_text() for i in range(beginning_page - 1, last_page - 1)]
+
+    return "".join(pages)
+
+
+
+def get_explanation(model, text_input, guide):
+    """Get an explanation of provided text from openai"""
+    response = []
+
+    user_content = (f"""You will explain provided text using the provided guidelines.
+                        Provided Guidelines: {guide}
+                        Provided Text: {text_input}"""
+                    if guide else f"""You will explain the following text: {text_input}""")
+
+    bit_response = openai.ChatCompletion.create(model=model,
+                                                messages=[{"role": "system", "content":"""You are a helpful chatbot that is proficient 
+                                                        in explaining text that is passed to it, not just summarizing it. You will help 
+                                                        the reader understand the meaning of the text being passed to you. If you do not 
+                                                        have access to a complete text, you will not create the rest."""},
+                                                       {"role": "user", "content": f"{user_content}"}
+                                                ],
+                                                stream=True)
+    for chunk in bit_response:
+        if not chunk.choices[0].delta:
+            break  # End of the stream; break the loop
+
+        response.append(chunk.choices[0].delta.content)  # save the event response
+        result = "".join(response).strip()
+        st.markdown(result)  # print the response as it is generated
+    return result
+
+
+
+def get_partial_summary(model: str, decoded_chunk: str):
+    """makes a summary of a chunk of text using openai and langchain"""
     prompt = ChatPromptTemplate.from_messages([
-        SystemMessagePromptTemplate.from_template("""You are a helpful chatbot that is proficient in explaining text that is passed to it.
-                                                    You will help the reader understand the meaning of the text being passed to you.
-                                                    If you do not have access to a complete text, you will not create the rest."""),
+        SystemMessagePromptTemplate.from_template("""You are a helpful bot that specializes in 
+                                                    summarizing text without losing any of its meaning."""),
         MessagesPlaceholder(variable_name="history"),
         HumanMessagePromptTemplate.from_template("{input}")
     ])
-
-    conversation = ConversationChain(memory=memory, 
-                                    prompt=prompt,
-                                    verbose= True, 
-                                    llm=ChatOpenAI(temperature=0.6, model= model),)
-    
-    response = conversation.predict(input=user_inquiry)
-
-    return response
+    memory = ConversationBufferMemory(return_messages=True)
+    conversation = ConversationChain(llm = ChatOpenAI(temperature=0, model=model),
+                                     memory=memory,
+                                     prompt=prompt,
+                                     verbose=True,)
+    return conversation.predict(input=decoded_chunk)
 
 
-# makes the prompt for the AI to follow
-# Each prompt involves a new perspective for the AI to consider the User's inquiry through
-def make_prompt(input):
-    memory = st.session_state.memory
 
-    if st.session_state.set_new_prompt:
-        prompt = f"""You will be given a block of text. You will respond to this text 
-        by creating an explanation of it using the following to guide your response: 
-        {input}. For whatever text is provided to you, you will only provide the meaning to that text."""
-    
-        if st.session_state.prompt != prompt:
-            st.session_state.prompt = prompt
-            memory.chat_memory.add_user_message(st.session_state.prompt)
-            memory.chat_memory.add_ai_message("Sure, input the text to be explained.")
+def page_error(beginning_page, last_page):
+    """lets user know if there is an invalid page selection"""
+    if beginning_page > last_page:
+        st.error("enter page selection in order from lower to higher page number")
+        return True
+    return False
 
 
-# make prompt, response, add to streamlit chat memory
-def summarize(model, guide, beginning_page, last_page):    
 
-    #make prompt for ai to follow
-    make_prompt(guide)
-
-    if st.session_state.pdf_file:
-        #need to have a valid page selection
-        if beginning_page > last_page:
-            st.error("Invalid Page Selection")
-
-        #array starts at zero, but user's page number doesn't
-        beginning_page -= 1
-        last_page -= 1
-        full_text = ""
-
-        # PDF reader instance
-        reader = PdfReader(st.session_state.pdf_file)
-
-        # reads each page of pdf into text
-        for i in range(beginning_page, last_page):
-            page = reader.pages[i]
-            full_text += page.extract_text()
-
-        #create chunks of text
-        
-        # create summary that builds off itself (langchain)
-
-        # get an explanation from ai based on larger/more complex summary
-        # creates summary based on input
-        explanation = get_explanation_with_memory(model, full_text, st.session_state.memory)
-
-        #add to chat history
-        st.session_state.user_message.append(full_text)
-        st.session_state.ai_message.append(explanation)
-
-
-# tell code whether to set a new prompt
-def prompt_change(input):
-    if input:
+def prompt_change(guide):
+    """tell code whether to set a new prompt"""
+    if guide:
         st.session_state.set_new_prompt = True
 
 
-# reset session state vars if button is pressed
+
 def reset_chat():
+    """reset session state vars if button is pressed"""
     del st.session_state.user_message
     del st.session_state.ai_message
-    del st.session_state.memory
     del st.session_state.pdf_file
+
+
+
+def summarize(model, guide, beginning_page, last_page, document_size):  
+    """make prompt, response, add to streamlit chat memory"""  
+    
+    if not st.session_state.pdf_file or page_error(beginning_page, last_page):
+        return
+
+    full_text = extract_text(beginning_page, last_page)
+
+    if document_size == "large ( > 13 pages or 8,000 tokens )":
+
+        #create smaller summaries of chunks of the text followed by one final summary of all of it
+        with st.spinner(text="Processing..."):
+            final_summary = complete_summary(model, full_text)
+
+            #add to chat memory
+            st.session_state.user_message.append(final_summary)
+
+            # creates summary based on input of final summary
+        explanation = get_explanation(model, final_summary, guide)
+
+    else:
+        # are too many tokens used in pdf to generate response that is 200 tokens long
+        if len(get_tokens_from_openai(full_text, "cl100k_base")) > (max_tokens(model)-200):
+            st.error("Too many tokens for a small document - documents with charts and tables may use more tokens than others")
+            return
+
+        #add to chat memory
+        st.session_state.user_message.append(full_text)
+
+        explanation = get_explanation(model, full_text, guide)
+            
+
+    #add response to chat memory
+    st.session_state.ai_message.append(explanation)
