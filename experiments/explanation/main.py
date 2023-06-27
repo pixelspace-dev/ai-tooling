@@ -1,5 +1,5 @@
 import streamlit as st
-from chat import summarize, prompt_change, reset_chat, display_percentage
+from summarization import summarize, prompt_change, reset_chat, display_percentage
 from token_counter import calculate_tokens_used
 
 st.set_page_config(layout="wide",)
@@ -44,7 +44,7 @@ with st.sidebar:
 
     st.caption("")
     st.subheader("Document Size")
-    document_size = st.selectbox(label="Select Document Size", label_visibility="collapsed", options=["small ( < 13 pages or 8,000 tokens )", "large ( > 13 pages or 8,000 tokens )"])
+    document_size = st.selectbox(label="Select Document Size", label_visibility="collapsed", options=["small ( < 10 pages or 8,000 tokens )", "large ( > 10 pages or 8,000 tokens )"])
 
     tokens_used_placeholder = st.container()
 
