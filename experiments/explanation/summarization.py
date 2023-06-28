@@ -1,5 +1,6 @@
+import os
 import streamlit as st
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 import openai
 
 from langchain.chains import ConversationChain
@@ -13,10 +14,11 @@ from langchain.prompts import (
 )
 from token_counter import get_tokens_from_openai, get_decoded_chunk_from_openai, max_tokens
 
-openai.api_key = st.secrets["API_KEY"]
+openai.api_key = st.secrets["API_KEY"] # for openai
+os.environ["OPENAI_API_KEY"] = st.secrets["API_KEY"] # for langchain
 
 
-def complete_summary(model, full_text):
+def complete_summary(model: str, full_text: str) -> str:
     """Creates a summary of the full pdf."""
 
     chunk_size = (max_tokens(model) - 200)
@@ -26,11 +28,11 @@ def complete_summary(model, full_text):
     # create a summary of each chunk, then put all summaries together
     summaries = [get_partial_summary(model, get_decoded_chunk_from_openai(chunk, "cl100k_base")) for chunk in chunks]
 
-    return "".join(summaries)
+    return " ".join(summaries)
 
 
 
-def create_chunks(full_text, chunk_size, overlap):
+def create_chunks(full_text: str, chunk_size: int, overlap: int) -> list:
     """Creates chunks of text instead of the full document."""   
 
     # find number of tokens in the entire document
@@ -61,7 +63,7 @@ def extract_text(beginning_page, last_page):
     reader = PdfReader(st.session_state.pdf_file)
 
     # reads each page of pdf into text
-    pages = [reader.pages[i].extract_text() for i in range(beginning_page - 1, last_page - 1)]
+    pages = [reader.pages[i].extract_text() for i in range(beginning_page - 1, last_page)]
 
     return "".join(pages)
 
@@ -71,16 +73,13 @@ def get_explanation(model, text_input, guide):
     """Get an explanation of provided text from openai"""
     response = []
 
-    user_content = (f"""You will explain provided text using the provided guidelines.
+    user_content = (f"""Process the following text based on the following guidelines:
                         Provided Guidelines: {guide}
                         Provided Text: {text_input}"""
                     if guide else f"""You will explain the following text: {text_input}""")
 
     bit_response = openai.ChatCompletion.create(model=model,
-                                                messages=[{"role": "system", "content":"""You are a helpful chatbot that is proficient 
-                                                        in explaining text that is passed to it, not just summarizing it. You will help 
-                                                        the reader understand the meaning of the text being passed to you. If you do not 
-                                                        have access to a complete text, you will not create the rest."""},
+                                                messages=[
                                                        {"role": "user", "content": f"{user_content}"}
                                                 ],
                                                 stream=True)
@@ -107,7 +106,8 @@ def get_partial_summary(model: str, decoded_chunk: str):
     conversation = ConversationChain(llm = ChatOpenAI(temperature=0, model=model),
                                      memory=memory,
                                      prompt=prompt,
-                                     verbose=True,)
+                                     verbose=True,
+                                     )
     return conversation.predict(input=decoded_chunk)
 
 
@@ -130,9 +130,12 @@ def prompt_change(guide):
 
 def reset_chat():
     """reset session state vars if button is pressed"""
-    del st.session_state.user_message
-    del st.session_state.ai_message
-    del st.session_state.pdf_file
+    if hasattr(st.session_state, 'user_message'):
+        del st.session_state.user_message
+    if hasattr(st.session_state, 'ai_message'):
+        del st.session_state.ai_message
+    if hasattr(st.session_state, 'pdf_file'):
+        del st.session_state.pdf_file
 
 
 
@@ -144,7 +147,7 @@ def summarize(model, guide, beginning_page, last_page, document_size):
 
     full_text = extract_text(beginning_page, last_page)
 
-    if document_size == "large ( > 13 pages or 8,000 tokens )":
+    if document_size == "large ( > 10 pages or 8,000 tokens )":
 
         #create smaller summaries of chunks of the text followed by one final summary of all of it
         with st.spinner(text="Processing..."):
