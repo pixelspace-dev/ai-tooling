@@ -115,9 +115,9 @@ def get_partial_summary(model: str, decoded_chunk: str, summary_size: int):
     summary = conversation.predict(input=decoded_chunk)
 
     ### temporary
-    st.session_state.partial_summaries.append(f"""Summary - {summary}
+    # st.session_state.partial_summaries.append(f"""Summary - {summary}
                                               
-                                               """)
+    #                                            """)
     ###
     return summary
 
