@@ -12,7 +12,7 @@ if 'user_message' not in st.session_state:
 if 'ai_message' not in st.session_state:
     st.session_state.ai_message = []
 if 'set_new_prompt' not in st.session_state:
-    st.session_state.set_new_prompt = False
+    st.session_state.set_new_prompt = True
 if 'prompt' not in st.session_state:
     st.session_state.prompt = ""
 if 'response' not in st.session_state:
@@ -37,6 +37,9 @@ with col1:
     #chat and input box
     explain_placeholder = st.empty()
     file_input_placeholder = st.form("pdf-form")
+
+    ### temporary
+    intermediate_summary_placeholder = st.container()
 
 with col2:
     #this is where the user can input prompts for the ai to use in considering its answer
@@ -89,9 +92,10 @@ with file_input_placeholder:
         with explain_placeholder:
             summarize(model, guide, beginning_page, last_page, document_size, summary_size)
         ### temporary
-        for sum in st.session_state.partial_summaries:
-            st.markdown(sum)
-        del st.session_state.partial_summaries
+        # with intermediate_summary_placeholder:
+        #     for sum in st.session_state.partial_summaries:
+        #         st.markdown(sum)
+        #     del st.session_state.partial_summaries
         ###
 
 

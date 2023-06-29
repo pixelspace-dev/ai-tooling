@@ -1,7 +1,6 @@
 import os
 import streamlit as st
 from pypdf import PdfReader
-import openai
 
 from langchain.callbacks.base import BaseCallbackHandler
 from langchain.chains import ConversationChain
@@ -26,7 +25,7 @@ def complete_summary(model: str, full_text: str, summary_size: int) -> str:
     chunks = create_chunks(full_text, chunk_size, overlap)
 
     # create a summary of each chunk, then put all summaries together
-    summaries = [get_partial_summary(model, get_decoded_chunk_from_openai(chunk, "cl100k_base")) for chunk in chunks]
+    summaries = [get_partial_summary(model, get_decoded_chunk_from_openai(chunk, "cl100k_base"), summary_size) for chunk in chunks]
 
     return " ".join(summaries)
 
@@ -72,7 +71,7 @@ def extract_text(beginning_page, last_page):
 # creates an explanation of the text for the user
 def get_explanation(model, text_input):
     prompt = ChatPromptTemplate.from_messages([
-        SystemMessagePromptTemplate.from_template("""You are a helpful chatbot that is proficient in explaining text that is passed to it,"""),
+        SystemMessagePromptTemplate.from_template("""You are a helpful chatbot that is proficient in explaining text that is passed to it"""),
         MessagesPlaceholder(variable_name="history"),
         HumanMessagePromptTemplate.from_template("{input}")
     ])
@@ -97,12 +96,13 @@ class MyCustomSyncHandler(BaseCallbackHandler):
 
 
 
-def get_partial_summary(model: str, decoded_chunk: str):
+def get_partial_summary(model: str, decoded_chunk: str, summary_size: int):
     """makes a summary of a chunk of text using openai and langchain"""
     prompt = ChatPromptTemplate.from_messages([
-        SystemMessagePromptTemplate.from_template("""You are a helpful bot that specializes in 
+        SystemMessagePromptTemplate.from_template(f"""You are a helpful bot that specializes in 
                                                     summarizing text without losing any of its meaning
-                                                    by using as much detail as possible."""),
+                                                    by using as much detail as possible. Your summary should 
+                                                    be {summary_size} tokens long"""),
         MessagesPlaceholder(variable_name="history"),
         HumanMessagePromptTemplate.from_template("{input}")
     ])
@@ -115,9 +115,9 @@ def get_partial_summary(model: str, decoded_chunk: str):
     summary = conversation.predict(input=decoded_chunk)
 
     ### temporary
-    # st.session_state.partial_summaries.append(f"""{summary}
+    st.session_state.partial_summaries.append(f"""Summary - {summary}
                                               
-    #                                           """)
+                                               """)
     ###
     return summary
 
@@ -163,6 +163,8 @@ def reset_chat():
         del st.session_state.pdf_file
     if hasattr(st.session_state, 'response'):
         del st.session_state.response
+    if hasattr(st.session_state, 'memory'):
+        del st.session_state.memory
 
 
 

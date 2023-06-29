@@ -11,8 +11,8 @@ def calculate_tokens_used(model) -> int:
     for message in st.session_state.ai_message:
         tokens_used += len(get_tokens_from_openai(message, base))
     if st.session_state.set_new_prompt:
-        tokens_used += len(get_tokens_from_openai(st.session_state.prompt, base)) + 9 
-        # 9 is added because a response is attached to the prompt that says "Sure, input the text to be explained."
+        tokens_used += len(get_tokens_from_openai(st.session_state.prompt, base)) + 17
+        # 17 is added because a response is attached to the prompt that says "You are a helpful chatbot that is proficient in explaining text that is passed to i"
         st.session_state.set_new_prompt = False
 
     max = max_tokens(model)
