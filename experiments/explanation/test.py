@@ -2,7 +2,7 @@ from unittest.mock import patch, MagicMock
 from io import StringIO
 import openai
 import streamlit as st
-from summarization import complete_summary, create_chunks, get_partial_summary, page_error, prompt_change, reset_chat, summarize
+from summarization import complete_summary, create_chunks, get_partial_summary, page_error, prompt_change, reset_chat, summarize, make_prompt
 import token_counter
 openai.api_key = st.secrets["API_KEY"]
 
@@ -11,6 +11,7 @@ def test_complete_summary():
     # prepared input
     model = "gpt-4"
     full_text = "Long document content..."
+    summary_size = 1000
 
     # expected output
     expected_summary = "summary1 summary2 summary3"
@@ -22,7 +23,7 @@ def test_complete_summary():
          patch('summarization.get_decoded_chunk_from_openai', side_effect=['chunk1', 'chunk2', 'chunk3']):
 
         # Run the function with the prepared input
-        summary = complete_summary(model, full_text)
+        summary = complete_summary(model, full_text, summary_size)
 
         # Verify the function output with expected result
         assert summary == expected_summary, f"Expected {expected_summary}, but got {summary}"
@@ -187,6 +188,28 @@ def test_get_partial_summary(ChatPromptTemplate, SystemMessagePromptTemplate,
     conversation_mock.predict.assert_called_once_with(input='decoded_chunk')
 
 
+@patch('summarization.st.session_state', new_callable=MagicMock)  # Mock session_state
+def test_make_prompt(mock_session_state):
+    mock_session_state.memory = MagicMock()
+    # Mock chat_memory within memory
+    mock_session_state.memory.chat_memory = MagicMock()
+
+    guide = "Some guide"
+    prompt = f"""Process the following text based on the following guidelines: {guide}"""
+
+    # Test the function with set_new_prompt True and prompt different than the created one
+    mock_session_state.set_new_prompt = True
+    mock_session_state.prompt = "Different prompt"
+    print(mock_session_state.prompt)
+    
+   
+    make_prompt(guide)
+
+    # verify the interactions
+    assert mock_session_state.prompt == prompt, "Prompt does not match the expected value"
+    mock_session_state.memory.chat_memory.add_user_message.assert_called_once_with(prompt)
+    mock_session_state.memory.chat_memory.add_ai_message.assert_called_once_with("Sure, what is the provided text?")
+
 
 @patch('streamlit.error')  # Mock st.error
 def test_page_error(mock_error):
@@ -253,9 +276,10 @@ def test_summarize(mock_max_tokens, mock_get_tokens, mock_get_explanation, mock_
     
     model, guide = "gpt-3", "Some guide"
     beginning_page, last_page = 1, 10
+    summary_size = 1000
 
     # Test the function with large document
-    summarize(model, guide, beginning_page, last_page, "large ( > 13 pages or 8,000 tokens )")
+    summarize(model, guide, beginning_page, last_page, "large ( > 10 pages or 8,000 tokens )", summary_size)
     assert mock_session_state.user_message == ["Final Summary"], "User message does not match for large document"
     assert mock_session_state.ai_message == ["Explanation"], "AI message does not match for large document"
 
@@ -264,7 +288,7 @@ def test_summarize(mock_max_tokens, mock_get_tokens, mock_get_explanation, mock_
     mock_session_state.ai_message = []
 
     # Test the function with small document
-    summarize(model, guide, beginning_page, last_page, "small")
+    summarize(model, guide, beginning_page, last_page, "small", summary_size)
     assert mock_session_state.user_message == ["Extracted Text"], "User message does not match for small document"
     assert mock_session_state.ai_message == ["Explanation"], "AI message does not match for small document"
 
