@@ -34,7 +34,7 @@ def enter_password():
     with st.form("password"):
         password_col1, password_col2 = st.columns([2,1])
         with password_col1:
-            entered_password = st.text_input(label="Enter Password:", label_visibility="collapsed", placeholder="password123")
+            entered_password = st.text_input(label="Enter Password:", label_visibility="collapsed", placeholder="password123", type="password")
         with password_col2:
             if st.form_submit_button(label=":green[Check]") and entered_password:
                 if entered_password == st.secrets["PASSWORD"]:
