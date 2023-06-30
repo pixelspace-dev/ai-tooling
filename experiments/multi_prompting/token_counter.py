@@ -30,7 +30,7 @@ def get_number_tokens_from_openai(message: str, encoding: str) -> int:
 def how_many_tokens_remaining_as_int(tokens_used: int, model: str) -> int:
     token_limits = {
         "gpt-4": 8192,
-        "gpt-3.5-turbo": 4096,
+        "gpt-3.5-turbo-16k": 16384,
     }
 
     return token_limits.get(model, -1)

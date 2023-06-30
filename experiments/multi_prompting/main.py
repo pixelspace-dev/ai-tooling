@@ -47,7 +47,7 @@ with col2:
 
 with st.sidebar:
     st.subheader("Select Model")
-    model = st.selectbox(label="Select Model", label_visibility="collapsed", options=["gpt-4", "gpt-3.5-turbo"])
+    model = st.selectbox(label="Select Model", label_visibility="collapsed", options=["gpt-4", "gpt-3.5-turbo-16k"])
 
     tokens_used_placeholder = st.container()
 
