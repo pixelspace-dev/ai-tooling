@@ -2,7 +2,7 @@
 # Allows for greater levels of accuracy in responses
 import streamlit as st
 from langchain.memory import ConversationBufferMemory
-from chat import send_message, prompt_change, reset_conversation, display_percentage
+from chat import send_message, prompt_change, reset_conversation, display_percentage, print_chat
 from token_counter import calculate_tokens_used
 
 st.set_page_config(layout="wide")
@@ -16,6 +16,7 @@ if 'set_new_prompt' not in st.session_state:
     st.session_state.set_new_prompt = False
 if 'prompt' not in st.session_state:
     st.session_state.prompt = ""
+st.session_state.response = []
 
 response = None
 
@@ -29,6 +30,7 @@ with col1:
 
     #chat and input box
     chat_placeholder = st.container()
+    response_placeholder = st.empty()
     input_placeholder = st.form("chat-form")
 
 with col2:
@@ -67,7 +69,13 @@ with input_placeholder:
 
     input_col1.text_input(label="message", label_visibility="collapsed", key= "user_inquiry")
             
-    input_col2.form_submit_button(":blue[Send]", on_click=send_message(model,first_perspective,second_perspective,third_perspective))
+    if input_col2.form_submit_button(":blue[Send]"):
+        #print existing chat
+        with chat_placeholder:
+            print_chat()
+        #stream new response message
+        with response_placeholder:
+            send_message(model,first_perspective,second_perspective,third_perspective)
 
 with tokens_used_placeholder:
     st.caption("")
@@ -79,8 +87,5 @@ with tokens_used_placeholder:
     st.subheader("Percentage of Tokens Remaining:")
 
     display_percentage(percentage)
-
-#update visible chat  
-with chat_placeholder:
-        for chat_message in st.session_state.chat:
-            st.markdown(chat_message)
+ 
+        
