@@ -12,7 +12,7 @@ def calculate_tokens_used(model) -> int:
         tokens_used += len(get_tokens_from_openai(message, base))
     if st.session_state.set_new_prompt:
         tokens_used += len(get_tokens_from_openai(st.session_state.prompt, base)) + 17
-        # 17 is added because a response is attached to the prompt that says "You are a helpful chatbot that is proficient in explaining text that is passed to i"
+        # 17 is added because a response is attached to the prompt that says "You are a helpful chatbot that is proficient in explaining text that is passed to it"
         st.session_state.set_new_prompt = False
 
     max = max_tokens(model)
@@ -41,7 +41,7 @@ def max_tokens(model: str) -> int:
     """takes number of tokens used and the model used, returns the number of tokens left to be used, which can be used in the response"""
     token_limits = {
         "gpt-4": 8192,
-        "gpt-3.5-turbo": 4096,
+        "gpt-3.5-turbo-16k": 16384,
     }
     return token_limits.get(model, -1)
 
