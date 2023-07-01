@@ -55,16 +55,21 @@ def display_percentage(percentage):
 
 
 
-def extract_text(beginning_page, last_page):
+def extract_text(beginning_page, last_page, document_type):
     """Extracts text from pdf documents."""
+    if document_type == "PDF":
+        # PDF reader instance
+        reader = PdfReader(st.session_state.pdf_file)
 
-    # PDF reader instance
-    reader = PdfReader(st.session_state.pdf_file)
+        # reads each page of pdf into text
+        pages = [reader.pages[i].extract_text() for i in range(beginning_page - 1, last_page)]
+        text = "".join(pages)
+    elif document_type == "text file (full document only)":
+        text = st.session_state.pdf_file.read()
+        text = text.decode("utf-8")
+        st.write
 
-    # reads each page of pdf into text
-    pages = [reader.pages[i].extract_text() for i in range(beginning_page - 1, last_page)]
-
-    return "".join(pages)
+    return text
 
 
 
@@ -168,13 +173,13 @@ def reset_chat():
 
 
 
-def summarize(model, guide, beginning_page, last_page, document_size, summary_size):  
+def summarize(model, guide, beginning_page, last_page, document_size, summary_size, document_type):  
     """make prompt, response, add to streamlit chat memory"""  
     
     if not st.session_state.pdf_file or page_error(beginning_page, last_page):
         return
 
-    full_text = extract_text(beginning_page, last_page)
+    full_text = extract_text(beginning_page, last_page, document_type)
 
     make_prompt(guide)
 

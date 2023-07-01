@@ -1,6 +1,6 @@
 import streamlit as st
 
-from page_configuration import enter_password, sidebar_configuration, guide_configuration, define_variables, file_input_configuration
+from page_configuration import enter_password, sidebar_configuration, guide_configuration, define_variables, file_input_configuration, tokens_used_configuration
 
 
 # initialize session_state variables
@@ -23,7 +23,8 @@ if st.session_state.correct_password:
 
         #prompt section
         with st.form("prompt-form"):
-            guide = guide_configuration()  
+            guide = guide_configuration() 
+        document_type = st.selectbox(label="Select Document Type", options=["PDF", "text file (full document only)",] )
 
     with primary_col:
         #header
@@ -38,4 +39,7 @@ if st.session_state.correct_password:
         # intermediate_summary_placeholder = st.container()
         ##
         with st.form("pdf-form"):
-            file_input_configuration(explain_placeholder, model, guide, document_size, summary_size)
+            file_input_configuration(explain_placeholder, model, guide, document_size, summary_size, document_type)
+    
+    with st.sidebar:
+        tokens_used_configuration(model)
