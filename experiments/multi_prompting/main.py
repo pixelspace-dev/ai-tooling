@@ -9,7 +9,7 @@ st.set_page_config(layout="wide")
 
 # add variables to the session state so AI can remember what has been said
 if 'memory' not in st.session_state:
-    st.session_state.memory = ConversationBufferMemory(return_messages=True)
+    st.session_state.memory = ConversationBufferMemory(return_messages=True, memory_key="chat_history")
 if 'chat' not in st.session_state:
     st.session_state.chat = []
 if 'set_new_prompt' not in st.session_state:
