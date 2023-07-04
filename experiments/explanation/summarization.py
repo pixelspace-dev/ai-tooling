@@ -59,13 +59,13 @@ def extract_text(beginning_page, last_page, document_type):
     """Extracts text from pdf documents."""
     if document_type == "PDF":
         # PDF reader instance
-        reader = PdfReader(st.session_state.pdf_file)
+        reader = PdfReader(st.session_state.file)
 
         # reads each page of pdf into text
         pages = [reader.pages[i].extract_text() for i in range(beginning_page - 1, last_page)]
         text = "".join(pages)
-    elif document_type == "text file (full document only)":
-        text = st.session_state.pdf_file.read()
+    elif document_type == "text file":
+        text = st.session_state.file.read()
         text = text.decode("utf-8")
         st.write
 
@@ -86,7 +86,8 @@ def get_explanation(model, text_input):
                                     verbose= True, 
                                     llm=ChatOpenAI(temperature=0.6, model= model, streaming=True, callbacks=[MyCustomSyncHandler()]),)
     bit_response = conversation.predict(input=text_input)
-
+    if bit_response[-1] != "." or bit_response[-1] != "!" or bit_response[-1] != "?":
+        bit_response = conversation.predict(input="continue")
     for chunk in bit_response: # This for loop is only needed for token count
         response.append(chunk) 
         result = "".join(response).strip()
@@ -107,7 +108,7 @@ def get_partial_summary(model: str, decoded_chunk: str, summary_size: int):
         SystemMessagePromptTemplate.from_template(f"""You are a helpful bot that specializes in 
                                                     summarizing text without losing any of its meaning
                                                     by using as much detail as possible. Your summary should 
-                                                    be {summary_size} tokens long"""),
+                                                    be as long as possible"""),
         MessagesPlaceholder(variable_name="history"),
         HumanMessagePromptTemplate.from_template("{input}")
     ])
@@ -165,7 +166,7 @@ def reset_chat():
     if hasattr(st.session_state, 'ai_message'):
         del st.session_state.ai_message
     if hasattr(st.session_state, 'pdf_file'):
-        del st.session_state.pdf_file
+        del st.session_state.file
     if hasattr(st.session_state, 'response'):
         del st.session_state.response
     if hasattr(st.session_state, 'memory'):
@@ -176,7 +177,7 @@ def reset_chat():
 def summarize(model, guide, beginning_page, last_page, document_size, summary_size, document_type):  
     """make prompt, response, add to streamlit chat memory"""  
     
-    if not st.session_state.pdf_file or page_error(beginning_page, last_page):
+    if not st.session_state.file or page_error(beginning_page, last_page):
         return
 
     full_text = extract_text(beginning_page, last_page, document_type)

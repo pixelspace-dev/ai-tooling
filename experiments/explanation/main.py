@@ -20,11 +20,12 @@ if st.session_state.correct_password:
         #this is where the user can input prompts for the ai to use in considering its answer
         st.subheader("Parameters")
         st.write("Add guidelines that tell the AI how to provide feedback")
+        st.caption("Ex: Explain in simple terms and using as few words as possible")
 
         #prompt section
         with st.form("prompt-form"):
             guide = guide_configuration() 
-        document_type = st.selectbox(label="Select Document Type", options=["PDF", "text file (full document only)",] )
+        document_type = st.selectbox(label="Select Document Type", options=["PDF", "text file",] )
 
     with primary_col:
         #header
