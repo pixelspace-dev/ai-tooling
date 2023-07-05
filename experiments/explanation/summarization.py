@@ -74,7 +74,7 @@ def extract_text(beginning_page, last_page, document_type):
 
 
 # creates an explanation of the text for the user
-def get_explanation(model, text_input):
+def get_explanation(model, text_input, summary_size):
     prompt = ChatPromptTemplate.from_messages([
         SystemMessagePromptTemplate.from_template("""You are a helpful chatbot that is proficient in explaining text that is passed to it"""),
         MessagesPlaceholder(variable_name="history"),
@@ -83,10 +83,10 @@ def get_explanation(model, text_input):
     response = []
     conversation = ConversationChain(memory=st.session_state.memory, 
                                     prompt=prompt,
-                                    verbose= True, 
+                                    verbose= True,  
                                     llm=ChatOpenAI(temperature=0.6, model= model, streaming=True, callbacks=[MyCustomSyncHandler()]),)
     bit_response = conversation.predict(input=text_input)
-    if bit_response[-1] != "." or bit_response[-1] != "!" or bit_response[-1] != "?":
+    if len(bit_response) >= summary_size:
         bit_response = conversation.predict(input="continue")
     for chunk in bit_response: # This for loop is only needed for token count
         response.append(chunk) 
@@ -194,7 +194,7 @@ def summarize(model, guide, beginning_page, last_page, document_size, summary_si
             st.session_state.user_message.append(final_summary)
 
             # creates summary based on input of final summary
-        explanation = get_explanation(model, final_summary)
+        explanation = get_explanation(model, final_summary, summary_size)
 
     else:
         # are too many tokens used in pdf to generate response that is 200 tokens long
@@ -205,7 +205,7 @@ def summarize(model, guide, beginning_page, last_page, document_size, summary_si
         #add to chat memory
         st.session_state.user_message.append(full_text)
 
-        explanation = get_explanation(model, full_text)
+        explanation = get_explanation(model, full_text, summary_size)
             
 
     #add response to chat memory
