@@ -59,13 +59,13 @@ def extract_text(beginning_page, last_page, document_type):
     """Extracts text from pdf documents."""
     if document_type == "PDF":
         # PDF reader instance
-        reader = PdfReader(st.session_state.pdf_file)
+        reader = PdfReader(st.session_state.file)
 
         # reads each page of pdf into text
         pages = [reader.pages[i].extract_text() for i in range(beginning_page - 1, last_page)]
         text = "".join(pages)
-    elif document_type == "text file (full document only)":
-        text = st.session_state.pdf_file.read()
+    elif document_type == "text file":
+        text = st.session_state.file.read()
         text = text.decode("utf-8")
         st.write
 
@@ -74,7 +74,7 @@ def extract_text(beginning_page, last_page, document_type):
 
 
 # creates an explanation of the text for the user
-def get_explanation(model, text_input):
+def get_explanation(model, text_input, summary_size):
     prompt = ChatPromptTemplate.from_messages([
         SystemMessagePromptTemplate.from_template("""You are a helpful chatbot that is proficient in explaining text that is passed to it"""),
         MessagesPlaceholder(variable_name="history"),
@@ -83,10 +83,11 @@ def get_explanation(model, text_input):
     response = []
     conversation = ConversationChain(memory=st.session_state.memory, 
                                     prompt=prompt,
-                                    verbose= True, 
+                                    verbose= True,  
                                     llm=ChatOpenAI(temperature=0.6, model= model, streaming=True, callbacks=[MyCustomSyncHandler()]),)
     bit_response = conversation.predict(input=text_input)
-
+    if len(bit_response) >= summary_size:
+        bit_response = conversation.predict(input="continue")
     for chunk in bit_response: # This for loop is only needed for token count
         response.append(chunk) 
         result = "".join(response).strip()
@@ -107,7 +108,7 @@ def get_partial_summary(model: str, decoded_chunk: str, summary_size: int):
         SystemMessagePromptTemplate.from_template(f"""You are a helpful bot that specializes in 
                                                     summarizing text without losing any of its meaning
                                                     by using as much detail as possible. Your summary should 
-                                                    be {summary_size} tokens long"""),
+                                                    be as long as possible"""),
         MessagesPlaceholder(variable_name="history"),
         HumanMessagePromptTemplate.from_template("{input}")
     ])
@@ -165,7 +166,7 @@ def reset_chat():
     if hasattr(st.session_state, 'ai_message'):
         del st.session_state.ai_message
     if hasattr(st.session_state, 'pdf_file'):
-        del st.session_state.pdf_file
+        del st.session_state.file
     if hasattr(st.session_state, 'response'):
         del st.session_state.response
     if hasattr(st.session_state, 'memory'):
@@ -176,7 +177,7 @@ def reset_chat():
 def summarize(model, guide, beginning_page, last_page, document_size, summary_size, document_type):  
     """make prompt, response, add to streamlit chat memory"""  
     
-    if not st.session_state.pdf_file or page_error(beginning_page, last_page):
+    if not st.session_state.file or page_error(beginning_page, last_page):
         return
 
     full_text = extract_text(beginning_page, last_page, document_type)
@@ -193,7 +194,7 @@ def summarize(model, guide, beginning_page, last_page, document_size, summary_si
             st.session_state.user_message.append(final_summary)
 
             # creates summary based on input of final summary
-        explanation = get_explanation(model, final_summary)
+        explanation = get_explanation(model, final_summary, summary_size)
 
     else:
         # are too many tokens used in pdf to generate response that is 200 tokens long
@@ -204,7 +205,7 @@ def summarize(model, guide, beginning_page, last_page, document_size, summary_si
         #add to chat memory
         st.session_state.user_message.append(full_text)
 
-        explanation = get_explanation(model, full_text)
+        explanation = get_explanation(model, full_text, summary_size)
             
 
     #add response to chat memory

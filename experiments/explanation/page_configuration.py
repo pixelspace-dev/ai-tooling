@@ -53,7 +53,7 @@ def file_input_configuration(explain_placeholder, model, guide, document_size, s
     else:
         beginning_page = 1
         last_page = 2
-    st.file_uploader(label="file", label_visibility="collapsed", key="pdf_file")
+    st.file_uploader(label="file", label_visibility="collapsed", key="file")
 
     input_col1, input_col2, input_col3= st.columns([3,1.2,3])
     if input_col2.form_submit_button(":green[Submit]"):
