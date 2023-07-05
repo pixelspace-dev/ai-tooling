@@ -126,7 +126,7 @@ def send_message(model, first_perspective, second_perspective, third_perspective
     if st.session_state.user_inquiry:
 
         response = get_response_with_memory(model, st.session_state.user_inquiry)
-        st.session_state.chat.append(f"AI: {response}") if st.session_state == "" else st.session_state.chat.append(response)
+        st.session_state.chat.append(f"AI: {response}") if st.session_state.chat == "" else st.session_state.chat.append(response)
 
 
 
