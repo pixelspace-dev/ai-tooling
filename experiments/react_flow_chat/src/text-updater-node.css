@@ -1,0 +1,39 @@
+.text-updater-node {
+    height: 70px;
+    border: 1px solid #efe5e5;
+    padding: 5px;
+    border-radius: 5px;
+    background: #262530;
+  }
+  
+  .text-updater-node label {
+    display: block;
+    color: #ede3e3;
+    font-size: 12px;
+    font-family:monospace;
+  }
+
+  .text-updater-node button {
+    height: 20px;
+    padding-top:1px;
+    padding-bottom: 7px;
+    color: #ede3e3;
+    font-size: 12px;
+    text-align:center;
+    vertical-align: middle;
+    background-color: #9e334a;
+    border: 1px solid #351219;
+    border-top-color: #cbaaaa;
+    border-left: #cbaaaa;
+    border-right: #cbaaaa;
+    font-family:monospace;
+  }
+
+  .text-updater-node input {
+    color: #2e1818;
+    font-size: 12px;
+    text-align:left;
+    background-color: #ede3e3;
+    border-color: #b3aacb;
+    font-family:monospace;
+  }
