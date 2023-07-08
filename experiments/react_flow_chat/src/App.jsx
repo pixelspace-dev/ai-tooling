@@ -6,7 +6,7 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   addEdge,
-  NodeToolbar,
+  MarkerType,
   applyEdgeChanges, 
   applyNodeChanges
 } from 'reactflow';
@@ -16,23 +16,29 @@ import 'reactflow/dist/style.css';
 import TextUpdaterNode from './TextUpdaterNode.jsx';
 import './text-updater-node.css';
 
+import AiResponseNode from './AiResponseNode.jsx';
+import './ai-response-node.css';
+
 const initialNodes = [
-  // { id: '3', position: { x: 700, y: 100 }, data: { label: 'Human Input' }, type: 'input', style: {backgroundColor: '#9e334a', color: 'white'} },
-  { id: '1', position: { x: 696, y: 100 }, data: { value: 123 }, type: 'textUpdater'},
-  { id: '2', position: { x: 700, y: 250 }, data: { label: 'AI Response' }, type: 'output', style: { backgroundColor: '#3a5c4e', color: 'white' } },
+  { id: '1', position: { x: 700, y: 100 }, data: { value: 123 }, type: 'textUpdater', draggable: false},
+  { id: '2', position: { x: 700, y: 230 }, data: { label: 'AI Response' }, type: 'aiResponse'},
 ];
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
-const nodeTypes = { textUpdater: TextUpdaterNode };
+const initialEdges = [{ id: 'e1-2', source: '1', target: '2', style: { strokeWidth: 2, stroke: '#17171a' }, 
+  markerEnd: {type: MarkerType.ArrowClosed, color: '#17171a',}
+  ,}];
+const nodeTypes = { textUpdater: TextUpdaterNode, aiResponse: AiResponseNode };
 const rfStyle = {
-  backgroundColor: '#B8CEFF',
+  backgroundColor: '#e1e8f2',
 };
 
 const nodeColor = (node) => {
   switch (node.type) {
     case 'input':
       return '#9e334a';
-    case 'output':
-      return '#3a5c4e';
+    case 'aiResponse':
+      return '#ad6675';
+    case 'textUpdater':
+      return '#262530';
     default:
       return '#616161';
   }

@@ -1,10 +1,9 @@
 import { useCallback } from 'react';
-import { Background, Handle, Panel, Position } from 'reactflow';
+import { Handle, Position } from 'reactflow';
 import sendText from './test_function.jsx';
 
-const handleStyle = { left: 10 };
-var message = "None"
 var response
+var message = ""
 
 function TextUpdaterNode({ data, isConnectable }) {
   const onChange = useCallback((evt) => {
@@ -18,17 +17,14 @@ function TextUpdaterNode({ data, isConnectable }) {
         <label htmlFor="text">Human Input:</label>
         <input id="text" name="text" onChange={onChange} className="nodrag" />
       </div>
-
       <button onClick={() => {
         console.log("Button Clicked");
         response = sendText("gpt-4", message)
       }}>Submit</button>
 
-      <p>{sendText("gpt-4", message)}</p>
-
       <Handle type="source" position={Position.Bottom} id="b" isConnectable={isConnectable} />
     </div>
   );
 }
-
+export {message};
 export default TextUpdaterNode;

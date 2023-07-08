@@ -1,14 +1,15 @@
 .text-updater-node {
     height: 70px;
-    border: 1px solid #efe5e5;
+    width: 145px;
+    border: 1px solid #e3e4ec;
     padding: 5px;
     border-radius: 5px;
-    background: #262530;
+    background: #2c2c32;
   }
   
   .text-updater-node label {
     display: block;
-    color: #ede3e3;
+    color: #e3e4ec;
     font-size: 12px;
     font-family:monospace;
   }
@@ -17,11 +18,11 @@
     height: 20px;
     padding-top:1px;
     padding-bottom: 7px;
-    color: #ede3e3;
+    color: #e3e4ec;
     font-size: 12px;
     text-align:center;
     vertical-align: middle;
-    background-color: #9e334a;
+    background-color: #813747;
     border: 1px solid #351219;
     border-top-color: #cbaaaa;
     border-left: #cbaaaa;
@@ -33,7 +34,7 @@
     color: #2e1818;
     font-size: 12px;
     text-align:left;
-    background-color: #ede3e3;
-    border-color: #b3aacb;
+    background-color: #e3e4ec;
+    border-color: rgb(150, 155, 185);
     font-family:monospace;
   }
