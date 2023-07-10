@@ -1,10 +1,10 @@
 import { OpenAI } from "langchain/llms/openai";
 import React from "react";
 import {message} from './TextUpdaterNode.jsx'
-import 'dotenv/config'
+//import 'dotenv/config'
 
 var response
-var OPENAI_API_KEY=process.env.REACT_APP_API_KEY
+//var OPENAI_API_KEY=process.env.REACT_APP_API_KEY
 
 async function sendText( model ) {
     //res = model.call(message);
