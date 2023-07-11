@@ -1,20 +1,20 @@
-.text-updater-node {
-    height: 70px;
-    width: 145px;
+.key-node {
+    height: 45px;
+    width: 160px;
     border: 1px solid #e3e4ec;
     padding: 5px;
     border-radius: 5px;
-    background: #2c2c32;
+    background: #333341;
   }
   
-  .text-updater-node label {
+  .key-node label {
     display: block;
     color: #e3e4ec;
     font-size: 12px;
     font-family:monospace;
   }
 
-  .text-updater-node button {
+  .key-node button {
     height: 20px;
     padding-top:1px;
     padding-bottom: 7px;
@@ -22,17 +22,16 @@
     font-size: 12px;
     text-align:center;
     vertical-align: middle;
-    background-color: #813747;
-    border: 1px solid #351219;
-    border-top-color: #cbaaaa;
-    border-left: #cbaaaa;
-    border-right: #cbaaaa;
+    background-color: #463781;
+    border: 1px solid #181235;
+    border-top-color: #b2aacb;
+    border-left: #b2aacb;
+    border-right: #b2aacb;
     font-family:monospace;
   }
 
-  .text-updater-node input {
-    color: #2e1818;
-    height: 18px;
+  .key-node input {
+    color: #1c1930;
     font-size: 12px;
     text-align:left;
     background-color: #e3e4ec;
@@ -44,4 +43,6 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     align-self: center;
+    width: 155px;
+    height: 15px;
   }

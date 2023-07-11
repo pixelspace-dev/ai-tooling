@@ -1,8 +1,9 @@
 import {  Handle, Position } from 'reactflow';
-import {response} from './test_function.jsx'
 
+// This node prints the AI response
 
-function AiResponseNode({ data, isConnectable }){
+function AiResponseNode({ response, isConnectable }){
+
   return (
     <div className="ai-response-node">
         

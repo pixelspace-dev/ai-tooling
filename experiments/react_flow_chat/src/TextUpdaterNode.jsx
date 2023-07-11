@@ -1,9 +1,8 @@
 import { useCallback } from 'react';
 import { Handle, Position } from 'reactflow';
-import sendText from './test_function.jsx';
+// This node accepts text input from the user, which will be sent to openai
 
-var response
-var message = ""
+var message
 
 function TextUpdaterNode({ data, isConnectable }) {
   const onChange = useCallback((evt) => {
@@ -13,15 +12,16 @@ function TextUpdaterNode({ data, isConnectable }) {
 
   return (
     <div className="text-updater-node">
+      <Handle type="target" position={Position.Left} id="a" isConnectable={isConnectable} />
+      
       <div>
         <label htmlFor="text">Human Input:</label>
         <input id="text" name="text" onChange={onChange} className="nodrag" />
+      
+        <button onClick={() => {
+          console.log("Button Clicked");
+        }}>Submit</button>
       </div>
-      <button onClick={() => {
-        console.log("Button Clicked");
-        response = sendText("gpt-4", message)
-      }}>Submit</button>
-
       <Handle type="source" position={Position.Bottom} id="b" isConnectable={isConnectable} />
     </div>
   );
