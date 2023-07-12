@@ -22,16 +22,16 @@
     font-size: 12px;
     text-align:center;
     vertical-align: middle;
-    background-color: #813747;
-    border: 1px solid #351219;
-    border-top-color: #cbaaaa;
-    border-left: #cbaaaa;
-    border-right: #cbaaaa;
+    background-color: #463781;
+    border: 1px solid #1a1235;
+    border-top-color: #b1aacb;
+    border-left: #b1aacb;
+    border-right: #b1aacb;
     font-family:monospace;
   }
 
   .text-updater-node input {
-    color: #2e1818;
+    color: #1c182e;
     height: 18px;
     font-size: 12px;
     text-align:left;

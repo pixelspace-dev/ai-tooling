@@ -1,22 +1,22 @@
 .ai-response-node {
     height: 70px;
     width: 145px;
-    border: 1px solid #efe5e5;
+    border: 1px solid #e6e5ef;
     padding: 5px;
     border-radius: 5px;
-    background: #ad6675;
+    background: #6766ad;
   }
   
   .ai-response-node label {
     display: block;
-    color: #ede3e3;
+    color: #e5e3ed;
     font-size: 14px;
     font-family:monospace;
   }
 
   .ai-response-node p {
     display: block;
-    color: #d6c9c9;
+    color: #cac9d6;
     font-size: 12px;
     font-family:monospace;
   }
