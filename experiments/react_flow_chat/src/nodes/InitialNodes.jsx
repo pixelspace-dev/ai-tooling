@@ -14,17 +14,8 @@ const nodeTypes = {
 
 const initialNodes = [
   {
-    id: "A",
-    position: { x: 10, y: 70 },
-    data: { label: null },
-    type: "group",
-    className: "A",
-    draggable: false,
-    style: { height: "230px", width: "400px" },
-  },
-  {
     id: "0",
-    position: { x: 20, y: 102 },
+    position: { x: 203, y: 0 },
     data: { value: 123 },
     type: "keyInput",
     draggable: false,

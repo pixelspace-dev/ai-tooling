@@ -18,7 +18,7 @@ function KeyNode({ data, isConnectable }) {
 
       <Handle
         type="source"
-        position={Position.Right}
+        position={Position.Bottom}
         id="b"
         isConnectable={isConnectable}
       />

@@ -4,9 +4,12 @@ import {
 } from "reactflow";
 import "reactflow/dist/style.css";
 import Flow from "./addNode.jsx"
+import "./button.css";
+import OpenaiCall from "./openaiCall.jsx"
 
 export default function App() {
-
+  
+  OpenaiCall()
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>

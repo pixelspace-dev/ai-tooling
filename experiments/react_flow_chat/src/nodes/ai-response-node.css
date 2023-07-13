@@ -20,3 +20,14 @@
     font-size: 12px;
     font-family:monospace;
   }
+
+  .ai-response-node button {
+    height: 20px;
+    padding-top:1px;
+    font-size: 12px;
+    text-align:center;
+    background-color: #c2c2dc;
+    color: rgb(72, 68, 84);
+    border: 1px solid #514a68;
+    font-family:monospace;
+  }

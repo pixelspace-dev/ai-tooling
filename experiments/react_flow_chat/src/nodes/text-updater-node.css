@@ -17,16 +17,11 @@
   .text-updater-node button {
     height: 20px;
     padding-top:1px;
-    padding-bottom: 7px;
-    color: #e3e4ec;
     font-size: 12px;
     text-align:center;
-    vertical-align: middle;
-    background-color: #463781;
+    background-color: rgb(86, 90, 131);
+    color: rgb(244, 240, 255);
     border: 1px solid #1a1235;
-    border-top-color: #b1aacb;
-    border-left: #b1aacb;
-    border-right: #b1aacb;
     font-family:monospace;
   }
 
