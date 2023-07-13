@@ -3,7 +3,7 @@ import {
   ReactFlowProvider,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import Flow from "./addNode.jsx"
+import Flow from "./nodeTree.jsx"
 import "./button.css";
 import OpenaiCall from "./openaiCall.jsx"
 
