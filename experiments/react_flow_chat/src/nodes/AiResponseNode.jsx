@@ -1,20 +1,29 @@
-import { Handle, Position,useReactFlow, MarkerType, useUpdateNodeInternals } from "reactflow";
+import {
+  Handle,
+  Position,
+  useReactFlow,
+  MarkerType,
+  useNodeId,
+} from "reactflow";
 import { useCallback } from "react";
+import { v4 as uuidv4 } from 'uuid';
+import { arrowColor } from "../InitialEdges.jsx";
 
 // This node prints the AI response
+let response;
 
-function AiResponseNode({ response, isConnectable }) {
-
+function AiResponseNode({ data, isConnectable }) {
   const reactFlowInstance = useReactFlow();
-  let nodeId = 4444;
+
   let xLocation = 110;
-  let yLocation = 350
+  let yLocation = 370; //need better way to define this
+  const currentId = useNodeId();
 
-  const onClick = useCallback(() => {
-    //create new node
-    console.log("node created");
+  const onClickCreateNode = useCallback(() => {
+    
+    //create new text input node
 
-    const id = `${++nodeId}`;
+    const id = uuidv4();
     const newNode = {
       id,
       position: {
@@ -24,22 +33,22 @@ function AiResponseNode({ response, isConnectable }) {
       data: {
         label: "Human Input:",
       },
-      type: "textUpdater",
+      type: "humanInput",
     };
 
     const newEdge = [
       {
         id,
-        source: "1",
-        target: `${nodeId}`,
-        style: { strokeWidth: 2, stroke: "#17171a" },
-        markerEnd: { type: MarkerType.ArrowClosed, color: "#17171a" },
+        source: currentId,
+        target: id,
+        style: { strokeWidth: 2, stroke: arrowColor },
+        markerEnd: { type: MarkerType.ArrowClosed, color: arrowColor },
       },
     ];
     xLocation = xLocation + 170;
     reactFlowInstance.addNodes(newNode);
-    //reactFlowInstance.addEdges(newEdge);
-    //end create new node
+    reactFlowInstance.addEdges(newEdge);
+    console.log("human input node created");
   }, []);
 
   return (
@@ -57,8 +66,8 @@ function AiResponseNode({ response, isConnectable }) {
         isConnectable={isConnectable}
       />
       <div>
-        <label htmlFor="text">AI Response: {response}</label>
-        <button onClick={onClick}>new message</button>
+        <label htmlFor="text">{data.label}</label>
+        <button onClick={onClickCreateNode}>new message</button>
       </div>
       <p>{response}</p>
     </div>
