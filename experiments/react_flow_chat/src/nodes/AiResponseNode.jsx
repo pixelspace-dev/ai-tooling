@@ -1,29 +1,22 @@
-import {
-  Handle,
-  Position,
-  useReactFlow,
-  MarkerType,
-  useNodeId,
-} from "reactflow";
+import { Handle, Position,useReactFlow, MarkerType, useUpdateNodeInternals, useNodeId } from "reactflow";
 import { useCallback } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { arrowColor } from "../InitialEdges.jsx";
 
 // This node prints the AI response
-let response;
 
-function AiResponseNode({ data, isConnectable }) {
+function AiResponseNode({ data, response, isConnectable }) {
+
   const reactFlowInstance = useReactFlow();
 
   let xLocation = 110;
-  let yLocation = 370; //need better way to define this
+  let yLocation = 350;
   const currentId = useNodeId();
 
-  const onClickCreateNode = useCallback(() => {
-    
-    //create new text input node
-
+  const onClick = useCallback(() => {
+    //create new node
     const id = uuidv4();
+    
     const newNode = {
       id,
       position: {
@@ -43,6 +36,7 @@ function AiResponseNode({ data, isConnectable }) {
         target: id,
         style: { strokeWidth: 2, stroke: arrowColor },
         markerEnd: { type: MarkerType.ArrowClosed, color: arrowColor },
+
       },
     ];
     xLocation = xLocation + 170;
@@ -66,10 +60,10 @@ function AiResponseNode({ data, isConnectable }) {
         isConnectable={isConnectable}
       />
       <div>
-        <label htmlFor="text">{data.label}</label>
-        <button onClick={onClickCreateNode}>new message</button>
+        <label htmlFor="text">AI Response: </label>
+        <p>{data?.response}</p>
+        <button onClick={onClick}>new message</button>
       </div>
-      <p>{response}</p>
     </div>
   );
 }

@@ -2,11 +2,10 @@ import { useCallback } from "react";
 import { Handle, Position } from "reactflow";
 // This node is where the user can input the openai key
 
-var openaiKey = "";
-
 function KeyNode({ data, isConnectable }) {
   const onChange = useCallback((evt) => {
-    openaiKey = evt.target.value;
+    const openaiKey = evt.target.value;
+    localStorage.setItem('openaiKey', openaiKey)
   }, []);
 
   return (
@@ -26,5 +25,4 @@ function KeyNode({ data, isConnectable }) {
   );
 }
 
-export { openaiKey };
 export default KeyNode;

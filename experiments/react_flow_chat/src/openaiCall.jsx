@@ -3,30 +3,26 @@ import "reactflow/dist/style.css";
 import { ChatOpenAI } from "langchain/chat_models/openai";
 import { HumanMessage } from "langchain/schema";
 import "./button.css";
-import { openaiKey } from "./nodes/KeyNode.jsx";
-//import { message } from "./nodes/TextUpdaterNode.jsx";
 
-function OpenaiCall(message) {
+async function OpenaiCall() {
   //// Send message to ai and get response
-  useEffect(() => {
-    if (openaiKey.length != 51) return;
+    const openaiKey = localStorage.getItem('openaiKey')
+    if (!openaiKey || !openaiKey.length) return;
 
     async function sendText(message) {
-      //chat call instance
       const chat = new ChatOpenAI({
-        openAIApiKey: openaiKey,
+        openAIApiKey: localStorage.getItem('openaiKey'),
         temperature: 0.9,
       });
 
-      // make call to ai
       response = await chat.call([new HumanMessage(message)]);
-      //record response
       console.log(response.content);
-      //can't return a value
+      localStorage.setItem('openAiResponse', JSON.stringify(response.content))
     }
-    //call ai function - does not get response back
-    var response = sendText(message);
-  }, [openaiKey]);
+
+    const message = localStorage.getItem('message')
+
+    var response = await sendText(message);
 }
 
-export default OpenaiCall;
+export default OpenaiCall
