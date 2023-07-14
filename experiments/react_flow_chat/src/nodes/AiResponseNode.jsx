@@ -1,20 +1,22 @@
-import { Handle, Position,useReactFlow, MarkerType, useUpdateNodeInternals } from "reactflow";
+import { Handle, Position,useReactFlow, MarkerType, useUpdateNodeInternals, useNodeId } from "reactflow";
 import { useCallback } from "react";
+import { v4 as uuidv4 } from 'uuid';
+import { arrowColor } from "../InitialEdges.jsx";
 
 // This node prints the AI response
 
 function AiResponseNode({ data, response, isConnectable }) {
 
   const reactFlowInstance = useReactFlow();
-  let nodeId = 4444;
+
   let xLocation = 110;
-  let yLocation = 350
+  let yLocation = 350;
+  const currentId = useNodeId();
 
   const onClick = useCallback(() => {
     //create new node
-    console.log("node created");
-
-    const id = `${++nodeId}`;
+    const id = uuidv4();
+    
     const newNode = {
       id,
       position: {
@@ -24,22 +26,23 @@ function AiResponseNode({ data, response, isConnectable }) {
       data: {
         label: "Human Input:",
       },
-      type: "textUpdater",
+      type: "humanInput",
     };
 
     const newEdge = [
       {
         id,
-        source: "1",
-        target: `${nodeId}`,
-        style: { strokeWidth: 2, stroke: "#17171a" },
-        markerEnd: { type: MarkerType.ArrowClosed, color: "#17171a" },
+        source: currentId,
+        target: id,
+        style: { strokeWidth: 2, stroke: arrowColor },
+        markerEnd: { type: MarkerType.ArrowClosed, color: arrowColor },
+
       },
     ];
     xLocation = xLocation + 170;
     reactFlowInstance.addNodes(newNode);
-    //reactFlowInstance.addEdges(newEdge);
-    //end create new node
+    reactFlowInstance.addEdges(newEdge);
+    console.log("human input node created");
   }, []);
 
   return (
@@ -61,7 +64,6 @@ function AiResponseNode({ data, response, isConnectable }) {
         <p>{data?.response}</p>
         <button onClick={onClick}>new message</button>
       </div>
-      
     </div>
   );
 }
