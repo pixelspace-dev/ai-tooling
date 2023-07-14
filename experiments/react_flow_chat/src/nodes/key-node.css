@@ -1,0 +1,48 @@
+.key-node {
+    height: 45px;
+    width: 160px;
+    border: 1px solid #e3e4ec;
+    padding: 5px;
+    border-radius: 5px;
+    background: #333341;
+  }
+  
+  .key-node label {
+    display: block;
+    color: #e3e4ec;
+    font-size: 12px;
+    font-family:monospace;
+  }
+
+  .key-node button {
+    height: 20px;
+    padding-top:1px;
+    padding-bottom: 7px;
+    color: #e3e4ec;
+    font-size: 12px;
+    text-align:center;
+    vertical-align: middle;
+    background-color: #463781;
+    border: 1px solid #181235;
+    border-top-color: #b2aacb;
+    border-left: #b2aacb;
+    border-right: #b2aacb;
+    font-family:monospace;
+  }
+
+  .key-node input {
+    color: #1c1930;
+    font-size: 12px;
+    text-align:left;
+    background-color: #e3e4ec;
+    border-color: rgb(150, 155, 185);
+    font-family:monospace;
+    border-style:none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    align-self: center;
+    width: 155px;
+    height: 15px;
+  }
