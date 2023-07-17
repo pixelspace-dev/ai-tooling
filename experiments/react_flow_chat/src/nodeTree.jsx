@@ -14,11 +14,11 @@ function Flow() {
   const nodeColor = (node) => {
     switch (node.type) {
       case "aiResponse":
-        return "#6766ad";
+        return "#424284";
       case "textUpdater":
-        return "#262530";
+        return "#424284";
       case "keyInput":
-        return "#333341";
+        return "#463781";
       default:
         return "#616161";
     }
@@ -30,13 +30,12 @@ function Flow() {
         defaultNodes={initialNodes}
         defaultEdges={initialEdges}
         nodeTypes={nodeTypes}
-        fitView
         style={{
-          backgroundColor: "rgb(239, 239, 239)",
+          backgroundColor: "#161618",
         }}
       >
         <Controls />
-        <MiniMap nodeColor={nodeColor} backgroundColor={"#D3D2E5"} nodeStrokeWidth={3} zoomable pannable />
+        <MiniMap nodeColor={nodeColor} nodeStrokeWidth={3} zoomable pannable />
       </ReactFlow>
     </>
   );

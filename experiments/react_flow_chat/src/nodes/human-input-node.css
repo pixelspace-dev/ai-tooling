@@ -1,37 +1,34 @@
-.key-node {
-  height: 45px;
-  width: 160px;
+.human-input-node {
+  height: fit-content;
+  width: 145px;
   border: 1px solid #48466f;
   padding: 5px;
   border-radius: 5px;
-  background: #37375c;
+  background: #373753;
 }
 
-.key-node label {
+.human-input-node label {
   display: block;
   color: #e3e4ec;
   font-size: 12px;
   font-family: monospace;
 }
 
-.key-node button {
+.human-input-node button {
   height: 20px;
   padding-top: 1px;
-  padding-bottom: 7px;
-  color: #e3e4ec;
   font-size: 12px;
   text-align: center;
-  vertical-align: middle;
-  background-color: #463781;
-  border: 1px solid #181235;
-  border-top-color: #b2aacb;
-  border-left: #b2aacb;
-  border-right: #b2aacb;
+  background-color: #424284;
+  color: rgb(244, 240, 255);
+  border: 1px solid #1a1235;
   font-family: monospace;
 }
 
-.key-node input {
-  color: #1c1930;
+.human-input-node textarea {
+  color: #1c182e;
+  height:70px;
+  width: 140px;
   font-size: 12px;
   text-align: left;
   background-color: #c1c4db;
@@ -43,6 +40,6 @@
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   align-self: center;
-  width: 155px;
-  height: 15px;
+  word-wrap: break-word;
+  flex-grow: inherit;
 }
