@@ -1,11 +1,9 @@
-import { useCallback} from "react";
 import ReactFlow, {
-  useReactFlow,
   MiniMap,
   Controls,
 } from "reactflow";
-import initialNodes, { nodeTypes } from "./nodes/InitialNodes";
-import initialEdges from "./InitialEdges";
+import initialNodes, { nodeTypes} from "./nodes/InitialNodes";
+import initialEdges, {edgeTypes} from "./InitialEdges";
 import "./button.css";
 
 
@@ -15,8 +13,8 @@ function Flow() {
     switch (node.type) {
       case "aiResponse":
         return "#424284";
-      case "textUpdater":
-        return "#424284";
+      case "humanInput":
+        return "#373753";
       case "keyInput":
         return "#463781";
       default:
@@ -30,6 +28,7 @@ function Flow() {
         defaultNodes={initialNodes}
         defaultEdges={initialEdges}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         style={{
           backgroundColor: "#161618",
         }}

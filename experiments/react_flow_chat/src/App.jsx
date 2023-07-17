@@ -3,11 +3,12 @@ import {
   ReactFlowProvider,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import Flow from "./nodeTree.jsx"
-import OpenaiCall from "./openaiCall.jsx"
+import Flow from "./nodeTree.jsx";
+import OpenaiCall from "./openaiCall.jsx";
+import { BufferMemory } from "langchain/memory";
+
 
 export default function App() {
-  
   OpenaiCall()
 
   return (

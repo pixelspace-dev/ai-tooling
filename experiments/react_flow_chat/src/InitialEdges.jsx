@@ -1,6 +1,10 @@
 import {  MarkerType,} from "reactflow";
+import CustomEdge from "./CustomEdge";
 
 const arrowColor = "#825184"
+const edgeTypes = {
+  custom: CustomEdge
+}
 
 const initialEdges = [
     {
@@ -12,5 +16,5 @@ const initialEdges = [
     },
   ];
 
-export {arrowColor}
+export {arrowColor, edgeTypes}
 export default initialEdges
