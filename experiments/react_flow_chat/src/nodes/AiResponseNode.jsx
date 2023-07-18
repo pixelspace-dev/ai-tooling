@@ -2,16 +2,22 @@ import { Handle, Position,useReactFlow, MarkerType, useUpdateNodeInternals, useN
 import { useCallback } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { arrowColor } from "../InitialEdges.jsx";
+import defineAttributes from "../nodeAttributes.jsx";
 
 // This node prints the AI response
 
 function AiResponseNode({ data, response, isConnectable }) {
 
   const reactFlowInstance = useReactFlow();
-
-  let xLocation = 110;
-  let yLocation = 350;
   const currentId = useNodeId();
+
+  const nodeString = localStorage.getItem('nodeArray')
+  const nodeArray = JSON.parse(nodeString)
+  let currentNode = nodeArray.find(({id}) => id == currentId);
+
+  let xLocation = currentNode.xVal - 100
+  let yLocation = currentNode.yVal + 150 + currentNode.content.length
+
 
   const onClick = useCallback(() => {
     //create new node
@@ -39,7 +45,8 @@ function AiResponseNode({ data, response, isConnectable }) {
 
       },
     ];
-    xLocation = xLocation + 170;
+    defineAttributes(id, xLocation, yLocation, "human input");
+    xLocation = xLocation + 180;
     reactFlowInstance.addNodes(newNode);
     reactFlowInstance.addEdges(newEdge);
     console.log("human input node created");

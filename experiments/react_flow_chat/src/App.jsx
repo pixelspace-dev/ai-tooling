@@ -6,10 +6,10 @@ import "reactflow/dist/style.css";
 import Flow from "./nodeTree.jsx";
 import OpenaiCall from "./openaiCall.jsx";
 import { BufferMemory } from "langchain/memory";
+import defineAttributes from "./nodeAttributes.jsx";
 
 
 export default function App() {
-  OpenaiCall()
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>

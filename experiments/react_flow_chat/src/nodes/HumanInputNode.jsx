@@ -3,6 +3,7 @@ import { useReactFlow, Handle, Position, MarkerType, useNodeId } from "reactflow
 import OpenaiCall from "../openaiCall.jsx"
 import { v4 as uuidv4 } from 'uuid';
 import { arrowColor } from "../InitialEdges.jsx";
+import defineAttributes from "../nodeAttributes.jsx";
 // This node accepts text input from the user, which will be sent to openai
 
 function HumanInputNode({ data, isConnectable }) {
@@ -14,14 +15,23 @@ function HumanInputNode({ data, isConnectable }) {
   }, []);
 
   const reactFlowInstance = useReactFlow();
-  let xLocation = 110;
-  let yLocation = 270;
+
   const currentId = useNodeId();
+  // access the current node object from the node array
+  // this allows new x and y values to be built from current values
+  const nodeString = localStorage.getItem('nodeArray')
+  const nodeArray = JSON.parse(nodeString)
+  let currentNode = nodeArray.find(({id}) => id == currentId);
+
+  let xLocation = currentNode.xVal - 100
+  let yLocation = currentNode.yVal + 200
   
   const handleOpenAiCall = async (message) => {
     await OpenaiCall()
     const openAiResponse = localStorage.getItem('openAiResponse')
     const openAiResponseParsed = JSON.parse(openAiResponse)
+
+
     const id = uuidv4(); 
     const newNode = {
       id,
@@ -49,7 +59,8 @@ function HumanInputNode({ data, isConnectable }) {
         data: {label: "User: " + message}
       },
     ];
-    xLocation = xLocation + 170;
+    defineAttributes(id, xLocation, yLocation, openAiResponseParsed);
+    xLocation = xLocation + 180;
     reactFlowInstance.addNodes(newNode);
     reactFlowInstance.addEdges(newEdge);
     //end create new node

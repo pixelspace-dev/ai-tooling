@@ -5,7 +5,7 @@ import { Handle, Position } from "reactflow";
 function KeyNode({ data, isConnectable }) {
   const onChange = useCallback((evt) => {
     const openaiKey = evt.target.value;
-    localStorage.setItem('openaiKey', openaiKey)
+    sessionStorage.setItem('openaiKey', openaiKey)
   }, []);
 
   return (
