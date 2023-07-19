@@ -4,55 +4,28 @@ import { ConversationChain } from "langchain/chains";
 import { BufferMemory, ChatMessageHistory } from "langchain/memory";
 import { HumanMessage, AIMessage } from "langchain/schema";
 
-async function OpenaiCall(currentID, nextID) {
+async function OpenaiCall(currentID) {
   //Send message to ai and get response
   const openaiKey = sessionStorage.getItem("openaiKey");
   if (!openaiKey || !openaiKey.length) return;
 
-  /* pastMessages is an array of objects whose contents look like
-    want:
-    pastMessages = [
-      idnum,
-      numels,
-      {type: "human",
-      text: "hi"},
-      idnum2,
-      numels2,
-      {type: "human",
-      text: "hello"}
-    ]
-    this was necessary because saving the [new HumanMessage(""), new AIMessage("")] array
-    in sessionStorage with stringify ruined the formatting
-  */
   let pastMessages = JSON.parse(sessionStorage.getItem("chatHistory"));
-  if (!pastMessages) {
-    pastMessages = [];
-  }
-
-  // index of corresponding id value
   let idIndex = pastMessages.findIndex((id) => id == currentID);
   let numberElements;
   if (idIndex < 0) {
     numberElements = 0;
   } else {
-    numberElements = pastMessages[idIndex].numberElements;
+    numberElements = pastMessages[idIndex + 1];
   }
-
-  //pastMessages.push(nextID, (numberElements+2));
+  console.log("id index: " + idIndex)
 
   // history is the usable chat history
   let history = [];
-  for (let i = 0; i < pastMessages.length; i = i + 2) {
+  for (let i = idIndex + 2; i < (idIndex + numberElements + 2); i = i + 2) {
     //works
     history.push(new HumanMessage(pastMessages[i].text));
     history.push(new AIMessage(pastMessages[i + 1].text));
-
-    // does not work
-    // console.log(pastMessages[i]);
-    // pastMessages.push(pastMessages[i]);
-    // pastMessages.push(pastMessages[i + 1]);
   }
-  //console.log(pastMessages[2]);
   console.log(history);
   console.log(pastMessages);
 

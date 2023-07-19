@@ -9,7 +9,7 @@ function Flow() {
   let nodeArray = [
     {
       id: 1,
-      xVal: 210,
+      xVal: 610,
       yVal: 100,
     },
   ];
@@ -37,7 +37,7 @@ function Flow() {
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         style={{
-          backgroundColor: "#161618",
+          backgroundColor: "#161618"
         }}
       >
         <Controls />

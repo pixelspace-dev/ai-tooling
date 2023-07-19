@@ -4,6 +4,7 @@ import OpenaiCall from "../openaiCall.jsx"
 import { v4 as uuidv4 } from 'uuid';
 import { arrowColor } from "../InitialEdges.jsx";
 import defineAttributes from "../nodeAttributes.jsx";
+import updatePastHistory from "../updatePastHistory.jsx";
 // This node accepts text input from the user, which will be sent to openai
 
 function HumanInputNode({ data, isConnectable }) {
@@ -28,9 +29,10 @@ function HumanInputNode({ data, isConnectable }) {
   const handleOpenAiCall = async (message) => {
     const id = uuidv4();
 
-    await OpenaiCall(currentId, id)
+    updatePastHistory(currentNode.previousResponseID, id, true)
+
+    await OpenaiCall(currentNode.previousResponseID)
     const openAiResponse = JSON.parse(localStorage.getItem('openAiResponse'))
-     
     const newNode = {
       id,
       position: {

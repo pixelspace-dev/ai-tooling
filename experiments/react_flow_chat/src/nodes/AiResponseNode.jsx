@@ -9,6 +9,7 @@ import { useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { arrowColor } from "../InitialEdges.jsx";
 import defineAttributes from "../nodeAttributes.jsx";
+import updatePastHistory from "../updatePastHistory.jsx";
 
 // This node prints the AI response
 
@@ -22,9 +23,16 @@ function AiResponseNode({ data, isConnectable }) {
   let xLocation = currentNode.xVal - 100;
   let yLocation = currentNode.yVal + 140 + currentNode.content.length;
 
+  const handlePastHistory = (id) => {
+    updatePastHistory(currentId, id, false)
+  }
+
   const onClick = useCallback(() => {
-    //create new node
     const id = uuidv4();
+
+    handlePastHistory(id)
+    //create new node
+
 
     const newNode = {
       id,
@@ -47,7 +55,7 @@ function AiResponseNode({ data, isConnectable }) {
         markerEnd: { type: MarkerType.ArrowClosed, color: arrowColor },
       },
     ];
-    defineAttributes(id, xLocation, yLocation, "human input");
+    defineAttributes(id, xLocation, yLocation, "human input", currentId);
     xLocation = xLocation + 180;
     reactFlowInstance.addNodes(newNode);
     reactFlowInstance.addEdges(newEdge);

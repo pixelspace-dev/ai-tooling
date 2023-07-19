@@ -1,15 +1,14 @@
 
-export default function defineAttributes(id, x, y, content) {
-    const nodeString = localStorage.getItem('nodeArray')
-    const nodeArray = JSON.parse(nodeString)
+export default function defineAttributes(id, x, y, content, previousResponseID) {
+    const nodeArray = JSON.parse(localStorage.getItem('nodeArray'))
     let newNode = {
         "id" : id,
         "xVal" : x,
         "yVal" : y,
-        "content" : content
+        "content" : content,
+        "previousResponseID" : previousResponseID
     }
     nodeArray.push(newNode)
-    const nodeString2 = JSON.stringify(nodeArray)
-    localStorage.setItem('nodeArray', nodeString2)
+    localStorage.setItem('nodeArray', JSON.stringify(nodeArray))
 
 }

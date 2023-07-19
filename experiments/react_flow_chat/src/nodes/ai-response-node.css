@@ -26,6 +26,8 @@
 .ai-response-node button {
   height: 20px;
   padding-top: 1px;
+  top: 0px;
+  left: 1px;
   font-size: 12px;
   text-align: center;
   background-color: #c2c2dc;
