@@ -1,29 +1,20 @@
-import ReactFlow, {
-  MiniMap,
-  Controls,
-} from "reactflow";
-import initialNodes, { nodeTypes} from "./nodes/InitialNodes";
-import initialEdges, {edgeTypes} from "./InitialEdges";
+import ReactFlow, { MiniMap, Controls } from "reactflow";
+import { useCallback } from "react";
+import initialNodes, { nodeTypes } from "./nodes/InitialNodes";
+import initialEdges, { edgeTypes } from "./InitialEdges";
 import { BufferMemory, ChatMessageHistory } from "langchain/memory";
 import { HumanMessage, AIMessage } from "langchain/schema";
 
 function Flow() {
-
-
-  let nodeArray = [{
-    "id" : 1,
-    "xVal" : 210,
-    "yVal" : 100
-  },]
-  let stringArray = JSON.stringify(nodeArray)
-  localStorage.setItem('nodeArray', stringArray)
-
-  const pastMessages = [
-    new HumanMessage("You are a friendly chatbot"),
-    new AIMessage("Okay, let's chat."),
-  ]
-  let pastMessagesString = JSON.stringify(pastMessages)
-  sessionStorage.setItem('pastMessages', pastMessagesString)
+  let nodeArray = [
+    {
+      id: 1,
+      xVal: 210,
+      yVal: 100,
+    },
+  ];
+  let stringArray = JSON.stringify(nodeArray);
+  localStorage.setItem("nodeArray", stringArray);
 
   const nodeColor = (node) => {
     switch (node.type) {
@@ -37,7 +28,6 @@ function Flow() {
         return "#616161";
     }
   };
-
 
   return (
     <>

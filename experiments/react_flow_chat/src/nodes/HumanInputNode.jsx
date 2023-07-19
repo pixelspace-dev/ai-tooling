@@ -10,7 +10,7 @@ function HumanInputNode({ data, isConnectable }) {
 
   const onChange = useCallback((evt) => {
     const message = evt.target.value;
-    console.log(evt.target.value);
+    //console.log(evt.target.value);
     localStorage.setItem('message', message)
   }, []);
 
@@ -19,20 +19,18 @@ function HumanInputNode({ data, isConnectable }) {
   const currentId = useNodeId();
   // access the current node object from the node array
   // this allows new x and y values to be built from current values
-  const nodeString = localStorage.getItem('nodeArray')
-  const nodeArray = JSON.parse(nodeString)
+  const nodeArray = JSON.parse(localStorage.getItem('nodeArray'))
   let currentNode = nodeArray.find(({id}) => id == currentId);
 
   let xLocation = currentNode.xVal - 100
   let yLocation = currentNode.yVal + 200
   
   const handleOpenAiCall = async (message) => {
-    await OpenaiCall()
-    const openAiResponse = localStorage.getItem('openAiResponse')
-    const openAiResponseParsed = JSON.parse(openAiResponse)
+    const id = uuidv4();
 
-
-    const id = uuidv4(); 
+    await OpenaiCall(currentId, id)
+    const openAiResponse = JSON.parse(localStorage.getItem('openAiResponse'))
+     
     const newNode = {
       id,
       position: {
@@ -41,7 +39,7 @@ function HumanInputNode({ data, isConnectable }) {
       },
       data: {
         label: "AI Response:",
-        response: openAiResponseParsed,
+        response: openAiResponse,
       },
       
       type: "aiResponse",
@@ -59,7 +57,7 @@ function HumanInputNode({ data, isConnectable }) {
         data: {label: "User: " + message}
       },
     ];
-    defineAttributes(id, xLocation, yLocation, openAiResponseParsed);
+    defineAttributes(id, xLocation, yLocation, openAiResponse);
     xLocation = xLocation + 180;
     reactFlowInstance.addNodes(newNode);
     reactFlowInstance.addEdges(newEdge);
