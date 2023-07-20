@@ -74,9 +74,22 @@ function HumanInputNode({ data, isConnectable }) {
     //create new node
     const message = localStorage.getItem("message");
     if (!message || !message.length) return;
-    console.log("node created");
+    console.log("response node created");
     handleOpenAiCall(message);
   }, []);
+
+  const onClickDelete = useCallback(() => {
+    reactFlowInstance.setNodes((nds) =>
+      nds.filter((node) => node.id !== currentId)
+    );
+  }, []);
+
+  let buttonClass;
+  if (currentId == 1) {
+    buttonClass = "first-node-delete-button"
+  } else {
+    buttonClass = "other-delete-button"
+  }
 
   return (
     <div className="human-input-node">
@@ -87,15 +100,21 @@ function HumanInputNode({ data, isConnectable }) {
         isConnectable={isConnectable}
       />
       <div>
-        <label htmlFor="text">Human Input:</label>
+        <label htmlFor="text">User Input:</label>
         <textarea
           id="text-area"
           name="text"
           onChange={onChange}
           className="nodrag"
         />
-
-        <button onClick={onClick}>add node</button>
+        <div className="bottom-line">
+          <button onClick={onClick}>new response</button>
+        </div>
+        <div className="bottom-line">
+          <button className={buttonClass} onClick={onClickDelete}>
+            x
+          </button>
+        </div>
       </div>
       <Handle
         type="source"

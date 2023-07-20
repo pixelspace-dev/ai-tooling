@@ -61,6 +61,12 @@ function AiResponseNode({ data, isConnectable }) {
     console.log("human input node created");
   }, []);
 
+  const onClickDelete = useCallback(() => {
+    reactFlowInstance.setNodes((nds) =>
+      nds.filter((node) => node.id !== currentId)
+    );
+  }, []);
+
   return (
     <div className="ai-response-node">
       <Handle
@@ -78,7 +84,12 @@ function AiResponseNode({ data, isConnectable }) {
       <div>
         <label htmlFor="text">AI Response: </label>
         <p>{data?.response}</p>
-        <button onClick={onClick}>new message</button>
+        <div className="bottom-line">
+          <button onClick={onClick}>new message</button>
+        </div>
+        <div className="bottom-line">
+          <button className="delete-button" onClick={onClickDelete}>x</button>
+        </div>
       </div>
     </div>
   );
