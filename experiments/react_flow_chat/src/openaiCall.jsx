@@ -41,18 +41,6 @@ async function OpenaiCall(currentID) {
       temperature: 0.9,
     });
     const chain = new ConversationChain({ llm: chat, memory: memory });
-  async function sendText(message) {
-    // initialize memory
-    const memory = new BufferMemory({
-      chatHistory: new ChatMessageHistory(history),
-    });
-
-    // initialize openai instance
-    const chat = new ChatOpenAI({
-      openAIApiKey: sessionStorage.getItem("openaiKey"),
-      temperature: 0.9,
-    });
-    const chain = new ConversationChain({ llm: chat, memory: memory });
 
     // get response
     response = await chain.call({ input: message });
@@ -73,29 +61,8 @@ async function OpenaiCall(currentID) {
   }
   //chat function call
   const message = localStorage.getItem("message");
-    // get response
-    response = await chain.call({ input: message });
-    console.log(response.response);
-    localStorage.setItem("openAiResponse", JSON.stringify(response.response));
 
-    // add input and output to memory array
-    pastMessages.push({
-      type: "human",
-      text: message,
-    });
-    pastMessages.push({
-      type: "ai",
-      text: response.response,
-    });
-
-    sessionStorage.setItem("chatHistory", JSON.stringify(pastMessages));
-  }
-  //chat function call
-  const message = localStorage.getItem("message");
-
-  var response = await sendText(message);
   var response = await sendText(message);
 }
 
-export default OpenaiCall;
 export default OpenaiCall;

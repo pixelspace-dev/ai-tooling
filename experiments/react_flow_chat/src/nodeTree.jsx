@@ -10,8 +10,7 @@ function Flow() {
       yVal: 100,
     },
   ];
-  let stringArray = JSON.stringify(nodeArray);
-  localStorage.setItem("nodeArray", stringArray);
+  localStorage.setItem("nodeArray", JSON.stringify(nodeArray));
 
   const nodeColor = (node) => {
     switch (node.type) {
