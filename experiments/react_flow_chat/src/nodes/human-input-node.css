@@ -17,9 +17,22 @@
 .human-input-node button {
   height: 20px;
   padding-top: 1px;
+  top: 0px;
+  left: 1px;
   font-size: 12px;
   text-align: center;
   background-color: #424284;
+  color: rgb(244, 240, 255);
+  border: 1px solid #1a1235;
+  font-family: monospace;
+}
+
+.human-input-node button:hover {
+  height: 20px;
+  padding-top: 1px;
+  font-size: 12px;
+  text-align: center;
+  background-color: #353570;
   color: rgb(244, 240, 255);
   border: 1px solid #1a1235;
   font-family: monospace;

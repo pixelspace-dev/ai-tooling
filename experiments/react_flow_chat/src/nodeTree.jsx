@@ -1,13 +1,17 @@
-import ReactFlow, {
-  MiniMap,
-  Controls,
-} from "reactflow";
-import initialNodes, { nodeTypes} from "./nodes/InitialNodes";
-import initialEdges, {edgeTypes} from "./InitialEdges";
-import "./button.css";
-
+import ReactFlow, { MiniMap, Controls } from "reactflow";
+import initialNodes, { nodeTypes } from "./nodes/InitialNodes";
+import initialEdges, { edgeTypes } from "./InitialEdges";
 
 function Flow() {
+  let nodeArray = [
+    {
+      id: 1,
+      xVal: 610,
+      yVal: 100,
+    },
+  ];
+  let stringArray = JSON.stringify(nodeArray);
+  localStorage.setItem("nodeArray", stringArray);
 
   const nodeColor = (node) => {
     switch (node.type) {

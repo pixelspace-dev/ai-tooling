@@ -15,14 +15,14 @@ const nodeTypes = {
 const initialNodes = [
   {
     id: "0",
-    position: { x: 203, y: 10 },
+    position: { x: 603, y: 10 },
     data: { value: 123 },
     type: "keyInput",
     draggable: false,
   },
   {
     id: "1",
-    position: { x: 210, y: 100 },
+    position: { x: 610, y: 100 },
     data: { value: 123 },
     type: "humanInput",
     draggable: false,
