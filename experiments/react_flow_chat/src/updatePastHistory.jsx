@@ -25,7 +25,6 @@ export default function updatePastHistory(currentID, nextID, isHuman) {
   }
   sessionStorage.setItem("chatHistory", JSON.stringify(pastMessages));
 }
-
 /* pastMessages is an array of objects whose contents look like
     want:
     pastMessages = [

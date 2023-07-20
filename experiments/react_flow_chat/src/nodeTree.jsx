@@ -34,7 +34,7 @@ function Flow() {
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         style={{
-          backgroundColor: "#161618",
+          backgroundColor: "#161618"
         }}
       >
         <Controls />
