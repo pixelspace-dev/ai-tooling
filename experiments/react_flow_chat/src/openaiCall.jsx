@@ -39,6 +39,7 @@ async function OpenaiCall(currentID) {
     const chat = new ChatOpenAI({
       openAIApiKey: sessionStorage.getItem("openaiKey"),
       temperature: 0.9,
+      modelName: "gpt-4"
     });
     const chain = new ConversationChain({ llm: chat, memory: memory });
 
