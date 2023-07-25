@@ -18,6 +18,8 @@
   height: 20px;
   padding-top: 1px;
   padding-bottom: 7px;
+  top: 1px;
+  left: 1px;
   color: #e3e4ec;
   font-size: 12px;
   text-align: center;
@@ -45,4 +47,8 @@
   align-self: center;
   width: 155px;
   height: 15px;
+}
+
+.key-node input:focus {
+  outline: none;
 }

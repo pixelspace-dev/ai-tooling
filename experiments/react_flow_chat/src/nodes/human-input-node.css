@@ -9,6 +9,7 @@
 
 .human-input-node label {
   display: block;
+  width: fit-content;
   color: #e3e4ec;
   font-size: 12px;
   font-family: monospace;
@@ -17,6 +18,8 @@
 .human-input-node button {
   height: 20px;
   padding-top: 1px;
+  top: 0px;
+  left: 1px;
   font-size: 12px;
   text-align: center;
   background-color: #424284;
@@ -25,9 +28,20 @@
   font-family: monospace;
 }
 
+.human-input-node button:hover {
+  height: 20px;
+  padding-top: 1px;
+  font-size: 12px;
+  text-align: center;
+  background-color: #353570;
+  color: rgb(244, 240, 255);
+  border: 1px solid #1a1235;
+  font-family: monospace;
+}
+
 .human-input-node textarea {
   color: #1c182e;
-  height:70px;
+  height: 70px;
   width: 140px;
   font-size: 12px;
   text-align: left;
@@ -42,4 +56,49 @@
   align-self: center;
   word-wrap: break-word;
   flex-grow: inherit;
+}
+
+.human-input-node textarea:focus {
+  outline: none;
+}
+
+.human-input-node .other-delete-button {
+  text-align: center;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 100%;
+  font-size: 12px;
+  background-color: #5f4284;
+  color: rgb(244, 240, 255);
+  border: 1px solid #1a1235;
+  font-family: monospace;
+}
+
+.human-input-node .other-delete-button:hover {
+  height: 20px;
+  padding-top: 1px;
+  font-size: 12px;
+  text-align: center;
+  background-color: #703561;
+  color: rgb(244, 240, 255);
+  border: 1px solid #1a1235;
+  font-family: monospace;
+}
+
+.human-input-node .bottom-line {
+  display: inline-block;
+  padding: 2px;
+}
+
+.human-input-node .first-node-delete-button {
+  visibility: collapse;
+  text-align: center;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 100%;
+  font-size: 12px;
+  background-color: #5f4284;
+  color: rgb(244, 240, 255);
+  border: 1px solid #1a1235;
+  font-family: monospace;
 }

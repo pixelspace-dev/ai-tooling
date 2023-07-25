@@ -26,10 +26,51 @@
 .ai-response-node button {
   height: 20px;
   padding-top: 1px;
+  top: 0px;
+  left: 1px;
   font-size: 12px;
   text-align: center;
   background-color: #c2c2dc;
   color: rgb(72, 68, 84);
   border: 1px solid #514a68;
   font-family: monospace;
+}
+
+.ai-response-node button:hover {
+  height: 20px;
+  padding-top: 1px;
+  font-size: 12px;
+  text-align: center;
+  background-color: #a9a9c6;
+  color: rgb(72, 68, 84);
+  border: 1px solid #514a68;
+  font-family: monospace;
+}
+
+.ai-response-node .delete-button {
+  text-align: center;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 100%;
+  font-size: 12px;
+  background-color: #bcb0d1;
+  color: rgb(72, 68, 84);
+  border: 1px solid #514a68;
+  font-family: monospace;
+}
+
+.ai-response-node .delete-button:hover {
+  height: 20px;
+  padding-top: 1px;
+  font-size: 12px;
+  text-align: center;
+  background-color: #865380;
+  color: #a9a9c6;
+  border: 1px solid #514a68;
+  font-family: monospace;
+}
+
+.ai-response-node .bottom-line {
+  display: inline-block;
+  padding: 2px;
 }

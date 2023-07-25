@@ -1,0 +1,26 @@
+.clear-button {
+  height: 33px;
+  width:fit-content;
+  position: absolute;
+  left: 220px;
+  top: 35px;
+  padding-top: 4px;
+  font-size: 14px;
+  text-align: center;
+  background-color: #424284;
+  color: rgb(244, 240, 255);
+  border: 5px solid transparent;
+  border-radius: 8px;
+  font-family: monospace;
+}
+
+.clear-button:hover {
+  height: 33px;
+  border: 5px solid transparent;
+  font-size: 14px;
+  text-align: center;
+  background-color: #353570;
+  color: rgb(244, 240, 255);
+  border-radius: 8px;
+  font-family: monospace;
+}
