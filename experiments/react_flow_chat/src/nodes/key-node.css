@@ -48,3 +48,7 @@
   width: 155px;
   height: 15px;
 }
+
+.key-node input:focus {
+  outline: none;
+}

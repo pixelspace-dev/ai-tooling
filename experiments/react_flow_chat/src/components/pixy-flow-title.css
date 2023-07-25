@@ -1,0 +1,8 @@
+.pixy-flow-title {
+    left: 10px;
+    font-family: monospace;
+    text-align: Left;
+    position: absolute;
+    width: fit-content;
+    color: rgb(194, 188, 203);
+}

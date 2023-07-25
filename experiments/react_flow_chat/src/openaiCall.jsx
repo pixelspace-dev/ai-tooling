@@ -34,12 +34,12 @@ async function OpenaiCall(currentID) {
     const memory = new BufferMemory({
       chatHistory: new ChatMessageHistory(history),
     });
-
+    console.log( sessionStorage.getItem("model"))
     // initialize openai instance
     const chat = new ChatOpenAI({
       openAIApiKey: sessionStorage.getItem("openaiKey"),
       temperature: 0.9,
-      modelName: "gpt-4"
+      modelName: sessionStorage.getItem("model")
     });
     const chain = new ConversationChain({ llm: chat, memory: memory });
 

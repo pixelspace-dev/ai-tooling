@@ -1,9 +1,10 @@
-import React, { useCallback } from "react";
+import React from "react";
+import "./clear-button.css"
 
 export default function ClearButton() {
   function handleClick() {
     sessionStorage.clear("chatHistory");
     window.location.reload();
   }
-  return <button onClick={handleClick}>Clear History</button>;
+  return <button className="clear-button" onClick={handleClick}>Clear History</button>;
 }

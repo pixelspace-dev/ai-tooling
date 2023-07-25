@@ -41,7 +41,7 @@
 
 .human-input-node textarea {
   color: #1c182e;
-  height:70px;
+  height: 70px;
   width: 140px;
   font-size: 12px;
   text-align: left;
@@ -56,6 +56,10 @@
   align-self: center;
   word-wrap: break-word;
   flex-grow: inherit;
+}
+
+.human-input-node textarea:focus {
+  outline: none;
 }
 
 .human-input-node .other-delete-button {

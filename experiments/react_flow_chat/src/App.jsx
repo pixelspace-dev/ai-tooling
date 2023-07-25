@@ -3,7 +3,10 @@ import { ReactFlowProvider } from "reactflow";
 import "reactflow/dist/style.css";
 import Flow from "./nodeTree.jsx";
 import ClearButton from "./components/ClearButton.jsx";
-import "./button.css";
+import "./components/clear-button.css";
+import SelectModel from "./components/SelectModel.jsx";
+import "./components/select-model.css";
+import PixyFlowTitle from "./components/PixyFlowTitle.jsx";
 
 export default function App() {
   return (
@@ -11,15 +14,17 @@ export default function App() {
       <div
         style={{
           width: "100vw",
-          height: "7.5vh",
+          height: "11vh",
           backgroundColor: "#161618",
           border: "none",
         }}
       >
+        <PixyFlowTitle />
         <ClearButton />
+        <SelectModel />
       </div>
       <div
-        style={{ width: "100vw", height: "92.5vh", backgroundColor: "#161618" }}
+        style={{ width: "100vw", height: "89vh", backgroundColor: "#161618"}}
       >
         <ReactFlowProvider>
           <Flow />

@@ -1,0 +1,30 @@
+.select-model {
+    height: 33px;
+    position: absolute;
+    left: 370px;
+    top: 35px;
+    padding-top: 1px;
+    font-size: 14px;
+    text-align: center;
+    background-color: #424284;
+    color: rgb(244, 240, 255);
+    border: 5px solid transparent;
+    border-radius: 8px;
+    font-family: monospace;
+    cursor: pointer;
+  }
+  
+  .select-model:hover {
+    font-size: 14px;
+    text-align: center;
+    background-color: #353570;
+    color: rgb(244, 240, 255);
+    border: 1px solid #1a1235;
+    border-radius: 8px;
+    border: 5px solid transparent;
+    font-family: monospace;
+  }
+
+  .select-model:focus {
+    outline: none;
+  }

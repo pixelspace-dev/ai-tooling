@@ -1,9 +1,10 @@
-button {
-  height: fit-content;
-  position: relative;
-  left: 5px;
-  top: 5px;
-  padding-top: 1px;
+.clear-button {
+  height: 33px;
+  width:fit-content;
+  position: absolute;
+  left: 220px;
+  top: 35px;
+  padding-top: 4px;
   font-size: 14px;
   text-align: center;
   background-color: #424284;
@@ -13,12 +14,13 @@ button {
   font-family: monospace;
 }
 
-button:hover {
+.clear-button:hover {
+  height: 33px;
+  border: 5px solid transparent;
   font-size: 14px;
   text-align: center;
   background-color: #353570;
   color: rgb(244, 240, 255);
-  border: 1px solid #1a1235;
   border-radius: 8px;
   font-family: monospace;
 }
