@@ -1,0 +1,26 @@
+.sentiment-button {
+  display: flex;
+  width: 85px;
+  height: 36px;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border: 2px solid #60863e;
+  color: #60863e;
+
+  /* Body Small Semi bold */
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 21px */
+  padding-top: 15px;
+  margin-top: 26px;
+  margin-left: 48px;
+}
+
+.sentiment-button:hover {
+    cursor: pointer;
+}

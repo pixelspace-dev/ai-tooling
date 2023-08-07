@@ -1,10 +1,14 @@
 .App {
-  min-height: 1050px;
-  min-width: 100vw;
+  min-height: 1015px;
+  min-width: 1300px;
   text-align: left;
   font-family: "poppins", sans-serif;
   /* font-family: "source-sans-pro", sans-serif; */
   background-color: #3A4259;
+}
+
+.setup-and-articles {
+  display: inline-flex;
 }
 
 ::-webkit-scrollbar {

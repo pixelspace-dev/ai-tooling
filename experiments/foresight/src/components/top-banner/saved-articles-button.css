@@ -1,4 +1,4 @@
-button {
+.saved-articles-button {
   color: #fff;
   background-color: transparent;
   border: hidden;
@@ -14,7 +14,7 @@ button {
 	padding-top: 10px;
 }
 
-button:hover {
+.saved-articles-button:hover {
   text-decoration: underline;
 	cursor: pointer;
 }
@@ -26,5 +26,6 @@ button:hover {
   stroke-width: 2px;
   stroke: #fff;
 	padding-left:12px;
-	padding-top:50px
+  padding-top:0px;
+	margin-top:50px
 }

@@ -2,7 +2,7 @@ import "./saved-articles-button.css";
 
 export default function SavedArticlesButton() {
   return (
-    <button>
+    <button className="saved-articles-button">
       SAVED ARTICLES
       <svg className="arrow"
         xmlns="http://www.w3.org/2000/svg"

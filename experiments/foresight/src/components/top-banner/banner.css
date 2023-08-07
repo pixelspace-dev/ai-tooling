@@ -1,5 +1,5 @@
-.Banner {
-  width: 1440px;
+.banner {
+  min-width: 1904px;
   height: 116px;
   flex-shrink: 0;
   background: #578099;
@@ -27,5 +27,5 @@ h1 {
   line-height: normal;
   padding-left: 48px;
   padding-top: 15px;
-  margin-right: 680px;
+  margin-right: 1160px;
 }

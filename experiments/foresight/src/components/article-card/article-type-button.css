@@ -1,0 +1,36 @@
+.article-type-button {
+  display: inline-flex;
+  height: 36px;
+  width: fit-content;
+  padding: 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border: 2px solid #3a4259;
+  color: #3a4259;
+
+  /* Body Small Semi bold */
+  padding-top: 15px;
+  text-align: left;
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 21px */
+  display: inline-flex;
+  margin-left: 32px;
+  margin-top: 26px;
+}
+
+.article-type-button:hover {
+    cursor: pointer;
+}
+
+.article-type-arrow {
+  padding-top: 1px;
+  padding-left: 8px;
+  width: 16px;
+  height: 20px;
+  fill: #3a4259;
+}
