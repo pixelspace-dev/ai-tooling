@@ -1,13 +1,14 @@
 import './App.css';
+import Banner from './components/Banner';
+import SetupForm from './components/SetupForm';
+import TolaLogo from './components/TolaLogo';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
+      <Banner/>
+      <SetupForm/>
+      <TolaLogo/>
     </div>
   );
 }

@@ -1,0 +1,31 @@
+.Banner {
+  width: 1440px;
+  height: 116px;
+  flex-shrink: 0;
+  background: #578099;
+  display: inline-flex;
+}
+
+.sidebar-button {
+  padding-top: 48px;
+  padding-left: 48px;
+  padding-right: 48px;
+}
+
+h1 {
+  display: flex;
+  width: 376px;
+  height: 42px;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  color: #fff;
+  font-family: Poppins;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding-left: 48px;
+  padding-top: 15px;
+  margin-right: 680px;
+}
