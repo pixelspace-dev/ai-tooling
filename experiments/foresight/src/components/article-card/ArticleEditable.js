@@ -1,12 +1,12 @@
-import SentimentButton from "./SentimentButton";
-import ArticleTypeButton from "./ArticleTypeButton";
+import ArticleTypeMenu from "./ArticleTypeMenu";
+import ToggleButtons from "./ToggleButton";
 import "./article-editable.css";
 
 export default function ArticleEditable() {
   return (
     <div className="article-editable">
-      <SentimentButton />
-      <ArticleTypeButton />
+      <ToggleButtons />
+      <ArticleTypeMenu />
       <svg
         className="bookmark"
         xmlns="http://www.w3.org/2000/svg"
