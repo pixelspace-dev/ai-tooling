@@ -2,14 +2,22 @@ import * as React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import "./bookmark.css";
 
-export default function BookmarkButton() {
+const BookmarkButton = (props) => {
   const [fillStatus, setFillStatus] = React.useState("none");
+  let articleHistory = JSON.parse(localStorage.getItem("articleHistory"));
+  if (!articleHistory) {
+    articleHistory = [];
+  }
+  let idIndex = articleHistory.findIndex((id) => id == props.currentID);
 
   const handleBookmark = (event) => {
     if (fillStatus === "none") {
       setFillStatus("black");
+      articleHistory[idIndex].bookmarked = true;
+
     } else {
       setFillStatus("none");
+      articleHistory[idIndex].bookmarked = false;
     }
   };
 
@@ -35,3 +43,5 @@ export default function BookmarkButton() {
     </ToggleButton>
   );
 }
+
+export default BookmarkButton;

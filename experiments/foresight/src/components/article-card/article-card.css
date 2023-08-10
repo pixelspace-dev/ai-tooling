@@ -24,7 +24,7 @@
 }
 
 .full-article::-webkit-scrollbar-thumb:hover {
-  background-color: #3A4259;
+  background-color: #3a4259;
 }
 
 .article-header {
@@ -64,4 +64,14 @@
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 24px */
+}
+
+.article-editable {
+  font-family: Poppins;
+  font-size: 14px;
+  width: 525px;
+  height: 88px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #bcbcbc;
+  display: inline-flex;
 }

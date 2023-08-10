@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-export default function StoreArticle() {
+export default function StoreArticle(id) {
     let articleName = localStorage.getItem("articleName")
     let articleSubheader = localStorage.getItem("authorName") + ", " + localStorage.getItem("date");
     let articleBody = localStorage.getItem("articleBody")
@@ -11,7 +11,7 @@ export default function StoreArticle() {
     }
 
     let newArticle = {
-        "id" : uuidv4(),
+        "id" : id,
         "bookmarked" : false,
         "articleName" : articleName,
         "articleSubheader" : articleSubheader,

@@ -2,7 +2,7 @@ import { OpenAI } from "langchain/llms/openai";
 
 async function OpenaiCall(storageName, message) {
   localStorage.setItem(
-    "openaiKey",
+    "openaiKey", ""
   );
   //Send message to ai and get response
   const openaiKey = localStorage.getItem("openaiKey");

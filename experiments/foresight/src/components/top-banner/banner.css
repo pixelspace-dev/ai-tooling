@@ -6,12 +6,6 @@
   display: inline-flex;
 }
 
-.sidebar-button {
-  padding-top: 48px;
-  padding-left: 48px;
-  padding-right: 48px;
-}
-
 h1 {
   display: flex;
   width: 376px;
@@ -28,4 +22,20 @@ h1 {
   padding-left: 48px;
   padding-top: 15px;
   margin-right: 1160px;
+}
+
+.sidebar-arrow-button {
+  width: 29px;
+  height: 29px;
+  flex-shrink: 0;
+  margin-left: 48px;
+  margin-top: 42px;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  padding: 5px;
+}
+
+.sidebar-arrow-button:hover {
+  cursor: pointer;
 }

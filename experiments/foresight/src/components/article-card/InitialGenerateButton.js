@@ -3,7 +3,7 @@ import StoreArticle from "../StoreArticle";
 import { useCallback } from "react";
 import "./initial-generate-button.css";
 
-export default function InitialGenerateButton() {
+const InitialGenerateButton = (props) => {
   const handleOpenAiCall = async () => {
     const sentiment = localStorage.getItem("sentiment");
     console.log(sentiment)
@@ -25,7 +25,7 @@ export default function InitialGenerateButton() {
     await OpenaiCall("articleName", "Provide the name of a" + sentiment + "article that is written by" + articleType + "based on the following information about the company the article is written about:" + companyInformation + hypothesis);
     await OpenaiCall("authorName", "Provide the fake first and last name of a made up journalist that writes for" + articleType);
     await OpenaiCall("articleBody", "Create a" + sentiment + "article that is written by" + articleType + "based on the following information about the company the article is written about:" + companyInformation + hypothesis + "You do not need to give the article a name.");
-    StoreArticle();
+    StoreArticle(props.articleID);
   };
 
   const handleClick = useCallback(() => {
@@ -42,7 +42,7 @@ export default function InitialGenerateButton() {
         width="24"
         height="28"
         viewBox="0 0 30 30"
-        fill="#578099"
+        fill="none"
       >
         <path
           d="M6.95833 4.375V9.54167M4.375 6.95833H9.54167M8.25 22.4583V27.625M5.66667 25.0417H10.8333M17.2917 4.375L20.244 13.2321L27.625 16L20.244 18.7679L17.2917 27.625L14.3393 18.7679L6.95833 16L14.3393 13.2321L17.2917 4.375Z"
@@ -55,3 +55,5 @@ export default function InitialGenerateButton() {
     </button>
   );
 }
+
+export default InitialGenerateButton;
