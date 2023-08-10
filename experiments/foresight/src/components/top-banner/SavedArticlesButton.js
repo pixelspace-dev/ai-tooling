@@ -14,7 +14,7 @@ export default function SavedArticlesButton() {
         <path
           d="M14 1.5L18 5.5M18 5.5L14 9.5M18 5.5H0"
           stroke="white"
-          stroke-width="2"
+          strokeWidth="2"
         />
       </svg>
     </button>

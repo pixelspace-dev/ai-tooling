@@ -10,7 +10,7 @@ function App() {
       <Banner />
       <div className="setup-and-articles">
         <SetupForm />
-        <ArticleCard />
+        <ArticleCard articleHeader={localStorage.getItem("articleName")} articleSubheader={localStorage.getItem("authorName") + ", " + localStorage.getItem("date")} articleText={localStorage.getItem("articleBody")} />
         <ArticleCard />
       </div>
       <TolaLogo />

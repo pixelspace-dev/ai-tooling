@@ -10,12 +10,3 @@
 .setup-and-articles {
   display: inline-flex;
 }
-
-::-webkit-scrollbar {
-	background-color: #3A4259;
-  color:#3A4259;
-	width: 16px;
-}
-::-webkit-scrollbar-thumb {
-	background-color: #578099;
-}

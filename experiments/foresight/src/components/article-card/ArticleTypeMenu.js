@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useCallback } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import "./article-type-menu.css";
 
@@ -26,10 +26,11 @@ function classNames(...classes) {
 }
 
 export default function ArticleTypeMenu() {
-  const [selected, setSelected] = useState(articles[0]);
+  const [selected, setSelected] = useState(articles[0])
+  localStorage.setItem("articleType", selected.name)
 
   return (
-    <Listbox value={selected} onChange={setSelected} >
+    <Listbox value={selected} onChange= {setSelected}>
       {({ open }) => (
         <>
           <div>

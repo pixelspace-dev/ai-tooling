@@ -11,10 +11,11 @@ export default function ToggleButtons() {
     } else {
       setSentiment("positive");
     }
+    localStorage.setItem("sentiment", sentiment)
   };
 
   return (
-      <ToggleButton onChange={handleSentiment} className={sentiment} >
+      <ToggleButton value="sentiment" onChange={handleSentiment} className={sentiment} >
         {sentiment}
       </ToggleButton>
   );
