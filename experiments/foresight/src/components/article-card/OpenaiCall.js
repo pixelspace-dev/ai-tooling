@@ -1,12 +1,11 @@
 import { OpenAI } from "langchain/llms/openai";
 
 async function OpenaiCall(storageName, message) {
-  sessionStorage.setItem(
+  localStorage.setItem(
     "openaiKey",
-    "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"
   );
   //Send message to ai and get response
-  const openaiKey = sessionStorage.getItem("openaiKey");
+  const openaiKey = localStorage.getItem("openaiKey");
   if (!openaiKey || !openaiKey.length) return;
 
   async function sendText(message) {

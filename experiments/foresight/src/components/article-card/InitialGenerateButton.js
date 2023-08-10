@@ -1,4 +1,5 @@
-import OpenaiCall from "./OpenaiCall";
+import OpenaiCall from "./openaiCall";
+import StoreArticle from "../StoreArticle";
 import { useCallback } from "react";
 import "./initial-generate-button.css";
 
@@ -24,6 +25,7 @@ export default function InitialGenerateButton() {
     await OpenaiCall("articleName", "Provide the name of a" + sentiment + "article that is written by" + articleType + "based on the following information about the company the article is written about:" + companyInformation + hypothesis);
     await OpenaiCall("authorName", "Provide the fake first and last name of a made up journalist that writes for" + articleType);
     await OpenaiCall("articleBody", "Create a" + sentiment + "article that is written by" + articleType + "based on the following information about the company the article is written about:" + companyInformation + hypothesis + "You do not need to give the article a name.");
+    StoreArticle();
   };
 
   const handleClick = useCallback(() => {
