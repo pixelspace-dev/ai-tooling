@@ -10,6 +10,7 @@ const ArticleCard = (props) => {
   const [articleName, setArticleName] = useState(null);
   const [articleSubheader, setArticleSubheader] = useState(null);
   const [articleBody, setArticleBody] = useState(null);
+  const [sentiment, setSentiment] = useState("positive");
 
   // let articleHistory = JSON.parse(localStorage.getItem("articleHistory"));
   // if (!articleHistory) {
@@ -33,7 +34,7 @@ const ArticleCard = (props) => {
   return (
     <div className="article-form-box">
       <div className="article-editable">
-        <ToggleButtons />
+        <ToggleButtons sentiment={sentiment} setSentiment={setSentiment}/>
         <ArticleTypeMenu />
         <BookmarkButton articleID={id}/>
       </div>
@@ -42,7 +43,7 @@ const ArticleCard = (props) => {
         <p className="article-subheader">{articleSubheader}</p>
         <p className="article-body-text">{articleBody}</p>
       </div>
-      <InitialGenerateButton articleID={id} setArticleName={setArticleName} setArticleSubheader={setArticleSubheader} setArticleBody={setArticleBody}/>
+      <InitialGenerateButton articleID={id} sentiment={sentiment} setArticleName={setArticleName} setArticleSubheader={setArticleSubheader} setArticleBody={setArticleBody}/>
     </div>
   );
 };

@@ -2,8 +2,7 @@ import * as React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import "./toggle-button.css";
 
-export default function ToggleButtons() {
-  const [sentiment, setSentiment] = React.useState("positive");
+export default function ToggleButtons({sentiment, setSentiment}) {
 
   const handleSentiment = (event) => {
     if (sentiment === "positive") {

@@ -11,6 +11,10 @@ async function OpenaiCall(storageName, message) {
     console.log(response);
     response.slice(1, 0);
     response.slice(0, -1);
+    if (storageName === "articleName") {
+      response.slice(1, 0);
+      response.slice(0, -1);
+    }
     localStorage.setItem(storageName, response);
   }
 

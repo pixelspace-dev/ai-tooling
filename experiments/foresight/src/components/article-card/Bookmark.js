@@ -8,16 +8,16 @@ const BookmarkButton = (props) => {
   if (!articleHistory) {
     articleHistory = [];
   }
-  let idIndex = articleHistory.findIndex((id) => id == props.currentID);
+  let idIndex = articleHistory.findIndex((id) => id === props.currentID);
 
   const handleBookmark = (event) => {
     if (fillStatus === "none") {
       setFillStatus("black");
-      articleHistory[idIndex].bookmarked = true;
+      //articleHistory[idIndex].bookmarked = true;
 
     } else {
       setFillStatus("none");
-      articleHistory[idIndex].bookmarked = false;
+      //articleHistory[idIndex].bookmarked = false;
     }
   };
 

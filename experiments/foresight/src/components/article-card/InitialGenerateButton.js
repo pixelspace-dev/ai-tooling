@@ -3,10 +3,10 @@ import StoreArticle from "../StoreArticle";
 import { useCallback } from "react";
 import "./initial-generate-button.css";
 
-const InitialGenerateButton = ({articleID, setArticleName, setArticleSubheader, setArticleBody}) => {
+const InitialGenerateButton = ({articleID, sentiment, setArticleName, setArticleSubheader, setArticleBody}) => {
   const handleOpenAiCall = async () => {
     // get each variable that gets sent into ai
-    const sentiment = localStorage.getItem("sentiment");
+    // const sentiment = localStorage.getItem("sentiment");
     console.log(sentiment)
     if (!sentiment) return;
     const articleType = localStorage.getItem("articleType");
@@ -28,7 +28,7 @@ const InitialGenerateButton = ({articleID, setArticleName, setArticleSubheader, 
     await OpenaiCall("articleBody", "Create a" + sentiment + "article that is written by" + articleType + "based on the following information about the company the article is written about:" + companyInformation + hypothesis + "You do not need to give the article a name.");
     //update visible article
     setArticleName(localStorage.getItem("articleName"))
-    setArticleSubheader(localStorage.getItem("articleSubheader"))
+    setArticleSubheader(localStorage.getItem("authorName") + ", " + date)
     setArticleBody(localStorage.getItem("articleBody"))
     StoreArticle(articleID);
   };
