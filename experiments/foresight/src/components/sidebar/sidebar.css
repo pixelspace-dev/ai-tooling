@@ -119,10 +119,12 @@
 }
 
 .company-names-navegation:hover .trash-button:hover {
-  stroke:#eb9d6a
+  stroke:#eb9d6a;
+  cursor: pointer;
 }
 .company-names-navegation:hover .edit-button:hover {
-  stroke:#eb9d6a
+  stroke:#eb9d6a;
+  cursor: pointer;
 }
 
 .edit-button {
@@ -136,6 +138,7 @@
   margin-top: 0px;
   margin-right: 10px;
   padding-top: 0px;
+  float: right;
   position: relative;
   top: 5px;
 }

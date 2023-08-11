@@ -13,13 +13,13 @@ const SidebarArrow = ({ toggle }) => {
         viewBox="0 0 29 29"
         fill="none"
       >
-        <g clip-path="url(#clip0_278_4254)">
+        <g clipPath="url(#clip0_278_4254)">
           <path
             d="M9.5 22.7031H0.015625M20.0156 14.7031H0.015625M20.0156 6.70312H0.015625"
             stroke="white"
-            stroke-width="2.71875"
-            stroke-linecap="square"
-            stroke-linejoin="round"
+            strokeWidth="2.71875"
+            strokeLinecap="square"
+            strokeLinejoin="round"
           />
         </g>
         <defs>
@@ -39,12 +39,13 @@ const SidebarArrow = ({ toggle }) => {
 
 export default function Banner() {
   const [sidebar, setSidebar] = useState(false);
+  const [companyName, setCompanyName] = useState("Unnamed Company");
   return (
     <>
       <div className="banner">
         <SidebarArrow toggle={() => setSidebar(!sidebar)} />
-        <Sidebar isOpen={sidebar} close={() => setSidebar(false)} />
-        <h1>Unnamed Company</h1>
+        <Sidebar isOpen={sidebar} close={() => setSidebar(false)} companyName={companyName} setCompanyName={setCompanyName}/>
+        <h1>{companyName}</h1>
         <SavedArticlesButton className="saved-articles-button" />
       </div>
     </>

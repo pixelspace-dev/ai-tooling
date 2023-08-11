@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function StoreArticle(id) {
     let articleName = localStorage.getItem("articleName")
-    let articleSubheader = localStorage.getItem("authorName") + ", " + localStorage.getItem("date");
+    let articleSubheader = (localStorage.getItem("authorName") !== null) ? localStorage.getItem("authorName") + ", " + localStorage.getItem("date") : null;
     let articleBody = localStorage.getItem("articleBody")
 
     let articleHistory = JSON.parse(localStorage.getItem("articleHistory"));

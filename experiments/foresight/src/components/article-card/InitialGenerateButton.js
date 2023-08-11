@@ -3,8 +3,9 @@ import StoreArticle from "../StoreArticle";
 import { useCallback } from "react";
 import "./initial-generate-button.css";
 
-const InitialGenerateButton = (props) => {
+const InitialGenerateButton = ({articleID, setArticleName, setArticleSubheader, setArticleBody}) => {
   const handleOpenAiCall = async () => {
+    // get each variable that gets sent into ai
     const sentiment = localStorage.getItem("sentiment");
     console.log(sentiment)
     if (!sentiment) return;
@@ -20,21 +21,20 @@ const InitialGenerateButton = (props) => {
     const companyInformation = localStorage.getItem("companyInformation");
     console.log(companyInformation)
     if (!companyInformation || !companyInformation.length) return;
-
+    //call openai
     console.log("calling openai");
     await OpenaiCall("articleName", "Provide the name of a" + sentiment + "article that is written by" + articleType + "based on the following information about the company the article is written about:" + companyInformation + hypothesis);
     await OpenaiCall("authorName", "Provide the fake first and last name of a made up journalist that writes for" + articleType);
     await OpenaiCall("articleBody", "Create a" + sentiment + "article that is written by" + articleType + "based on the following information about the company the article is written about:" + companyInformation + hypothesis + "You do not need to give the article a name.");
-    StoreArticle(props.articleID);
+    //update visible article
+    setArticleName(localStorage.getItem("articleName"))
+    setArticleSubheader(localStorage.getItem("articleSubheader"))
+    setArticleBody(localStorage.getItem("articleBody"))
+    StoreArticle(articleID);
   };
 
-  const handleClick = useCallback(() => {
-    console.log("button clicked")
-    handleOpenAiCall();
-  }, []);
-
   return (
-    <button className="initial-generate-button" onClick={handleClick}>
+    <button className="initial-generate-button" onClick={handleOpenAiCall}>
       <div className="create-article-text">Create Article </div>
       <svg
         className="sparkles"

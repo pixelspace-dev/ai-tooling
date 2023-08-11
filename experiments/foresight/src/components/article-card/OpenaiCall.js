@@ -1,18 +1,11 @@
 import { OpenAI } from "langchain/llms/openai";
 
 async function OpenaiCall(storageName, message) {
-  localStorage.setItem(
-    "openaiKey", ""
-  );
   //Send message to ai and get response
-  const openaiKey = localStorage.getItem("openaiKey");
-  if (!openaiKey || !openaiKey.length) return;
-
   async function sendText(message) {
     const llm = new OpenAI({
-      openAIApiKey: sessionStorage.getItem("openaiKey"),
+      openAIApiKey: process.env.REACT_APP_API_KEY,
       temperature: 0.9,
-      modelName: "gpt-4",
     });
     response = await llm.call(message);
     console.log(response);
