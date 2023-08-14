@@ -43,9 +43,8 @@ export default function SetupForm() {
             name="username"
             id="username"
             placeholder="MM/DD/YYYY"
-          >
-            {dateText}
-          </textarea>
+            value={dateText}
+          />{" "}
         </div>
 
         <div>
@@ -55,9 +54,8 @@ export default function SetupForm() {
             readOnly
             readonly
             placeholder="Has promising..."
-          >
-            {hypothesisText}
-          </textarea>
+            value={hypothesisText}
+          />
         </div>
 
         <div>
@@ -68,9 +66,8 @@ export default function SetupForm() {
             readonly
             placeholder="Information about company..."
             className="company-background-text-area"
-          >
-            {companyBackgroundText}
-          </textarea>
+            value={companyBackgroundText}
+          />
         </div>
       </div>
     </div>

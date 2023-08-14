@@ -2,16 +2,28 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./sidebar.css";
 
-const Sidebar = ({ isOpen, close, companyName, setCompanyName }) => {
-  const [items, setItems] = useState([
-    { id: uuidv4(), text: "Unnamed Company" },
-  ]); // set initial list
+const Sidebar = ({ isOpen, close, setCompanyName, items, setItems, pages, setPages, sidebar, setSidebar}) => {
+  // const [items, setItems] = useState([
+  //   { id: uuidv4(), text: "Unnamed Company" },
+  // ]); // set initial list
   const [editableItem, setEditableItem] = useState({ id: null, text: "" });
 
   const addItem = () => {
     let newItem = { id: uuidv4(), text: `Unnamed Company` };
     setItems([...items, newItem]);
     setCompanyName(newItem.text);
+    // setPages([...pages, {
+    //   path: "/Unnamed-Company",
+    //   element: (
+    //     <ArticleGenerationPage
+    //       items={items}
+    //       setItems={setItems}
+    //       companyName="Unnamed Company"
+    //       setSidebar={setSidebar}
+    //       sidebar={sidebar}
+    //     />
+    //   )
+    // }])
   };
 
   const deleteItem = (id) => {

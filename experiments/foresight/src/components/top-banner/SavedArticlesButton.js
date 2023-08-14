@@ -1,10 +1,21 @@
 import "./saved-articles-button.css";
+import { useNavigate } from "react-router-dom";
 
 export default function SavedArticlesButton() {
+  // const onClick = (event) => {
+  //   window.location.href = "http://localhost:3000/saved-articles";
+  // };
+  let navigate = useNavigate(); 
+  const routeChange = () =>{ 
+    let path = `saved-articles`; 
+    navigate(path);
+  }
+
   return (
-    <button className="saved-articles-button">
+    <button onClick={routeChange} className="saved-articles-button">
       SAVED ARTICLES
-      <svg className="arrow"
+      <svg
+        className="arrow"
         xmlns="http://www.w3.org/2000/svg"
         width="5"
         height="11"

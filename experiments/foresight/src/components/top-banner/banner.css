@@ -6,7 +6,7 @@
   display: inline-flex;
 }
 
-h1 {
+.heading-in-banner {
   display: flex;
   width: 376px;
   height: 42px;

@@ -1,7 +1,6 @@
 import "./banner.css";
 import SavedArticlesButton from "./SavedArticlesButton";
-import React, { useState } from "react";
-import Sidebar from "../sidebar/Sidebar";
+import React from "react";
 
 const SidebarArrow = ({ toggle }) => {
   return (
@@ -37,16 +36,17 @@ const SidebarArrow = ({ toggle }) => {
   );
 };
 
-export default function Banner() {
-  const [sidebar, setSidebar] = useState(false);
-  const [companyName, setCompanyName] = useState("Unnamed Company");
+export default function Banner({ companyName, sidebar, setSidebar }) {
+
   return (
     <>
       <div className="banner">
         <SidebarArrow toggle={() => setSidebar(!sidebar)} />
-        <Sidebar isOpen={sidebar} close={() => setSidebar(false)} companyName={companyName} setCompanyName={setCompanyName}/>
-        <h1>{companyName}</h1>
-        <SavedArticlesButton className="saved-articles-button" />
+
+        <h1 className="heading-in-banner">{companyName}</h1>
+        <SavedArticlesButton
+          className="saved-articles-button"
+        />
       </div>
     </>
   );

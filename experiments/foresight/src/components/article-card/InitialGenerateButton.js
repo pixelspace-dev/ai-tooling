@@ -1,6 +1,5 @@
 import OpenaiCall from "./openaiCall";
 import StoreArticle from "../StoreArticle";
-import { useCallback } from "react";
 import "./initial-generate-button.css";
 
 const InitialGenerateButton = ({articleID, sentiment, setArticleName, setArticleSubheader, setArticleBody}) => {
