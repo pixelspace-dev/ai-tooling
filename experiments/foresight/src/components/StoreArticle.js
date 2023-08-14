@@ -1,7 +1,4 @@
-export default function StoreArticle(id) {
-    let articleName = localStorage.getItem("articleName")
-    let articleSubheader = (localStorage.getItem("authorName") !== null) ? localStorage.getItem("authorName") + ", " + localStorage.getItem("date") : null;
-    let articleBody = localStorage.getItem("articleBody")
+export default function storeArticle(id, articleName, articleSubheader, articleBody) {
 
     let articleHistory = JSON.parse(localStorage.getItem("articleHistory"));
     if (!articleHistory) {
@@ -10,11 +7,12 @@ export default function StoreArticle(id) {
 
     let newArticle = {
         "id" : id,
-        "bookmarked" : false,
+        "bookmarked" : "false",
         "articleName" : articleName,
         "articleSubheader" : articleSubheader,
         "articleBody" : articleBody
     }
     articleHistory.push(newArticle)
+    console.log(articleHistory)
     localStorage.setItem("articleHistory", JSON.stringify(articleHistory))
 }

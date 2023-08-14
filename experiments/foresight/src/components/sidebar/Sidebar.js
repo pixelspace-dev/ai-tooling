@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import ArticleGenerationPage from "../../ArticleGenerationPage";
+import SavedArticlesPage from "../../ArticleGenerationPage";
 import "./sidebar.css";
 
-const Sidebar = ({ isOpen, close, setCompanyName, items, setItems, pages, setPages, sidebar, setSidebar}) => {
+const Sidebar = ({ isOpen, close,companyName, setCompanyName, items, setItems, pages, setPages, sidebar, setSidebar}) => {
   // const [items, setItems] = useState([
   //   { id: uuidv4(), text: "Unnamed Company" },
   // ]); // set initial list
@@ -12,18 +14,22 @@ const Sidebar = ({ isOpen, close, setCompanyName, items, setItems, pages, setPag
     let newItem = { id: uuidv4(), text: `Unnamed Company` };
     setItems([...items, newItem]);
     setCompanyName(newItem.text);
-    // setPages([...pages, {
-    //   path: "/Unnamed-Company",
-    //   element: (
-    //     <ArticleGenerationPage
-    //       items={items}
-    //       setItems={setItems}
-    //       companyName="Unnamed Company"
-    //       setSidebar={setSidebar}
-    //       sidebar={sidebar}
-    //     />
-    //   )
-    // }])
+    setPages([...pages, {
+      path: "/unnamed-company",
+      element: (
+        <ArticleGenerationPage
+          items={items}
+          setItems={setItems}
+          companyName="Unnamed Company"
+          setSidebar={setSidebar}
+          sidebar={sidebar}
+        />
+      )
+    },
+    {
+      path: "/Unnamed-Company/saved-articles",
+      element: <SavedArticlesPage companyName={companyName} />,
+    },])
   };
 
   const deleteItem = (id) => {

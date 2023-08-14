@@ -2,27 +2,38 @@ import * as React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import "./bookmark.css";
 
-const BookmarkButton = (props) => {
-  const [fillStatus, setFillStatus] = React.useState("none");
+const BookmarkButton = ({ articleID, fillStatus, setFillStatus }) => {
   let articleHistory = JSON.parse(localStorage.getItem("articleHistory"));
-  if (!articleHistory) {
-    articleHistory = [];
+  let idIndex;
+  if (articleHistory !== null) {
+    idIndex = articleHistory.findIndex((id) => id.id === articleID);
   }
-  let idIndex = articleHistory.findIndex((id) => id === props.currentID);
 
   const handleBookmark = (event) => {
     if (fillStatus === "none") {
       setFillStatus("black");
-      //articleHistory[idIndex].bookmarked = true;
-
+      if (articleHistory[articleHistory.length - 1]) {
+        articleHistory[articleHistory.length - 1].bookmarked = "true";
+        localStorage.setItem("articleHistory", JSON.stringify(articleHistory));
+      }
+      console.log(articleHistory);
     } else {
       setFillStatus("none");
-      //articleHistory[idIndex].bookmarked = false;
+      console.log(idIndex);
+      if (articleHistory[idIndex]) {
+        articleHistory[idIndex].bookmarked = "false";
+        localStorage.setItem("articleHistory", JSON.stringify(articleHistory));
+      }
+      console.log(articleHistory);
     }
   };
 
   return (
-    <ToggleButton value="bookmark" onChange={handleBookmark} className="bookmark-button">
+    <ToggleButton
+      value="bookmark"
+      onChange={handleBookmark}
+      className="bookmark-button"
+    >
       <svg
         className="bookmark"
         xmlns="http://www.w3.org/2000/svg"
@@ -42,6 +53,6 @@ const BookmarkButton = (props) => {
       </svg>
     </ToggleButton>
   );
-}
+};
 
 export default BookmarkButton;

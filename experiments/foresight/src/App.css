@@ -1,6 +1,6 @@
 .App {
   min-height: 1015px;
-  min-width: 1300px;
+  min-width: fit-content;
   text-align: left;
   font-family: "poppins", sans-serif;
   /* font-family: "source-sans-pro", sans-serif; */

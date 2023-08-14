@@ -1,35 +1,64 @@
 import OpenaiCall from "./openaiCall";
-import StoreArticle from "../StoreArticle";
+import storeArticle from "../storeArticle";
 import "./initial-generate-button.css";
 
-const InitialGenerateButton = ({articleID, sentiment, setArticleName, setArticleSubheader, setArticleBody}) => {
+const InitialGenerateButton = ({
+  articleID,
+  sentiment,
+  setArticleName,
+  setArticleSubheader,
+  setArticleBody,
+}) => {
   const handleOpenAiCall = async () => {
     // get each variable that gets sent into ai
     // const sentiment = localStorage.getItem("sentiment");
-    console.log(sentiment)
+    console.log(sentiment);
     if (!sentiment) return;
     const articleType = localStorage.getItem("articleType");
-    console.log(articleType)
+    console.log(articleType);
     if (!articleType) return;
     const hypothesis = localStorage.getItem("hypothesis");
-    console.log(hypothesis)
+    console.log(hypothesis);
     if (!hypothesis) return;
     const date = localStorage.getItem("date");
-    console.log(date)
+    console.log(date);
     if (!date) return;
     const companyInformation = localStorage.getItem("companyInformation");
-    console.log(companyInformation)
+    console.log(companyInformation);
     if (!companyInformation || !companyInformation.length) return;
     //call openai
     console.log("calling openai");
-    await OpenaiCall("articleName", "Provide the name of a" + sentiment + "article that is written by" + articleType + "based on the following information about the company the article is written about:" + companyInformation + hypothesis);
-    await OpenaiCall("authorName", "Provide the fake first and last name of a made up journalist that writes for" + articleType);
-    await OpenaiCall("articleBody", "Create a" + sentiment + "article that is written by" + articleType + "based on the following information about the company the article is written about:" + companyInformation + hypothesis + "You do not need to give the article a name.");
+    await OpenaiCall(
+      "articleName",
+      "Provide the name of a" +
+        sentiment +
+        "article that is written by" +
+        articleType +
+        "based on the following information about the company the article is written about:" +
+        companyInformation +
+        hypothesis
+    );
+    await OpenaiCall(
+      "authorName",
+      "Provide the fake first and last name of a made up journalist that writes for" +
+        articleType
+    );
+    await OpenaiCall(
+      "articleBody",
+      "Create a" +
+        sentiment +
+        "article that is written by" +
+        articleType +
+        "based on the following information about the company the article is written about:" +
+        companyInformation +
+        hypothesis +
+        "You do not need to give the article a name."
+    );
     //update visible article
-    setArticleName(localStorage.getItem("articleName"))
-    setArticleSubheader(localStorage.getItem("authorName") + ", " + date)
-    setArticleBody(localStorage.getItem("articleBody"))
-    StoreArticle(articleID);
+    setArticleName(localStorage.getItem("articleName"));
+    setArticleSubheader(localStorage.getItem("authorName") + ", " + date);
+    setArticleBody(localStorage.getItem("articleBody"));
+    storeArticle(articleID, localStorage.getItem("articleName"), localStorage.getItem("authorName") + ", " + date, localStorage.getItem("articleBody") );
   };
 
   return (
@@ -53,6 +82,6 @@ const InitialGenerateButton = ({articleID, sentiment, setArticleName, setArticle
       </svg>
     </button>
   );
-}
+};
 
 export default InitialGenerateButton;
