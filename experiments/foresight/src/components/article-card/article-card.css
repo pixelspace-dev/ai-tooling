@@ -12,6 +12,7 @@
   height: 640px;
   scroll-behavior: smooth;
   overflow: scroll;
+  color:#000
 }
 
 .full-article::-webkit-scrollbar {
@@ -24,6 +25,23 @@
 }
 
 .full-article::-webkit-scrollbar-thumb:hover {
+  background-color: #3a4259;
+}
+
+.opaque {
+  color: rgba(255, 255, 255, 0.50);
+}
+
+.changed-full-article::-webkit-scrollbar {
+  background-color: #fbfbfc;
+  width: 16px;
+}
+
+.changed-full-article::-webkit-scrollbar-thumb {
+  background-color: #578099;
+}
+
+.changed-full-article::-webkit-scrollbar-thumb:hover {
   background-color: #3a4259;
 }
 

@@ -2,7 +2,7 @@ import * as React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import "./toggle-button.css";
 
-export default function ToggleButtons({sentiment, setSentiment}) {
+export default function ToggleButtons({sentiment, setSentiment, setArticleClass}) {
 
   const handleSentiment = (event) => {
     if (sentiment === "positive") {
@@ -11,6 +11,7 @@ export default function ToggleButtons({sentiment, setSentiment}) {
       setSentiment("positive");
     }
     localStorage.setItem("sentiment", sentiment)
+    setArticleClass("opaque")
   };
 
   return (

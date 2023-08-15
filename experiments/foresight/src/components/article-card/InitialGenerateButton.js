@@ -1,5 +1,6 @@
 import OpenaiCall from "./openaiCall";
 import storeArticle from "../storeArticle";
+import React, { useState } from "react";
 import "./initial-generate-button.css";
 
 const InitialGenerateButton = ({
@@ -8,8 +9,15 @@ const InitialGenerateButton = ({
   setArticleName,
   setArticleSubheader,
   setArticleBody,
+  setArticleClass
 }) => {
+  const [generateStyle, setGenerateStyle] = useState("initial-generate-button");
+  const [generateMessage, setGenerateMessage] = useState("Create Article");
   const handleOpenAiCall = async () => {
+    setGenerateStyle("updated-generate-button")
+    setGenerateMessage("")
+    setArticleClass("clear")
+
     // get each variable that gets sent into ai
     // const sentiment = localStorage.getItem("sentiment");
     console.log(sentiment);
@@ -62,8 +70,8 @@ const InitialGenerateButton = ({
   };
 
   return (
-    <button className="initial-generate-button" onClick={handleOpenAiCall}>
-      <div className="create-article-text">Create Article </div>
+    <button className={generateStyle} onClick={handleOpenAiCall}>
+      <div className="create-article-text">{generateMessage}</div>
       <svg
         className="sparkles"
         xmlns="http://www.w3.org/2000/svg"

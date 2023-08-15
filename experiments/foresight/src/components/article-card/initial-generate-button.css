@@ -29,6 +29,34 @@
    cursor: pointer;
 }
 
+.updated-generate-button {
+  width: 48px;
+  height: 48px;
+  padding: 0px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 41px;
+  background: #578099;
+
+  color: #fff;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; /* 22.5px */
+
+  border: none;
+  margin-left: 430px;
+  margin-top: 6px;
+}
+
+.updated-generate-button:hover {
+  background-color: #3A4259;
+  cursor: pointer;
+}
+
 .create-article-text {
   width: 128px;
   margin: 0px;

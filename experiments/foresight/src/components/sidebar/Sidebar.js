@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ArticleGenerationPage from "../../ArticleGenerationPage";
 import SavedArticlesPage from "../../ArticleGenerationPage";
+import { useNavigate, Link } from "react-router-dom";
+import ErrorPage from "../../ErrorPage";
 import "./sidebar.css";
 
 const Sidebar = ({ isOpen, close,companyName, setCompanyName, items, setItems, pages, setPages, sidebar, setSidebar}) => {
@@ -10,26 +12,35 @@ const Sidebar = ({ isOpen, close,companyName, setCompanyName, items, setItems, p
   // ]); // set initial list
   const [editableItem, setEditableItem] = useState({ id: null, text: "" });
 
+  // let navigate = useNavigate(); 
+  // const routeChange = () =>{ 
+  //   let path = `/`; 
+  //   navigate(path);
+  // }
+
   const addItem = () => {
     let newItem = { id: uuidv4(), text: `Unnamed Company` };
     setItems([...items, newItem]);
     setCompanyName(newItem.text);
     setPages([...pages, {
-      path: "/unnamed-company",
+      path: (newItem.id) ,
       element: (
         <ArticleGenerationPage
           items={items}
           setItems={setItems}
-          companyName="Unnamed Company"
+          companyName={newItem.text}
           setSidebar={setSidebar}
           sidebar={sidebar}
         />
-      )
+      ),
+      errorElement: <ErrorPage/>
     },
     {
-      path: "/Unnamed-Company/saved-articles",
+      path: newItem.id + `/saved-articles`,
       element: <SavedArticlesPage companyName={companyName} />,
+      errorElement: <ErrorPage/>
     },])
+    console.log(pages)
   };
 
   const deleteItem = (id) => {
@@ -105,8 +116,10 @@ const Sidebar = ({ isOpen, close,companyName, setCompanyName, items, setItems, p
                 </>
               ) : (
                 <>
-                  {item.text}
-
+                  <a className="link-text" href={item.id}>{item.text}</a>
+                  {/* <button onClick={routeChange}>{item.text}</button> */}
+                  {/* {item.text} */}
+                  {/* <Link to={item.id}>{item.name}</Link> */}
                   <button
                     className="trash-button"
                     onClick={() => deleteItem(item.id)}

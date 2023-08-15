@@ -12,32 +12,21 @@ const ArticleCard = (props) => {
   const [articleBody, setArticleBody] = useState(null);
   const [sentiment, setSentiment] = useState("positive");
   const [fillStatus, setFillStatus] = useState("none");
+  const [articleClass, setArticleClass] = useState("clear");
 
-  // let articleHistory = JSON.parse(localStorage.getItem("articleHistory"));
-  // if (!articleHistory) {
-  //   articleHistory = [];
-  // }
-  // let articleName = "";
-  // let articleSubheader = "";
-  // let articleBody = "";
-  // if (articleHistory[articleHistory.length-1]) {
-  //   articleName = articleHistory[articleHistory.length-1].articleName;
-  //   articleSubheader = articleHistory[articleHistory.length-1].articleSubheader;
-  //   articleBody = articleHistory[articleHistory.length-1].articleBody;
-  // }
-  // if (articleName == null) {
-  //   articleName = "";
-  // }
-  // if (articleSubheader == null) {
-  //   articleSubheader = "";
-  // }
   let id = uuidv4();
   return (
     <div className="article-form-box">
       <div className="article-editable">
-        <ToggleButtons sentiment={sentiment} setSentiment={setSentiment} />
-        <ArticleTypeMenu />
-        <div style={{marginLeft:"80px"}}>
+        <ToggleButtons
+          sentiment={sentiment}
+          setSentiment={setSentiment}
+          setArticleClass={setArticleClass}
+        />
+        <ArticleTypeMenu
+          setArticleClass={setArticleClass}
+        />
+        <div style={{ marginLeft: "80px" }}>
           <BookmarkButton
             articleID={id}
             fillStatus={fillStatus}
@@ -45,17 +34,20 @@ const ArticleCard = (props) => {
           />
         </div>
       </div>
+
       <div className="full-article">
         <p className="article-header">{articleName}</p>
         <p className="article-subheader">{articleSubheader}</p>
         <p className="article-body-text">{articleBody}</p>
       </div>
+      <div className={articleClass}></div>
       <InitialGenerateButton
         articleID={id}
         sentiment={sentiment}
         setArticleName={setArticleName}
         setArticleSubheader={setArticleSubheader}
         setArticleBody={setArticleBody}
+        setArticleClass={setArticleClass}
       />
     </div>
   );

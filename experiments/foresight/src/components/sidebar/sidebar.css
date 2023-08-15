@@ -55,8 +55,9 @@
   font-weight: 600;
   line-height: normal;
   color: #fff;
-  margin-top: 36px;
+  margin-top: 38px;
   margin-left: 0px;
+  margin-right: none;
   list-style-type: none;
   padding: none;
   margin-bottom: none;
@@ -106,7 +107,6 @@
   margin-right: 24px;
   padding-top: 0px;
   float: right;
-  position: relative;
   top: 5px;
 }
 
@@ -139,7 +139,6 @@
   margin-right: 10px;
   padding-top: 0px;
   float: right;
-  position: relative;
   top: 5px;
 }
 
@@ -176,4 +175,25 @@
   border-bottom: 2px;
   color: #eb9d6a;
   background-color: transparent;
+}
+
+.link-text {
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: #fff;
+  margin-top: 38px;
+  margin-left: 0px;
+  margin-right: none;
+  list-style-type: none;
+  padding: none;
+  margin-bottom: none;
+  border: transparent;
+  text-decoration: none;
+}
+
+.link-text:hover {
+  color: #eb9d6a;
 }
