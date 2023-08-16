@@ -45,7 +45,7 @@
 }
 
 .title-and-close-button {
-  display: inline-flex;
+  display: flex;
 }
 
 .company-names-navegation {

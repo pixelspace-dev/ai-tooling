@@ -1,6 +1,6 @@
 import { OpenAI } from "langchain/llms/openai";
 
-async function OpenaiCall(storageName, message) {
+async function openaiCall(storageName, message) {
   //Send message to ai and get response
   async function sendText(message) {
     const llm = new OpenAI({
@@ -21,4 +21,4 @@ async function OpenaiCall(storageName, message) {
   var response = await sendText(message);
 }
 
-export default OpenaiCall;
+export default openaiCall;
