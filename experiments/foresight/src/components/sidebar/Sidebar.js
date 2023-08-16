@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ArticleGenerationPage from "../../ArticleGenerationPage";
 import SavedArticlesPage from "../../ArticleGenerationPage";
@@ -6,41 +6,82 @@ import { useNavigate, Link } from "react-router-dom";
 import ErrorPage from "../../ErrorPage";
 import "./sidebar.css";
 
-const Sidebar = ({ isOpen, close,companyName, setCompanyName, items, setItems, pages, setPages, sidebar, setSidebar}) => {
+const Sidebar = ({
+  isOpen,
+  close,
+  companyName,
+  setCompanyName,
+  items,
+  setItems,
+  pages,
+  setPages,
+  sidebar,
+  setSidebar,
+  companyNumber,
+  setCompanyNumber
+}) => {
   // const [items, setItems] = useState([
   //   { id: uuidv4(), text: "Unnamed Company" },
   // ]); // set initial list
   const [editableItem, setEditableItem] = useState({ id: null, text: "" });
 
-  // let navigate = useNavigate(); 
-  // const routeChange = () =>{ 
-  //   let path = `/`; 
+  // let navigate = useNavigate();
+  // const routeChange = () =>{
+  //   let path = `/`;
   //   navigate(path);
   // }
+  // useEffect(() => {
+  //   localStorage.setItem('items', JSON.stringify(items))
+  // }, items)
 
   const addItem = () => {
-    let newItem = { id: uuidv4(), text: `Unnamed Company` };
+    let newItem = { id: uuidv4(), text: `Unnamed Company`, route: "company" + companyNumber};
+    setCompanyNumber(companyNumber + 1)
     setItems([...items, newItem]);
     setCompanyName(newItem.text);
-    setPages([...pages, {
-      path: (newItem.id) ,
-      element: (
-        <ArticleGenerationPage
-          items={items}
-          setItems={setItems}
-          companyName={newItem.text}
-          setSidebar={setSidebar}
-          sidebar={sidebar}
-        />
-      ),
-      errorElement: <ErrorPage/>
-    },
-    {
-      path: newItem.id + `/saved-articles`,
-      element: <SavedArticlesPage companyName={companyName} />,
-      errorElement: <ErrorPage/>
-    },])
-    console.log(pages)
+    // let pages = JSON.parse(localStorage.getItem("pages"));
+    // if (pages !== null) {
+    //   pages.push(
+    //     {
+    //       path: newItem.id,
+    //       element: (
+    //         <ArticleGenerationPage
+    //           items={items}
+    //           setItems={setItems}
+    //           companyName={newItem.text}
+    //           setSidebar={setSidebar}
+    //           sidebar={sidebar}
+    //         />
+    //       ),
+    //       errorElement: <ErrorPage />,
+    //     },
+    //     {
+    //       path: newItem.id + `/saved-articles`,
+    //       element: <SavedArticlesPage companyName={companyName} />,
+    //       errorElement: <ErrorPage />,
+    //     }
+    //   );
+    //   localStorage.setItem("pages", JSON.stringify(pages));
+    // }
+    // setPages([...pages, {
+    //   path: (newItem.id) ,
+    //   element: (
+    //     <ArticleGenerationPage
+    //       items={items}
+    //       setItems={setItems}
+    //       companyName={newItem.text}
+    //       setSidebar={setSidebar}
+    //       sidebar={sidebar}
+    //     />
+    //   ),
+    //   errorElement: <ErrorPage/>
+    // },
+    // {
+    //   path: newItem.id + `/saved-articles`,
+    //   element: <SavedArticlesPage companyName={companyName} />,
+    //   errorElement: <ErrorPage/>
+    // },])
+    // console.log(pages)
   };
 
   const deleteItem = (id) => {
@@ -62,6 +103,7 @@ const Sidebar = ({ isOpen, close,companyName, setCompanyName, items, setItems, p
     );
     setEditableItem({ id: null, text: "" });
   };
+  // let mappedItems = JSON.parse(localStorage.getItem("items"))
 
   return (
     <div>
@@ -116,7 +158,9 @@ const Sidebar = ({ isOpen, close,companyName, setCompanyName, items, setItems, p
                 </>
               ) : (
                 <>
-                  <a className="link-text" href={item.id}>{item.text}</a>
+                  <a className="link-text" href={item.route === null ? ".." : item.route}>
+                    {item.text}
+                  </a>
                   {/* <button onClick={routeChange}>{item.text}</button> */}
                   {/* {item.text} */}
                   {/* <Link to={item.id}>{item.name}</Link> */}

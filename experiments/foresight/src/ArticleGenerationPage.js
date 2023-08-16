@@ -4,12 +4,12 @@ import TolaLogo from "./components/TolaLogo";
 import ArticleCard from "./components/article-card/ArticleCard";
 import React, {useState} from "react";
 
-const ArticleGenerationPage = ({companyName, setSidebar, sidebar}) => {
+const ArticleGenerationPage = ({companyName, setCompanyName, setSidebar, sidebar}) => {
   const [fillStatus, setFillStatus] = useState("none");
 
   return (
     <div className="App">
-      <Banner companyName={companyName} setSidebar={setSidebar} sidebar={sidebar}/>
+      <Banner companyName={companyName} setCompanyName={setCompanyName} setSidebar={setSidebar} sidebar={sidebar}/>
       <div className="setup-and-articles">
         <SetupForm />
         <ArticleCard fillStatus={fillStatus} setFillStatus={setFillStatus}

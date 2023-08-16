@@ -21,7 +21,8 @@
   line-height: normal;
   padding-left: 48px;
   padding-top: 15px;
-  margin-right: 1160px;
+  margin-right: 15px;
+  margin-top: 27px;
 }
 
 .sidebar-arrow-button {
@@ -38,4 +39,60 @@
 
 .sidebar-arrow-button:hover {
   cursor: pointer;
+}
+
+.banner-edit-button {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background-color: transparent;
+  stroke: none;
+  border: none;
+  padding: 5px;
+  margin-top: 60px;
+  margin-right: 1140px;
+  margin-left: none;
+  padding-left: none;
+  padding-top: 0px;
+  float: left;
+  top: 2px;
+}
+
+.heading-in-banner:hover .banner-edit-button:hover {
+  stroke:#eb9d6a;
+  cursor: pointer;
+}
+
+.heading-in-banner:hover .banner-edit-button:hover {
+  stroke:#eb9d6a;
+  cursor: pointer;
+}
+
+.banner-edit-button:hover {
+  stroke:#eb9d6a;
+  cursor: pointer;
+}
+
+.heading-in-banner:hover .banner-edit-button {
+  stroke:#ffff;
+  cursor: pointer;
+}
+
+.banner-company-name-change-input {
+  width: 376px;
+  height: 45px;
+  flex-direction: column;
+  flex-shrink: 0;
+  color: #eb9d6a;
+  font-family: Poppins;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding-left: 48px;
+  padding-top: 15px;
+  margin-right: 15px;
+  margin-top: 27px;
+  background-color: transparent;
+  border: none;
 }
