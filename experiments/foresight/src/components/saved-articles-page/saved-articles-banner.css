@@ -1,9 +1,8 @@
 .saved-articles-banner {
-  min-width: 1904px;
   height: 116px;
   flex-shrink: 0;
   background: transparent;
-  display: inline-flex;
+  display: flex;
 }
 
 .company-name-in-saved-articles {
