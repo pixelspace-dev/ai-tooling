@@ -35,8 +35,6 @@
     font-style: normal;
     font-weight: 700;
     line-height: 125%; /* 25px */
-    margin-left: 48px;
-    margin-right: 48px;
   }
   
   .article-subheader {
@@ -47,8 +45,6 @@
     font-style: normal;
     font-weight: 700;
     line-height: 125%; /* 22.5px */
-    margin-left: 48px;
-    margin-right: 48px;
   }
   
   .article-body-text {
@@ -56,8 +52,6 @@
     height: fit-content;
     flex-shrink: 0;
     margin-top: 24px;
-    margin-left: 48px;
-    margin-right: 32px;
     font-family: "source-sans-pro", sans-serif;
     color: var(--primary, #000);
     font-size: 16px;
@@ -73,7 +67,7 @@
     height: 88px;
     flex-shrink: 0;
     border-bottom: 1px solid #bcbcbc;
-    display: inline-flex;
+    display: flex;
   }
   
   .saved-bookmark-button {

@@ -1,4 +1,4 @@
-import OpenaiCall from "./openaiCall";
+import openaiCall from "./openaiCall";
 import storeArticle from "../storeArticle";
 import React, { useState } from "react";
 import "./initial-generate-button.css";
@@ -36,7 +36,7 @@ const InitialGenerateButton = ({
     if (!companyInformation || !companyInformation.length) return;
     //call openai
     console.log("calling openai");
-    await OpenaiCall(
+    await openaiCall(
       "articleName",
       "Provide the name of a" +
         sentiment +
@@ -46,12 +46,12 @@ const InitialGenerateButton = ({
         companyInformation +
         hypothesis
     );
-    await OpenaiCall(
+    await openaiCall(
       "authorName",
       "Provide the fake first and last name of a made up journalist that writes for" +
         articleType
     );
-    await OpenaiCall(
+    await openaiCall(
       "articleBody",
       "Create a" +
         sentiment +

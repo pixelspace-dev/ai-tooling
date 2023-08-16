@@ -9,7 +9,8 @@ const ArticleGenerationPage = ({companyName, setCompanyName, setSidebar, sidebar
 
   return (
     <div className="App">
-      <Banner companyName={companyName} setCompanyName={setCompanyName} setSidebar={setSidebar} sidebar={sidebar}/>
+      <div className="app-container">
+      <Banner companyName={companyName}  setCompanyName={setCompanyName} setSidebar={setSidebar} sidebar={sidebar}/>
       <div className="setup-and-articles">
         <SetupForm />
         <ArticleCard fillStatus={fillStatus} setFillStatus={setFillStatus}
@@ -17,6 +18,7 @@ const ArticleGenerationPage = ({companyName, setCompanyName, setSidebar, sidebar
         <ArticleCard fillStatus={fillStatus} setFillStatus={setFillStatus}/>
       </div>
       <TolaLogo />
+      </div>
     </div>
   );
 }

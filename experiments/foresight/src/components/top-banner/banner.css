@@ -1,9 +1,8 @@
 .banner {
-  min-width: 1904px;
   height: 116px;
   flex-shrink: 0;
   background: #578099;
-  display: inline-flex;
+  display: flex;
 }
 
 .heading-in-banner {
@@ -21,8 +20,6 @@
   line-height: normal;
   padding-left: 48px;
   padding-top: 15px;
-  margin-right: 15px;
-  margin-top: 27px;
 }
 
 .sidebar-arrow-button {
