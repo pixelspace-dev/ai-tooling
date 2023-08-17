@@ -11,12 +11,12 @@
   text-transform: uppercase;
   height: 20px;
   width: 250px;
-	padding-top: 10px;
+  padding-top: 10px;
 }
 
 .saved-articles-button:hover {
   text-decoration: underline;
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .arrow {
@@ -25,7 +25,7 @@
   flex-shrink: 0;
   stroke-width: 2px;
   stroke: #fff;
-	padding-left:12px;
-  padding-top:0px;
-	margin-top:50px
+  padding-left: 12px;
+  padding-top: 0px;
+  margin-top: 50px;
 }

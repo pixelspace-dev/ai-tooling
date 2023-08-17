@@ -1,7 +1,8 @@
 import { useRouteError } from "react-router-dom";
-import  "./error-page.css"
+import "./error-page.css";
 
 export default function ErrorPage() {
+  // error page for when the user tries to route themselves to a page that does not exist
   const error = useRouteError();
   console.error(error);
 

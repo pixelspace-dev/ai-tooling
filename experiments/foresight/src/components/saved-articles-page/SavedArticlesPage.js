@@ -3,12 +3,14 @@ import SavedArticleCard from "./SavedArticleCard";
 import React from "react";
 
 const SavedArticlesPage = ({ setSidebar, sidebar }) => {
+  // initialize array variables 
   let articleHistory = JSON.parse(localStorage.getItem("articleHistory"));
   let articleID = [];
   let articleName = [];
   let articleSubheader = [];
   let articleBody = [];
   let companyName = [];
+  // add bookmarked articles to array variables
   if (articleHistory !== null) {
     for (let i = 0; i < articleHistory.length; i++) {
       if (articleHistory[i].bookmarked === "true") {
@@ -19,13 +21,16 @@ const SavedArticlesPage = ({ setSidebar, sidebar }) => {
         companyName.push(articleHistory[i].companyName)
       }
     }
+
+    // remove articles that have not been bookmarked from article history
     const filteredArray = articleHistory.filter(
       (item) => item.bookmarked === "true"
     );
     console.log(filteredArray);
     localStorage.setItem("articleHistory", JSON.stringify(filteredArray));
   }
-
+  
+  // used to index arrays when printing saved articles
   let arrayLength = articleID.length;
 
   return (

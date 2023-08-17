@@ -6,6 +6,7 @@ import "./initial-generate-button.css";
 const InitialGenerateButton = ({
   articleID,
   sentiment,
+  articleType,
   setArticleName,
   setArticleSubheader,
   setArticleBody,
@@ -22,7 +23,6 @@ const InitialGenerateButton = ({
     // const sentiment = localStorage.getItem("sentiment");
     console.log(sentiment);
     if (!sentiment) return;
-    const articleType = localStorage.getItem("articleType");
     console.log(articleType);
     if (!articleType) return;
     const hypothesis = localStorage.getItem("hypothesis");
@@ -39,21 +39,25 @@ const InitialGenerateButton = ({
     if (!companyInformation || !companyInformation.length) return;
     //call openai
     console.log("calling openai");
+    // create article name
     await openaiCall(
       "articleName",
       "Provide the name of a" +
         sentiment +
         "article that is written by" +
         articleType +
-        "based on the following information about the company the article is written about:" +
+        "news company based on the following information about the company the article is written about:" +
         companyInformation +
-        hypothesis
+        hypothesis +
+        "Format the title as follows: {news company name}: {article title}"
     );
+    // create author name
     await openaiCall(
       "authorName",
       "Provide the fake first and last name of a made up journalist that writes for" +
         articleType
     );
+    //create article body
     await openaiCall(
       "articleBody",
       "Create a" +
@@ -69,6 +73,7 @@ const InitialGenerateButton = ({
     setArticleName(localStorage.getItem("articleName"));
     setArticleSubheader(localStorage.getItem("authorName") + ", " + date);
     setArticleBody(localStorage.getItem("articleBody"));
+    // store the article to be accessed by saved articles page
     storeArticle(articleID, localStorage.getItem("articleName"), localStorage.getItem("authorName") + ", " + date, localStorage.getItem("articleBody"), localStorage.getItem("companyName") );
   };
 

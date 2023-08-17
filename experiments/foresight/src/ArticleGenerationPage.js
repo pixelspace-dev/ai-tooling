@@ -9,7 +9,18 @@ const ArticleGenerationPage = ({
   // setSidebar,
   // sidebar,
 }) => {
+  // determines fill status of the bookmark button
   const [fillStatus, setFillStatus] = useState("none");
+
+  // determines which company has been selected in the dropdown menu for each card
+  const [selected1, setSelected1] = useState({
+    id: 1,
+    name: "TechCrunch",
+  });
+  const [selected2, setSelected2] = useState({
+    id: 1,
+    name: "TechCrunch",
+  });
 
   return (
     <div className="App">
@@ -22,8 +33,18 @@ const ArticleGenerationPage = ({
         />
         <div className="setup-and-articles">
           <SetupForm />
-          <ArticleCard fillStatus={fillStatus} setFillStatus={setFillStatus} />
-          <ArticleCard fillStatus={fillStatus} setFillStatus={setFillStatus} />
+          <ArticleCard
+            fillStatus={fillStatus}
+            setFillStatus={setFillStatus}
+            selected={selected1}
+            setSelected={setSelected1}
+          />
+          <ArticleCard
+            fillStatus={fillStatus}
+            setFillStatus={setFillStatus}
+            selected={selected2}
+            setSelected={setSelected2}
+          />
         </div>
       </div>
     </div>

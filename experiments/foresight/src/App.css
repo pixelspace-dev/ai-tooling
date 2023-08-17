@@ -4,8 +4,8 @@
   text-align: left;
   font-family: "poppins", sans-serif;
   /* font-family: "source-sans-pro", sans-serif; */
-  background-color: #3A4259;
-  zoom: 84%
+  background-color: #3a4259;
+  zoom: 84%;
 }
 
 .setup-and-articles {
@@ -27,5 +27,5 @@
 .app-container {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
 }

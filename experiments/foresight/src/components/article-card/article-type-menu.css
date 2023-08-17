@@ -12,18 +12,18 @@
   margin-left: 32px;
   margin-top: 26px;
   padding-top: none;
-	display: flex;
+  display: flex;
 }
 
 .article-type-general:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .selected-article-text {
   color: #3a4259;
 
   /* Body Small Semi bold */
-	width: 125px;
+  width: 125px;
   font-family: Poppins;
   font-size: 14px;
   font-style: normal;
@@ -34,41 +34,45 @@
 }
 
 .drop-down-down-arrow {
-	float: right;
   padding-left: 4px;
   padding-top: 0px;
   margin-top: 3px;
 }
 
 .hover-dropdown-selection {
-	color:#eb9d6a;
-	text-decoration: none;
+  color: #eb9d6a;
+  text-decoration: none;
   margin-top: 10px;
   padding-top: 4px;
 }
 
 .default-dropdown-selection-style {
-	color: white;
-	text-decoration: none;
+  color: white;
+  text-decoration: none;
   margin-top: 10px;
   padding-top: 4px;
 }
 
 .menu-items {
-	background-color: #3a4259;
-	padding-top: 0px;
-	list-style-type: none;
-	padding-left: 0px;
+  background-color: #3a4259;
+  padding-top: 0px;
+  list-style-type: none;
+  padding-left: 0px;
   margin-top: 0px;
   padding-top: none;
   padding-bottom: 24px;
   height: fit-content;
   position: relative;
-  float:right;
+  float: right;
   width: 200px;
 }
 
 .not-selected {
   margin-top: 10px;
   padding-top: 4px;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+  transform-origin: 60%; 
 }

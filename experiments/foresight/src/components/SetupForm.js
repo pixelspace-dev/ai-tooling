@@ -2,30 +2,31 @@ import { useCallback } from "react";
 import "./setup-form.css";
 
 export default function SetupForm() {
+  // change hypothesis section
   const handleChangeHypothesis = useCallback((evt) => {
-    //create new node
     const hypothesis = evt.target.value;
     localStorage.setItem("hypothesis", hypothesis);
   }, []);
 
+  // change in company information section
   const handleChangeCompanyInformation = useCallback((evt) => {
-    //create new node
     const companyInformation = evt.target.value;
     localStorage.setItem("companyInformation", companyInformation);
   }, []);
 
+  // change to date section
   const handleChangeDate = useCallback((evt) => {
-    //create new node
     const date = evt.target.value;
     localStorage.setItem("date", date);
   }, []);
 
+  // change to company name section
   const handleChangeName = useCallback((evt) => {
-    //create new node
     const companyName = evt.target.value;
     localStorage.setItem("companyName", companyName);
   }, []);
 
+  // set values so they stay when page is reloaded
   let hypothesisText =
     localStorage.getItem("hypothesis") !== null
       ? localStorage.getItem("hypothesis")
@@ -37,7 +38,9 @@ export default function SetupForm() {
   let dateText =
     localStorage.getItem("date") !== null ? localStorage.getItem("date") : "";
   let companyNameText =
-    localStorage.getItem("companyName") !== null ? localStorage.getItem("companyName") : "";
+    localStorage.getItem("companyName") !== null
+      ? localStorage.getItem("companyName")
+      : "";
 
   return (
     <div className="form-box">

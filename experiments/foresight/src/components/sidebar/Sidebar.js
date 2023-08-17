@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import ArticleGenerationPage from "../../ArticleGenerationPage";
-import SavedArticlesPage from "../../ArticleGenerationPage";
-import { useNavigate, Link } from "react-router-dom";
-import ErrorPage from "../../ErrorPage";
+// import ArticleGenerationPage from "../../ArticleGenerationPage";
+// import SavedArticlesPage from "../../ArticleGenerationPage";
+// import { useNavigate, Link } from "react-router-dom";
+// import ErrorPage from "../../ErrorPage";
 import "./sidebar.css";
 
 const Sidebar = ({
@@ -18,7 +18,7 @@ const Sidebar = ({
   sidebar,
   setSidebar,
   companyNumber,
-  setCompanyNumber
+  setCompanyNumber,
 }) => {
   // const [items, setItems] = useState([
   //   { id: uuidv4(), text: "Unnamed Company" },
@@ -35,8 +35,12 @@ const Sidebar = ({
   // }, items)
 
   const addItem = () => {
-    let newItem = { id: uuidv4(), text: `Unnamed Company`, route: "company" + companyNumber};
-    setCompanyNumber(companyNumber + 1)
+    let newItem = {
+      id: uuidv4(),
+      text: `Unnamed Company`,
+      route: "company" + companyNumber,
+    };
+    setCompanyNumber(companyNumber + 1);
     setItems([...items, newItem]);
     setCompanyName(newItem.text);
     // let pages = JSON.parse(localStorage.getItem("pages"));
@@ -158,7 +162,10 @@ const Sidebar = ({
                 </>
               ) : (
                 <>
-                  <a className="link-text" href={item.route === null ? ".." : item.route}>
+                  <a
+                    className="link-text"
+                    href={item.route === null ? ".." : item.route}
+                  >
                     {item.text}
                   </a>
                   {/* <button onClick={routeChange}>{item.text}</button> */}

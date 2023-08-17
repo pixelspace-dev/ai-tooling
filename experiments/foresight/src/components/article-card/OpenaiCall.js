@@ -9,8 +9,12 @@ async function openaiCall(storageName, message) {
     });
     response = await llm.call(message);
     console.log(response);
+
+    // removes quotes around response
     response.slice(1, 0);
     response.slice(0, -1);
+
+    // for some reason there is an extra set of quotes around the article title
     if (storageName === "articleName") {
       response.slice(1, 0);
       response.slice(0, -1);
@@ -18,6 +22,7 @@ async function openaiCall(storageName, message) {
     localStorage.setItem(storageName, response);
   }
 
+  // call openai
   var response = await sendText(message);
 }
 

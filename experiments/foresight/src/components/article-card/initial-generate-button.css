@@ -20,12 +20,12 @@
   border: none;
   margin-right: 32px;
   margin-top: 6px;
-  float:right;
+  float: right;
 }
 
 .initial-generate-button:hover {
-   background-color: #3A4259;
-   cursor: pointer;
+  background-color: #3a4259;
+  cursor: pointer;
 }
 
 .updated-generate-button {
@@ -49,10 +49,12 @@
   border: none;
   margin-left: 430px;
   margin-top: 6px;
+  float: right;
+  margin-right: 32px;
 }
 
 .updated-generate-button:hover {
-  background-color: #3A4259;
+  background-color: #3a4259;
   cursor: pointer;
 }
 
@@ -68,5 +70,6 @@
   margin: 0px;
   width: 31px;
   height: 31px;
-  margin-bottom: 2px;
+  margin-bottom: 0px;
+  margin-right: 1px;
 }

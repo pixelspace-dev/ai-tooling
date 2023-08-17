@@ -25,7 +25,7 @@
 
 .saved-articles-heading {
   height: 27px;
-  margin-top: 56px;
+  margin-top: 59px;
   margin-left: 0px;
   padding-left: 0px;
   font-family: Poppins;
@@ -38,6 +38,18 @@
   text-transform: uppercase;
 }
 
-.sidebar-arrow-button {
+.back-arrow-button {
   margin-top: 45px;
+  width: 29px;
+  height: 29px;
+  flex-shrink: 0;
+  margin-left: 48px;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  padding: 5px;
+}
+
+.back-arrow-button:hover {
+  cursor: pointer;
 }

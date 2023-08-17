@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import "./article-type-menu.css";
 
@@ -19,8 +19,8 @@ const articles = [
     id: 4,
     name: "NextWeb",
   },
-  { 
-    id: 5, 
+  {
+    id: 5,
     name: "Wired",
   },
 ];
@@ -29,8 +29,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const ArticleTypeMenu = ({ setArticleClass, }) => {
-  const [selected, setSelected] = useState(articles[0]);
+const ArticleTypeMenu = ({ setArticleClass, selected, setSelected }) => {
+  // const [selected, setSelected] = useState(articles[0]);
 
   // localStorage.setItem("articleType", selected.name)
   //  setArticleClass("opaque")
@@ -42,19 +42,23 @@ const ArticleTypeMenu = ({ setArticleClass, }) => {
           <div>
             <Listbox.Button className="article-type-general">
               <span className="selected-article-text">{selected.name}</span>
-              <svg
-                className="drop-down-down-arrow"
-                xmlns="http://www.w3.org/2000/svg"
-                width="17"
-                height="10"
-                viewBox="0 0 17 10"
-                fill="none"
-              >
-                <path
-                  d="M1.5197 7.89684e-07L-3.70442e-07 1.52528L8.5 10L17 1.51671L15.4803 1.79446e-07L8.5 6.96658L1.5197 7.89684e-07Z"
-                  fill="#3A4259"
-                />
-              </svg>
+              <Listbox as="div" className="relative inline-block text-left">
+                {/* Other Listbox related tags here... */}
+
+                <svg
+                  className={`drop-down-down-arrow ${open ? "rotate-180" : ""}`}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="17"
+                  height="10"
+                  viewBox="0 0 17 10"
+                  fill="none"
+                >
+                  <path
+                    d="M1.5197 7.89684e-07L-3.70442e-07 1.52528L8.5 10L17 1.51671L15.4803 1.79446e-07L8.5 6.96658L1.5197 7.89684e-07Z"
+                    fill="#3A4259"
+                  />
+                </svg>
+              </Listbox>
             </Listbox.Button>
 
             <Transition

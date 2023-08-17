@@ -2,14 +2,12 @@ import "./saved-articles-button.css";
 import { useNavigate } from "react-router-dom";
 
 export default function SavedArticlesButton() {
-  // const onClick = (event) => {
-  //   window.location.href = "http://localhost:3000/saved-articles";
-  // };
-  let navigate = useNavigate(); 
-  const routeChange = () =>{ 
-    let path = `saved-articles`; 
+  // navegates user to saved articles page when button is pressed
+  let navigate = useNavigate();
+  const routeChange = () => {
+    let path = `saved-articles`;
     navigate(path);
-  }
+  };
 
   return (
     <button onClick={routeChange} className="saved-articles-button">

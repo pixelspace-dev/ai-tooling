@@ -9,6 +9,7 @@ const SavedArticleCard = ({
   articleBody,
   companyName,
 }) => {
+  // sets fill status for bookmark button
   const [savedFillStatus, setSavedFillStatus] = useState("black");
 
   return (

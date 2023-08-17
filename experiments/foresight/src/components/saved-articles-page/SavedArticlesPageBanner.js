@@ -2,14 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./saved-articles-banner.css"
 
-const SidebarArrow = ({ toggle }) => {
+const BackArrow = () => {
   let navigate = useNavigate(); 
   const routeChange = () =>{ 
     let path = `/`; 
     navigate(path);
   }
   return (
-    <button onClick={routeChange} className="sidebar-arrow-button">
+    <button onClick={routeChange} className="back-arrow-button">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="12"
@@ -34,7 +34,7 @@ export default function Banner({
   return (
     <>
       <div className="saved-articles-banner">
-        <SidebarArrow toggle={() => setSidebar(!sidebar)} />
+        <BackArrow />
 
         <h1 className="company-name-in-saved-articles">{companyName}</h1>
         <p className="saved-articles-heading">SAVED ARTICLES</p>

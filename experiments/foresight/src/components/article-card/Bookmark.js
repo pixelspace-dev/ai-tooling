@@ -3,29 +3,35 @@ import ToggleButton from "@mui/material/ToggleButton";
 import "./bookmark.css";
 
 const BookmarkButton = ({ articleID, fillStatus, setFillStatus }) => {
+  // figure out which article is being accessed
   let articleHistory = JSON.parse(localStorage.getItem("articleHistory"));
   let idIndex;
   if (articleHistory !== null) {
     idIndex = articleHistory.findIndex((id) => id.id === articleID);
   }
 
-  const handleBookmark = (event) => {
+  // set bookmarked status when button is pressed
+  const handleBookmark = () => {
+    // Get a fresh copy of articleHistory
+    let newArticleHistory =
+      JSON.parse(localStorage.getItem("articleHistory")) || [];
+
     if (fillStatus === "none") {
       setFillStatus("black");
-      if (articleHistory[articleHistory.length - 1]) {
-        articleHistory[articleHistory.length - 1].bookmarked = "true";
-        localStorage.setItem("articleHistory", JSON.stringify(articleHistory));
+      if (newArticleHistory[newArticleHistory.length - 1]) {
+        newArticleHistory[newArticleHistory.length - 1].bookmarked = "true";
       }
-      console.log(articleHistory);
+      console.log(newArticleHistory);
     } else {
       setFillStatus("none");
-      console.log(idIndex);
-      if (articleHistory[idIndex]) {
-        articleHistory[idIndex].bookmarked = "false";
-        localStorage.setItem("articleHistory", JSON.stringify(articleHistory));
+      if (newArticleHistory[idIndex]) {
+        newArticleHistory[idIndex].bookmarked = "false";
       }
-      console.log(articleHistory);
+      console.log(newArticleHistory);
     }
+
+    // Save the new articleHistory to local storage
+    localStorage.setItem("articleHistory", JSON.stringify(newArticleHistory));
   };
 
   return (

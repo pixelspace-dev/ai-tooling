@@ -1,6 +1,6 @@
 import "./banner.css";
 import SavedArticlesButton from "./SavedArticlesButton";
-import React, { useState } from "react";
+import React from "react";
 import TolaLogo from "../TolaLogo";
 
 // const SidebarArrow = ({ toggle }) => {
@@ -43,12 +43,12 @@ export default function Banner({
   sidebar,
   setSidebar,
 }) {
-  const [isEditing, setIsEditing] = useState(false);
+  // const [isEditing, setIsEditing] = useState(false);
 
-  // Save input value
-  const handleSave = ({ target }) => {
-    setCompanyName(target.value);
-  };
+  // // Save input value
+  // const handleSave = ({ target }) => {
+  //   setCompanyName(target.value);
+  // };
   return (
     <>
       <div className="banner">
