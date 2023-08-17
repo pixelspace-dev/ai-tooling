@@ -53,6 +53,7 @@ const ArticleCard = ({ selected, setSelected }) => {
         setArticleSubheader={setArticleSubheader}
         setArticleBody={setArticleBody}
         setArticleClass={setArticleClass}
+        setFillStatus={setFillStatus}
       />
     </div>
   );

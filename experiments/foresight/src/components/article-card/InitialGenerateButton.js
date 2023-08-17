@@ -11,12 +11,15 @@ const InitialGenerateButton = ({
   setArticleSubheader,
   setArticleBody,
   setArticleClass,
+  setFillStatus,
 }) => {
   const [generateStyle, setGenerateStyle] = useState("initial-generate-button");
   const [generateMessage, setGenerateMessage] = useState("Create Article");
   const handleOpenAiCall = async () => {
-    setGenerateStyle("updated-generate-button")
-    setGenerateMessage("")
+    setArticleClass("opaque");
+    setFillStatus("none");
+    setGenerateStyle("updated-generate-button");
+    setGenerateMessage("");
 
     // get each variable that gets sent into ai
     // const sentiment = localStorage.getItem("sentiment");
@@ -66,15 +69,23 @@ const InitialGenerateButton = ({
         "based on the following information about the company the article is written about:" +
         companyInformation +
         hypothesis +
-        "You do not need to give the article a name."
+        "Your goal is to predict the " +
+        sentiment +
+        " future of that company at the date that the article is written. You do not need to give the article a name. Do not make any make up any information about the company. Only use what the use provides"
     );
     //update visible article
-    setArticleClass("clear")
+    setArticleClass("clear");
     setArticleName(localStorage.getItem("articleName"));
     setArticleSubheader(localStorage.getItem("authorName") + ", " + date);
     setArticleBody(localStorage.getItem("articleBody"));
     // store the article to be accessed by saved articles page
-    storeArticle(articleID, localStorage.getItem("articleName"), localStorage.getItem("authorName") + ", " + date, localStorage.getItem("articleBody"), localStorage.getItem("companyName") );
+    storeArticle(
+      articleID,
+      localStorage.getItem("articleName"),
+      localStorage.getItem("authorName") + ", " + date,
+      localStorage.getItem("articleBody"),
+      localStorage.getItem("companyName")
+    );
   };
 
   return (
