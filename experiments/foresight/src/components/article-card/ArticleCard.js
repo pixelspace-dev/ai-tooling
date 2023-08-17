@@ -6,14 +6,13 @@ import BookmarkButton from "./Bookmark";
 import React, { useState } from "react";
 import "./article-card.css";
 
-const ArticleCard = ({selected, setSelected}) => {
+const ArticleCard = ({ selected, setSelected }) => {
   const [articleName, setArticleName] = useState(null);
   const [articleSubheader, setArticleSubheader] = useState(null);
   const [articleBody, setArticleBody] = useState(null);
   const [sentiment, setSentiment] = useState("positive");
   const [fillStatus, setFillStatus] = useState("none");
   const [articleClass, setArticleClass] = useState("clear");
-
 
   let id = uuidv4();
   return (
@@ -23,6 +22,7 @@ const ArticleCard = ({selected, setSelected}) => {
           <ToggleButtons
             sentiment={sentiment}
             setSentiment={setSentiment}
+            articleClass={articleClass}
             setArticleClass={setArticleClass}
           />
           <ArticleTypeMenu
@@ -40,13 +40,11 @@ const ArticleCard = ({selected, setSelected}) => {
           />
         </div>
       </div>
-
-      <div className="full-article" style={{ zIndex: 10 }}>
-        <p className="article-header">{articleName}</p>
-        <p className="article-subheader">{articleSubheader}</p>
-        <p className="article-body-text">{articleBody}</p>
+      <div className={`full-article`} style={{ zIndex: 10 }}>
+        <p className={`article-header ${articleClass}`}>{articleName}</p>
+        <p className={`article-subheader ${articleClass}`}>{articleSubheader}</p>
+        <p className={`article-body-text ${articleClass}`}>{articleBody}</p>
       </div>
-      <div className={articleClass}></div>
       <InitialGenerateButton
         articleID={id}
         sentiment={sentiment}

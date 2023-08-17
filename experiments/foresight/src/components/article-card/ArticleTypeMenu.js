@@ -33,10 +33,18 @@ const ArticleTypeMenu = ({ setArticleClass, selected, setSelected }) => {
   // const [selected, setSelected] = useState(articles[0]);
 
   // localStorage.setItem("articleType", selected.name)
-  //  setArticleClass("opaque")
+  const handleChangeSelected = (newValue) => {
+    setSelected(prevState => {
+      // Here you can perform any changes based on the prevState
+      if (prevState !== newValue) {
+        setArticleClass("opaque"); // Set your updated value here
+      }
+      return newValue;
+    });
+  };
 
   return (
-    <Listbox value={selected} onChange={setSelected} className="listbox">
+    <Listbox value={selected} onChange={handleChangeSelected} className="listbox">
       {({ open }) => (
         <>
           <div>

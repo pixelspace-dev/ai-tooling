@@ -5,6 +5,7 @@ import "./toggle-button.css";
 export default function ToggleButtons({
   sentiment,
   setSentiment,
+  articleClass,
   setArticleClass,
 }) {
   // toggle between positive and negative when button is pressed
@@ -16,7 +17,9 @@ export default function ToggleButtons({
     }
     localStorage.setItem("sentiment", sentiment);
     // when something is changed, the article text should change css
-    setArticleClass("opaque");
+    if (articleClass === "clear") {
+      setArticleClass("opaque");
+    }
   };
 
   return (

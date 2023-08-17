@@ -10,14 +10,13 @@ const InitialGenerateButton = ({
   setArticleName,
   setArticleSubheader,
   setArticleBody,
-  setArticleClass
+  setArticleClass,
 }) => {
   const [generateStyle, setGenerateStyle] = useState("initial-generate-button");
   const [generateMessage, setGenerateMessage] = useState("Create Article");
   const handleOpenAiCall = async () => {
     setGenerateStyle("updated-generate-button")
     setGenerateMessage("")
-    setArticleClass("clear")
 
     // get each variable that gets sent into ai
     // const sentiment = localStorage.getItem("sentiment");
@@ -70,6 +69,7 @@ const InitialGenerateButton = ({
         "You do not need to give the article a name."
     );
     //update visible article
+    setArticleClass("clear")
     setArticleName(localStorage.getItem("articleName"));
     setArticleSubheader(localStorage.getItem("authorName") + ", " + date);
     setArticleBody(localStorage.getItem("articleBody"));

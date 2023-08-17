@@ -11,7 +11,6 @@
   margin-left: 32px;
   scroll-behavior: smooth;
   overflow: scroll;
-  color: #000;
 }
 
 .full-article::-webkit-scrollbar {
@@ -45,9 +44,8 @@
 }
 
 .article-header {
-  width: 461px;
+  width: 458px;
   height: fit-content;
-  color: var(--primary, #000);
   font-family: Poppins;
   font-size: 20px;
   font-style: normal;
@@ -56,9 +54,8 @@
 }
 
 .article-subheader {
-  width: 461px;
+  width: 458px;
   height: fit-content;
-  color: var(--primary, #000);
   font-family: Poppins;
   font-size: 18px;
   font-style: normal;
@@ -67,12 +64,12 @@
 }
 
 .article-body-text {
-  width: 461px !important;
+  width: 458px !important;
   height: fit-content;
   flex-shrink: 0;
   margin-top: 24px;
   font-family: "source-sans-pro", sans-serif;
-  color: var(--primary, #000);
+
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -92,4 +89,12 @@
 
 .left-side {
   display: flex;
+}
+
+.opaque {
+  color: #578099 !important;
+}
+
+.clear {
+  color: #000;
 }
