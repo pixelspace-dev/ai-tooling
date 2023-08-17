@@ -18,15 +18,17 @@ const ArticleCard = (props) => {
   return (
     <div className="article-form-box">
       <div className="article-editable">
+        <div className="left-side">
         <ToggleButtons
           sentiment={sentiment}
           setSentiment={setSentiment}
           setArticleClass={setArticleClass}
         />
-        <ArticleTypeMenu
+        <ArticleTypeMenu style={{zIndex:1 , position: "absolute"}}
           setArticleClass={setArticleClass}
         />
-        <div style={{ marginLeft: "80px" }}>
+        </div>
+        <div >
           <BookmarkButton
             articleID={id}
             fillStatus={fillStatus}
@@ -35,7 +37,7 @@ const ArticleCard = (props) => {
         </div>
       </div>
 
-      <div className="full-article">
+      <div className="full-article" style={{zIndex: 10}}>
         <p className="article-header">{articleName}</p>
         <p className="article-subheader">{articleSubheader}</p>
         <p className="article-body-text">{articleBody}</p>

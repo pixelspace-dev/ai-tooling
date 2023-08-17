@@ -5,11 +5,12 @@
   background-color: white;
   flex-shrink: 0;
   border: 1px solid rgba(0, 0, 0, 0.5);
+  margin-right: 24px;
 }
 
 .all-fields {
-  width: 470px;
-  margin-left: 48px;
+  width: 501px;
+  margin-left: 32px;
 }
 
 h2 {
@@ -32,7 +33,7 @@ h2 {
 }
 
 .date-input {
-  width: 198px;
+  width: 212px;
   height: 22px;
   padding-top: 8px;
   padding-bottom: 0px;
@@ -47,6 +48,8 @@ h2 {
   font-style: normal;
   font-weight: 400;
   line-height: 125%; /* 20px */
+  padding: none;
+  margin: none;
 }
 
 .hypothesis-title {
@@ -67,7 +70,7 @@ h2 {
 }
 
 textarea {
-  width: 445px;
+  width: 477px;
   height: 150px;
   border-color: #808080;
   color: #578099;
@@ -96,4 +99,9 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 .company-background-text-area {
   height: 308px;
+}
+
+.name-and-date {
+  display: flex;
+  justify-content: space-between;
 }

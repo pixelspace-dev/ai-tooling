@@ -18,8 +18,9 @@
   line-height: 125%; /* 22.5px */
 
   border: none;
-  margin-left: 265px;
+  margin-right: 32px;
   margin-top: 6px;
+  float:right;
 }
 
 .initial-generate-button:hover {

@@ -19,20 +19,24 @@ const articles = [
     id: 4,
     name: "NextWeb",
   },
+  { 
+    id: 5, 
+    name: "Wired",
+  },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const ArticleTypeMenu = ({ setArticleClass }) => {
+const ArticleTypeMenu = ({ setArticleClass, }) => {
   const [selected, setSelected] = useState(articles[0]);
 
   // localStorage.setItem("articleType", selected.name)
   //  setArticleClass("opaque")
 
   return (
-    <Listbox value={selected} onChange={setSelected}>
+    <Listbox value={selected} onChange={setSelected} className="listbox">
       {({ open }) => (
         <>
           <div>

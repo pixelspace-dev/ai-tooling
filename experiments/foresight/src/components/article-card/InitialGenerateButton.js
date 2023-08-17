@@ -31,6 +31,9 @@ const InitialGenerateButton = ({
     const date = localStorage.getItem("date");
     console.log(date);
     if (!date) return;
+    const companyName = localStorage.getItem("companyName");
+    console.log(companyName);
+    if (!companyName) return;
     const companyInformation = localStorage.getItem("companyInformation");
     console.log(companyInformation);
     if (!companyInformation || !companyInformation.length) return;
@@ -66,7 +69,7 @@ const InitialGenerateButton = ({
     setArticleName(localStorage.getItem("articleName"));
     setArticleSubheader(localStorage.getItem("authorName") + ", " + date);
     setArticleBody(localStorage.getItem("articleBody"));
-    storeArticle(articleID, localStorage.getItem("articleName"), localStorage.getItem("authorName") + ", " + date, localStorage.getItem("articleBody") );
+    storeArticle(articleID, localStorage.getItem("articleName"), localStorage.getItem("authorName") + ", " + date, localStorage.getItem("articleBody"), localStorage.getItem("companyName") );
   };
 
   return (

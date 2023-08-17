@@ -1,4 +1,4 @@
-export default function storeArticle(id, articleName, articleSubheader, articleBody) {
+export default function storeArticle(id, articleName, articleSubheader, articleBody, companyName) {
 
     let articleHistory = JSON.parse(localStorage.getItem("articleHistory"));
     if (!articleHistory) {
@@ -10,7 +10,8 @@ export default function storeArticle(id, articleName, articleSubheader, articleB
         "bookmarked" : "false",
         "articleName" : articleName,
         "articleSubheader" : articleSubheader,
-        "articleBody" : articleBody
+        "articleBody" : articleBody,
+        "companyName" : companyName
     }
     articleHistory.push(newArticle)
     console.log(articleHistory)

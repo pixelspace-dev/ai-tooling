@@ -30,7 +30,7 @@
   font-weight: 600;
   line-height: 150%; /* 21px */
   padding-top: none;
-  margin-top: none;
+  margin-top: 2px;
 }
 
 .drop-down-down-arrow {
@@ -43,14 +43,14 @@
 .hover-dropdown-selection {
 	color:#eb9d6a;
 	text-decoration: none;
-  margin-top: 15px;
+  margin-top: 10px;
   padding-top: 4px;
 }
 
 .default-dropdown-selection-style {
 	color: white;
 	text-decoration: none;
-  margin-top: 15px;
+  margin-top: 10px;
   padding-top: 4px;
 }
 
@@ -61,10 +61,14 @@
 	padding-left: 0px;
   margin-top: 0px;
   padding-top: none;
-  height: 225px;
+  padding-bottom: 24px;
+  height: fit-content;
+  position: relative;
+  float:right;
+  width: 200px;
 }
 
 .not-selected {
-  margin-top: 15px;
+  margin-top: 10px;
   padding-top: 4px;
 }

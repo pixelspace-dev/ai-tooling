@@ -8,9 +8,10 @@
 
 .full-article {
   height: 640px;
+  margin-left: 32px;
   scroll-behavior: smooth;
   overflow: scroll;
-  color:#000
+  color:#000;
 }
 
 .full-article::-webkit-scrollbar {
@@ -44,6 +45,7 @@
 }
 
 .article-header {
+  width: 461px;
   height: fit-content;
   color: var(--primary, #000);
   font-family: Poppins;
@@ -54,6 +56,7 @@
 }
 
 .article-subheader {
+  width: 461px;
   height: fit-content;
   color: var(--primary, #000);
   font-family: Poppins;
@@ -64,7 +67,7 @@
 }
 
 .article-body-text {
-  width: 416px;
+  width: 461px !important;
   height: fit-content;
   flex-shrink: 0;
   margin-top: 24px;
@@ -83,5 +86,10 @@
   height: 88px;
   flex-shrink: 0;
   border-bottom: 1px solid #bcbcbc;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-side {
   display: flex;
 }

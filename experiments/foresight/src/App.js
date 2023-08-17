@@ -14,38 +14,16 @@ function App() {
     { id: uuidv4(), text: "Unnamed Company", route:"/" },
   ]);
   const [companyNumber, setCompanyNumber] = useState(2)
-  // const [pages, setPages] = useState([
-  //   {
-  //     path: `/`,
-  //     element: (
-  //       <ArticleGenerationPage
-  //         companyName={companyName}
-  //         setCompanyName={setCompanyName}
-  //         setSidebar={setSidebar}
-  //         sidebar={sidebar}
-  //       />
-  //     ),
-  //     errorElement: <ErrorPage/>
-  //   },
-  //   {
-  //     path: `saved-articles`,
-  //     element: <SavedArticlesPage companyName={companyName} />,
-  //     errorElement: <ErrorPage/>
-  //   },
-  // ]);
 
-  // const router = createBrowserRouter(pages);
-  // console.log(router)
   const router = createBrowserRouter([{
         path: `/`,
         element: (
           <ArticleGenerationPage
-            items={items}
-            setItems={setItems}
             companyName={companyName}
             setCompanyName={setCompanyName}
             setSidebar={setSidebar}
             sidebar={sidebar}
+            companyIndex="company1"
           />
         ),
         errorElement: <ErrorPage/>
@@ -57,55 +35,8 @@ function App() {
           />
         ),
         errorElement: <ErrorPage/>
-      },{
-        path: `company2`,
-        element: (
-          <ArticleGenerationPage
-            items={items}
-            setItems={setItems}
-            companyName={companyName}
-            setCompanyName={setCompanyName}
-            setSidebar={setSidebar}
-            sidebar={sidebar}
-          />
-        ),
-        errorElement: <ErrorPage/>
-      },
-      {
-        path: `company2/saved-articles`,
-        element: (
-          <SavedArticlesPage companyName={companyName}
-          />
-        ),
-        errorElement: <ErrorPage/>
       }, ]);
-  // let pages = JSON.parse(localStorage.getItem("pages"));
-  // if (pages == null) {
-  //   pages = [
-  //     {
-  //       path: `/`,
-  //       element: (
-  //         <ArticleGenerationPage
-  //           items={items}
-  //           setItems={setItems}
-  //           companyName={companyName}
-  //           setCompanyName={setCompanyName}
-  //           setSidebar={setSidebar}
-  //           sidebar={sidebar}
-  //         />
-  //       ),
-  //       errorElement: <ErrorPage />,
-  //     },
-  //     {
-  //       path: `saved-articles`,
-  //       element: <SavedArticlesPage companyName={companyName} />,
-  //       errorElement: <ErrorPage />,
-  //     },
-  //   ];
-  //   localStorage.setItem("pages", JSON.stringify(pages))
-  // }
-  // const router = createBrowserRouter(pages);
-  console.log(router)
+  
   return (
     <div className="App">
       <Sidebar
@@ -115,14 +46,11 @@ function App() {
         setCompanyName={setCompanyName}
         items={items}
         setItems={setItems}
-        // pages={pages}
-        // setPages={setPages}
         sidebar={sidebar}
         setSidebar={setSidebar}
         companyNumber={companyNumber}
         setCompanyNumber={setCompanyNumber}
       />
-      {/* <ArticleGenerationPage /> */}
       <RouterProvider router={router} />
     </div>
   );

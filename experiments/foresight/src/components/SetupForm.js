@@ -20,6 +20,12 @@ export default function SetupForm() {
     localStorage.setItem("date", date);
   }, []);
 
+  const handleChangeName = useCallback((evt) => {
+    //create new node
+    const companyName = evt.target.value;
+    localStorage.setItem("companyName", companyName);
+  }, []);
+
   let hypothesisText =
     localStorage.getItem("hypothesis") !== null
       ? localStorage.getItem("hypothesis")
@@ -30,22 +36,37 @@ export default function SetupForm() {
       : "";
   let dateText =
     localStorage.getItem("date") !== null ? localStorage.getItem("date") : "";
+  let companyNameText =
+    localStorage.getItem("companyName") !== null ? localStorage.getItem("companyName") : "";
 
   return (
     <div className="form-box">
       <div className="all-fields">
-        <div>
-          <h2 className="article-date-title">Article Date</h2>
-          <textarea
-            onChange={handleChangeDate}
-            className="date-input"
-            type="text"
-            name="username"
-            id="username"
-            placeholder="MM/DD/YYYY"
-          >
-            {dateText}
-          </textarea>
+        <div className="name-and-date">
+          <div>
+            <h2 className="article-date-title">Company Name</h2>
+            <textarea
+              onChange={handleChangeName}
+              className="date-input"
+              type="text"
+              placeholder="Unnamed Company"
+            >
+              {companyNameText}
+            </textarea>
+          </div>
+          <div>
+            <h2 className="article-date-title">Article Date</h2>
+            <textarea
+              onChange={handleChangeDate}
+              className="date-input"
+              type="text"
+              name="username"
+              id="username"
+              placeholder="MM/DD/YYYY"
+            >
+              {dateText}
+            </textarea>
+          </div>
         </div>
 
         <div>
