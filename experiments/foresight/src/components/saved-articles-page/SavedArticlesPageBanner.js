@@ -36,7 +36,9 @@ export default function Banner({
       <div className="saved-articles-banner">
         <BackArrow />
 
-        <h1 className="company-name-in-saved-articles">{companyName}</h1>
+        <img alt="tola-logo"
+            src={require("./foresight-tola.png")}
+            className="heading-in-banner"/>
         <p className="saved-articles-heading">SAVED ARTICLES</p>
       </div>
     </>

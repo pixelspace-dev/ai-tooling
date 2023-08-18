@@ -4,6 +4,7 @@
   flex-shrink: 0;
   background: #fbfbfc;
   border: 1px solid #bcbcbc;
+  margin-bottom: 32px;
 }
 
 .full-article {
