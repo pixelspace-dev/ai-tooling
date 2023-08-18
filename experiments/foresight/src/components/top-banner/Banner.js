@@ -1,7 +1,6 @@
 import "./banner.css";
 import SavedArticlesButton from "./SavedArticlesButton";
 import React from "react";
-import TolaLogo from "../TolaLogo";
 
 // const SidebarArrow = ({ toggle }) => {
 //   return (
@@ -54,8 +53,9 @@ export default function Banner({
       <div className="banner">
         {/* <SidebarArrow toggle={() => setSidebar(!sidebar)} /> */}
         <div style={{display: "flex"}}>
-          <p className="heading-in-banner">Foresight</p>
-          <TolaLogo />
+          <img alt="tola-logo"
+            src={require("./foresight-tola.png")}
+            className="heading-in-banner"/>
         </div>
         <SavedArticlesButton className="button-for-saved-articles" />
       </div>

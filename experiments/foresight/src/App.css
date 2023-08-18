@@ -1,11 +1,10 @@
 .App {
-  min-height: 842px;
+  min-height: 100vh;
   min-width: fit-content;
   text-align: left;
   font-family: "poppins", sans-serif;
   /* font-family: "source-sans-pro", sans-serif; */
   background-color: #3a4259;
-  zoom: 84%;
 }
 
 .setup-and-articles {
