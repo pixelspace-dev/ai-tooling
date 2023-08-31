@@ -1,0 +1,89 @@
+.saved-article-form-box {
+  width: 525px;
+  height: 814px;
+  flex-shrink: 0;
+  background: #fbfbfc;
+  border: 1px solid #bcbcbc;
+  margin-bottom: 32px;
+}
+
+.full-article {
+  height: 640px;
+  scroll-behavior: smooth;
+  overflow: scroll;
+}
+
+.full-article::-webkit-scrollbar {
+  background-color: #fbfbfc;
+  width: 16px;
+}
+
+.full-article::-webkit-scrollbar-thumb {
+  background-color: #578099;
+}
+
+.full-article::-webkit-scrollbar-thumb:hover {
+  background-color: #3a4259;
+}
+
+.article-header {
+  height: fit-content;
+  color: var(--primary, #000);
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; /* 25px */
+}
+
+.article-subheader {
+  height: fit-content;
+  color: var(--primary, #000);
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; /* 22.5px */
+}
+
+.article-body-text {
+  width: 416px;
+  height: fit-content;
+  flex-shrink: 0;
+  margin-top: 24px;
+  font-family: "source-sans-pro", sans-serif;
+  color: var(--primary, #000);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+}
+
+.saved-article-bookmark {
+  font-family: Poppins;
+  font-size: 14px;
+  width: 525px;
+  height: 88px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #bcbcbc;
+  display: flex;
+  justify-content: space-between;
+}
+
+.saved-bookmark-button {
+  margin-right: 32px !important;
+}
+
+.saved-article-company-name {
+  padding-top: 24px;
+  width: fit-content;
+  height: 23px;
+  flex-shrink: 0;
+  color: #332929;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 125%; /* 22.5px */
+  margin-left: 32px;
+}

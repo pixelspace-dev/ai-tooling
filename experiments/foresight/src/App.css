@@ -1,0 +1,30 @@
+.App {
+  min-height: 100vh;
+  min-width: fit-content;
+  text-align: left;
+  font-family: "poppins", sans-serif;
+  /* font-family: "source-sans-pro", sans-serif; */
+  background-color: #3a4259;
+}
+
+.setup-and-articles {
+  display: flex;
+  flex-direction: row;
+  max-width: 132vw;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  gap: 48px;
+  padding-top: 32px;
+  padding-left: 72px;
+  padding-right: 72px;
+}
+
+.setup-and-articles::-webkit-scrollbar {
+  display: none;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}

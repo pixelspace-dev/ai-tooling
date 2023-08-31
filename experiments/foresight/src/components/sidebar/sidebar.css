@@ -1,0 +1,199 @@
+/* Sidebar.css */
+.sidebar-menu {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  background: #333;
+  width: 312px;
+  min-height: 100vh;
+  text-align: left;
+  transition: left 200ms ease-in-out;
+  background-color: #3a4259;
+}
+
+.sidebar-menu.active {
+  left: 0;
+}
+
+.sidebar-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  padding: 5px;
+  margin-top: 36px;
+  margin-left: 46px;
+}
+
+.sidebar-button:hover {
+  cursor: pointer;
+}
+
+.foresight-title {
+  color: #fff;
+  font-family: Poppins;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: 171px;
+  padding: 0px;
+  margin-top: 36px;
+  margin-left: 32px;
+}
+
+.title-and-close-button {
+  display: flex;
+}
+
+.company-names-navegation {
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: #fff;
+  margin-top: 38px;
+  margin-left: 0px;
+  margin-right: none;
+  list-style-type: none;
+  padding: none;
+  margin-bottom: none;
+  border: transparent;
+}
+
+.company-names-navegation:hover {
+  cursor: pointer;
+  color: #eb9d6a;
+  border-bottom: #eb9d6a;
+  border-bottom-width: 33px;
+}
+
+.add-item-button {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  padding: 5px;
+  margin-top: 24px;
+  margin-left: 32px;
+}
+
+.add-item-button:hover {
+  cursor: pointer;
+}
+
+.add-item-plus-symbol {
+  stroke: #fff;
+}
+
+.add-item-plus-symbol:hover {
+  stroke: #eb9d6a;
+}
+
+.trash-button {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background-color: transparent;
+  stroke: none;
+  border: none;
+  padding: 5px;
+  margin-top: 0px;
+  margin-right: 24px;
+  padding-top: 0px;
+  float: right;
+  top: 5px;
+}
+
+.company-names-navegation:hover .trash-button {
+  stroke: #fff;
+}
+
+.company-names-navegation:hover .edit-button {
+  stroke: #fff;
+}
+
+.company-names-navegation:hover .trash-button:hover {
+  stroke: #eb9d6a;
+  cursor: pointer;
+}
+.company-names-navegation:hover .edit-button:hover {
+  stroke: #eb9d6a;
+  cursor: pointer;
+}
+
+.edit-button {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background-color: transparent;
+  stroke: none;
+  border: none;
+  padding: 5px;
+  margin-top: 0px;
+  margin-right: 10px;
+  padding-top: 0px;
+  float: right;
+  top: 5px;
+}
+
+.update-check-button {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background-color: transparent;
+  stroke: white;
+  border: none;
+  padding: 5px;
+  margin-top: 0px;
+  margin-right: 64px;
+  margin-left: none;
+  float: right;
+  position: relative;
+  bottom: 32px;
+}
+
+.update-check-button:hover {
+  stroke: #eb9d6a;
+  cursor: pointer;
+}
+
+.change-company-name-input {
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: 200px;
+  border-style: none;
+  border-bottom: #eb9d6a;
+  border-bottom: 2px;
+  color: #eb9d6a;
+  background-color: transparent;
+}
+
+.link-text {
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: #fff;
+  margin-top: 38px;
+  margin-left: 0px;
+  margin-right: none;
+  list-style-type: none;
+  padding: none;
+  margin-bottom: none;
+  border: transparent;
+  text-decoration: none;
+}
+
+.link-text:hover {
+  color: #eb9d6a;
+}

@@ -1,0 +1,31 @@
+.saved-articles-button {
+  color: #fff;
+  background-color: transparent;
+  border: hidden;
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.72px;
+  text-transform: uppercase;
+  height: 20px;
+  width: 250px;
+  padding-top: 10px;
+}
+
+.saved-articles-button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.arrow {
+  width: 18px;
+  height: 8px;
+  flex-shrink: 0;
+  stroke-width: 2px;
+  stroke: #fff;
+  padding-left: 12px;
+  padding-top: 0px;
+  margin-top: 50px;
+}
