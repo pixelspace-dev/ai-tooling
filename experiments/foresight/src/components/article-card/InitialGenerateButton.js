@@ -51,7 +51,7 @@ const InitialGenerateButton = ({
         "news company based on the following information about the company the article is written about:" +
         companyInformation +
         hypothesis +
-        "Format the title as follows: {news company name}: {article title}"
+        "Format the title as follows: {news company name}" //: {article title}"
     );
     // create author name
     await openaiCall(
