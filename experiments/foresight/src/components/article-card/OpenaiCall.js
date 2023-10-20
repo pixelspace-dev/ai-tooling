@@ -6,9 +6,10 @@ async function openaiCall(storageName, message) {
     const llm = new OpenAI({
       openAIApiKey: process.env.REACT_APP_API_KEY,
       temperature: 0.9,
+      maxTokens: -1
     });
     response = await llm.call(message);
-    console.log(response);
+    console.log('Response1',response);
 
     // removes quotes around response
     response.slice(1, 0);
