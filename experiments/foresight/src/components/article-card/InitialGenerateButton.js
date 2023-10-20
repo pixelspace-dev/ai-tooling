@@ -1,5 +1,5 @@
-import openaiCall from "./openaiCall";
-import storeArticle from "../storeArticle";
+import openaiCall from "./OpenaiCall";
+import storeArticle from "../StoreArticle";
 import React, { useState } from "react";
 import "./initial-generate-button.css";
 
@@ -44,14 +44,14 @@ const InitialGenerateButton = ({
     // create article name
     await openaiCall(
       "articleName",
-      "Provide the name of a" +
+      "Write a title for a" +
         sentiment +
-        "article that is written by" +
+        "sentiment news article as written by" +
         articleType +
-        "news company based on the following information about the company the article is written about:" +
+        ", making sure you respect the tone, style, language and biases that this new organization is known for. An article piece based on the following information about the company the article is written about, and the hypothesis for this company's potential future described here as well:" +
         companyInformation +
         hypothesis +
-        "Format the title as follows: {news company name}" //: {article title}"
+        "Format the title as follows: {news company name}: {article title}"
     );
     // create author name
     await openaiCall(
@@ -62,16 +62,16 @@ const InitialGenerateButton = ({
     //create article body
     await openaiCall(
       "articleBody",
-      "Create a" +
+      "Write a" +
         sentiment +
-        "article that is written by" +
+        "sentiment news article as written by" +
         articleType +
-        "based on the following information about the company the article is written about:" +
+        ", making sure you respect the tone, style, language and biases that this new organization is known for. An article piece based on the following information about the company the article is written about, and the hypothesis for this company's potential future described here as well:" +
         companyInformation +
         hypothesis +
         "Your goal is to predict the " +
         sentiment +
-        " future of that company at the date that the article is written. You do not need to give the article a name. Do not make any make up any information about the company. Only use what the use provides"
+        " future of that company by the date that the article is written. You do not need to give the article a name. Do not make any make up any information about the company. Only base your article on the provided information about the company and the hypotheses exposed there. The article will be of a good length, it will not a be a short little article, and it will also not be a full book. Consider approximately 1,000 words length."
     );
     //update visible article
     setArticleClass("clear");
